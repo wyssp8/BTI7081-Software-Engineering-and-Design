@@ -1,9 +1,28 @@
-Diary:
+ ______   _      _      _   _______
+|  __  \ | |    | |    | | |  _____|
+| |__| | | |    | |    | | | |___
+|  __ <  | |    | |    | | |  ___|
+| |__| | | |___ | |____| | | |_____
+|______/ |_____| \______/  |_______|
 
-Member E-Mail:
-kielm1@bfh.ch
-poloc1@bfh.ch
-jooolchef@gmail.com
-andre2pi@gmail.com
-sa.lu@bluewin.ch
-wyssp8@gmail.com
+
+
+Diary:
+------------------------------------------------------
+
+Team:
+
+Kieliger Martin		(kielm1@bfh.ch)
+Polo Claudio Dano	(poloc1@bfh.ch)
+Frutiger Joël Paul	(jooolchef@gmail.com)
+Argollo Pitta Andre	(andre2pi@gmail.com)
+Luder Sandro		(sa.lu@bluewin.ch)
+Wyss Patrick Sandro	(wyssp8@gmail.com)
+
+
+------------------------------------------------------
+28.02.2017
+------------------------------------------------------
+Anwesend:	Kieliger, Frutiger, Argollo, Luder, Wyss
+
+Task:		Task01 und Task02 im Team am erarbeiten
