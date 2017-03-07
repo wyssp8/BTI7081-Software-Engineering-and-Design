@@ -26,3 +26,17 @@ Wyss Patrick Sandro	(wyssp8@gmail.com)
 Anwesend:	Kieliger, Frutiger, Argollo, Luder, Wyss
 
 Task:		Task01 und Task02 im Team am erarbeiten
+
+------------------------------------------------------
+06.03.2017
+------------------------------------------------------
+Anwesend:	Niemand aufgrund Unterrichtsausfall.
+
+Selbständiges erarbeiten der gestellten Aufgaben des Lehrers. RE 3.3 und Sommerville_SE9ed_pp082_091.pdf.
+
+------------------------------------------------------
+07.03.2017
+------------------------------------------------------
+Anwesend:	Kieliger, Pitta, Frutiger, Luder, Wyss, Polo
+
+Selbständiges erarbeiten der Theorie RE 3.4 und Sommerville_SE9ed_pp100_109.pdf. Anschliessend erarbeiten des CS2 im Team.
