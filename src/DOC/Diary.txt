@@ -55,6 +55,6 @@ Task:		Selbständiges erarbeiten der Theorie RE 3.6, 3.7, 3.8
 ------------------------------------------------------
 Anwesend:	Kieliger, Frutiger, Argollo, Luder, Wyss, Polo
 
-Task: 		
+Task: 		...	
 
 
