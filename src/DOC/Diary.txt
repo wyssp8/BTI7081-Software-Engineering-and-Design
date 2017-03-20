@@ -76,9 +76,9 @@ Task:		CS01 Task03 Design Thinking. Storyboards, Prototyps und Dokument am erste
 ------------------------------------------------------
 20.03.2017
 ------------------------------------------------------
-Anwensend:	Frutiger, Argollo, Luder, Wyss, Polo
+Anwensend:	Frutiger, Argollo, Luder, Wyss
 
-Task:		Abschluss des Projektes CS01 Task03 und erstellen der Präsendtation.
+Task:		Abschluss des Projektes CS01 Task03 und erstellen der Präsentation.
 
 
 
