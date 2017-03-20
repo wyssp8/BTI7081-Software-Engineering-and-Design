@@ -53,8 +53,33 @@ Task:		Selbständiges erarbeiten der Theorie RE 3.6, 3.7, 3.8
 ------------------------------------------------------
 13.03.2017
 ------------------------------------------------------
-Anwesend:	Kieliger, Frutiger, Argollo, Luder, Wyss, Polo
+Anwesend:	Frutiger, Argollo, Luder, Wyss, Polo
 
-Task: 		......	
+Task: 		Start des Task03 CS01. 
+
+------------------------------------------------------
+14.03.2017
+------------------------------------------------------
+Anwesend:	Frutiger, Argollo, Luder, Wyss, Polo
+
+Task:		CS01 Task03 Design Thinking.
+
+
+------------------------------------------------------
+17.03.2017
+------------------------------------------------------
+Anwesend:	Frutiger, Argollo, Luder, Wyss, Polo, Kieliger
+
+Task:		CS01 Task03 Design Thinking. Storyboards, Prototyps und Dokument am erstellen
+
+
+------------------------------------------------------
+20.03.2017
+------------------------------------------------------
+Anwensend:	Frutiger, Argollo, Luder, Wyss, Polo
+
+Task:		Abschluss des Projektes CS01 Task03 und erstellen der Präsendtation.
+
+
 
 
