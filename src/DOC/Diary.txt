@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
  ______   _      _      _   _______
 |  __  \ | |    | |    | | |  _____|
 | |__| | | |    | |    | | | |___
@@ -25,6 +26,7 @@ Wyss Patrick Sandro	(wyssp8@gmail.com)
 ------------------------------------------------------
 Anwesend:	Kieliger, Frutiger, Argollo, Luder, Wyss
 
+<<<<<<< Updated upstream
 Task:		Task01 und Task02 im Team am erarbeiten
 
 ------------------------------------------------------
@@ -39,6 +41,7 @@ Task:		Selbständiges erarbeiten der gestellten Aufgaben des Lehrers. RE 3.3 und 
 ------------------------------------------------------
 Anwesend:	Kieliger, Pitta, Frutiger, Luder, Wyss, Polo
 
+<<<<<<< Updated upstream
 Task:		Selbständiges erarbeiten der Theorie RE 3.4 und Sommerville_SE9ed_pp100_109.pdf. Anschliessend erarbeiten des CS2 im Team.
 
 
@@ -82,4 +85,11 @@ Task:		Abschluss des Projektes CS01 Task03 und erstellen der Präsentation.
 
 
 
+=======
+Selbständiges erarbeiten der Theorie RE 3.4 und Sommerville_SE9ed_pp100_109.pdf. Anschliessend erarbeiten des CS2 im Team.
+=======
+Task:		Task01 und Task02 im Team am erarbeiten
+=======
+Diary
+>>>>>>> Stashed changes
 
