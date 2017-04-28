@@ -1,7 +1,16 @@
 /bin/
 .project
+<<<<<<< HEAD
 .classpath
 .gitignore
 target/*
 /target/
 .target
+=======
+/.classpath
+/.gitignore
+target/
+/target/
+target
+/target/classes
+>>>>>>> branch 'master' of https://github.com/wyssp8/ch.bfh.bti7081.s2017.blue
