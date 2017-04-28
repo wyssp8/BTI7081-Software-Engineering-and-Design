@@ -1,5 +1,5 @@
 /bin/
 .project
-#/.classpath
-#/.gitignore
+/.classpath
+/.gitignore
 target/
