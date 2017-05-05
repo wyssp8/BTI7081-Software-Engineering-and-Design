@@ -6,7 +6,6 @@ import java.util.List;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.EmergencyViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.MainView;
 
