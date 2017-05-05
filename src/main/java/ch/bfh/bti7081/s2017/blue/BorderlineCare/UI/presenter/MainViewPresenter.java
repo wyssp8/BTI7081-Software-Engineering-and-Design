@@ -2,9 +2,9 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
 import com.vaadin.external.org.slf4j.Logger;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.ButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.viewimpl.MainViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.MainViewImpl;
 
 public class MainViewPresenter implements ButtonClickListener {
 

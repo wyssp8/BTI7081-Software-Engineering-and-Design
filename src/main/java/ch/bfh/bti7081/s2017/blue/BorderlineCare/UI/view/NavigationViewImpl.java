@@ -1,4 +1,4 @@
-package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.viewimpl;
+package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;

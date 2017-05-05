@@ -14,8 +14,8 @@ import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.viewimpl.MainViewImpl;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.viewimpl.NavigationViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.MainViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.NavigationViewImpl;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
