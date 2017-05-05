@@ -11,9 +11,10 @@ import com.vaadin.ui.themes.ValoTheme;
 
 public class NavigationViewImpl extends TabSheet {
 
-	public NavigationViewImpl(MainViewImpl mainView, ContactViewImpl contactsViewImpl) {
+	public NavigationViewImpl(MainViewImpl mainView, ContactViewImpl contactsViewImpl, DiaryViewImpl diaryViewImpl) {
 		addTab(mainView,"Home");
-		addTab(contactsViewImpl,"Contacts");      
+		addTab(contactsViewImpl,"Contacts"); 
+		addTab(diaryViewImpl,"Diary");
 		setHeight(100.0f, Unit.PERCENTAGE);
         addStyleName(ValoTheme.TABSHEET_FRAMED);
         addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);;
