@@ -18,9 +18,11 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresen
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.EmergencyViewImpl;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.MainViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.DiaryDashViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.EmergencyViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.ExerciseDashViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -35,10 +37,12 @@ public class MyUI extends UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
     	//Main View
+    	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
+    	DiaryDashViewImpl diaryDashViewImpl = new DiaryDashViewImpl();
         EmergencyViewImpl emergencyViewImpl = new EmergencyViewImpl();
     	EmergencyViewModel emergencyViewModel = new EmergencyViewModel();
     	EmergencyViewPresenter emergencyViewPresenter = new EmergencyViewPresenter(emergencyViewImpl,emergencyViewModel);
-    	MainViewImpl mainView = new MainViewImpl(emergencyViewImpl);
+    	MainViewImpl mainView = new MainViewImpl(exerciseDashViewImpl,diaryDashViewImpl,emergencyViewImpl);
     	MainViewModel model = new MainViewModel();
     	MainViewPresenter presenter = new MainViewPresenter(model, mainView);
     	
