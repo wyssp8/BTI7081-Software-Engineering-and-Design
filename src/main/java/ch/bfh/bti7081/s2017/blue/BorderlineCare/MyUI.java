@@ -12,6 +12,11 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.viewimpl.MainViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.viewimpl.NavigationViewImpl;
+
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
  * (or tab) or some part of a html page where a Vaadin application is embedded.

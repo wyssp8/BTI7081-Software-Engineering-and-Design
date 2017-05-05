@@ -1,10 +1,15 @@
-package ch.bfh.bti7081.s2017.blue.BorderlineCare;
+package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.viewimpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
+
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.ButtonClickListener;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.EmergencyViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.MainView;
+
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
