@@ -11,7 +11,7 @@ import com.vaadin.ui.themes.ValoTheme;
 
 public class NavigationViewImpl extends TabSheet {
 
-	public NavigationViewImpl(MainViewImpl mainView, ContactsViewImpl contactsViewImpl) {
+	public NavigationViewImpl(MainViewImpl mainView, ContactViewImpl contactsViewImpl) {
 		addTab(mainView,"Home");
 		addTab(contactsViewImpl,"Contacts");      
 		setHeight(100.0f, Unit.PERCENTAGE);

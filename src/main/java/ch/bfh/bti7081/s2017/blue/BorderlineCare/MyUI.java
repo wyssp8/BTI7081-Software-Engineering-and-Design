@@ -14,7 +14,7 @@ import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactsViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.MainViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
 
@@ -32,7 +32,7 @@ public class MyUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         
     	MainViewImpl mainView = new MainViewImpl();
-    	ContactsViewImpl contactsViewImpl = new ContactsViewImpl();
+    	ContactViewImpl contactsViewImpl = new ContactViewImpl();
     	NavigationViewImpl view = new NavigationViewImpl(mainView,contactsViewImpl);
     	MainViewModel model = new MainViewModel();
     	MainViewPresenter presenter = new MainViewPresenter(model, mainView);
