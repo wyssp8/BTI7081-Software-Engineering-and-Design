@@ -12,8 +12,10 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
@@ -50,10 +52,13 @@ public class MyUI extends UI {
     	ContactViewImpl contactsViewImpl = new ContactViewImpl();
     	
     	//Diary View
+    	DiaryViewModel diaryViewModel = new DiaryViewModel();
     	DiaryViewImpl diaryViewImpl = new DiaryViewImpl();
+    	DiaryViewPresenter diaryViewPresenter = new DiaryViewPresenter(diaryViewModel, diaryViewImpl);
     	
     	//Navigation View 
     	NavigationViewImpl view = new NavigationViewImpl(mainView,contactsViewImpl,diaryViewImpl);
+    	
     	setContent(view);
     }
 
