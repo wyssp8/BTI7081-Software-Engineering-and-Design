@@ -6,9 +6,8 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.MainViewImpl;
 
-public class MainViewPresenter implements ButtonClickListener {
+public class MainViewPresenter {
 
-		// TODO Auto-generated method stub
 	MainViewModel model;
 	MainViewImpl impl;
 	
@@ -16,12 +15,8 @@ public class MainViewPresenter implements ButtonClickListener {
 	public MainViewPresenter(MainViewModel model, MainViewImpl view){
 		this.model = model;
 		this.impl = view;
-		view.addListener(this);
-		view.setName("Presenter");
 	}
 
-	@Override
-	public void buttonClick() {
-		impl.setName("Yay");
-	}
+
+
 }

@@ -12,10 +12,13 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.EmergencyViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.MainViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
 
@@ -31,13 +34,22 @@ public class MyUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        
-    	MainViewImpl mainView = new MainViewImpl();
-    	ContactViewImpl contactsViewImpl = new ContactViewImpl();
-    	DiaryViewImpl diaryViewImpl = new DiaryViewImpl();
-    	NavigationViewImpl view = new NavigationViewImpl(mainView,contactsViewImpl,diaryViewImpl);
+    	//Main View
+        EmergencyViewImpl emergencyViewImpl = new EmergencyViewImpl();
+    	EmergencyViewModel emergencyViewModel = new EmergencyViewModel();
+    	EmergencyViewPresenter emergencyViewPresenter = new EmergencyViewPresenter(emergencyViewImpl,emergencyViewModel);
+    	MainViewImpl mainView = new MainViewImpl(emergencyViewImpl);
     	MainViewModel model = new MainViewModel();
     	MainViewPresenter presenter = new MainViewPresenter(model, mainView);
+    	
+    	//Contact View
+    	ContactViewImpl contactsViewImpl = new ContactViewImpl();
+    	
+    	//Diary View
+    	DiaryViewImpl diaryViewImpl = new DiaryViewImpl();
+    	
+    	//Navigation View 
+    	NavigationViewImpl view = new NavigationViewImpl(mainView,contactsViewImpl,diaryViewImpl);
     	setContent(view);
     }
 
