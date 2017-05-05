@@ -24,20 +24,13 @@ public class MyUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        final VerticalLayout layout = new VerticalLayout();
         
-        final TextField name = new TextField();
-        name.setCaption("Type your name here:");
-
-        Button button = new Button("Click Me");
-        button.addClickListener( e -> {
-            layout.addComponent(new Label("Thanks " + name.getValue() 
-                    + ", it works!"));
-        });
-        
-        layout.addComponents(name, button);
-        
-        setContent(layout);
+    	MainViewImpl mainView = new MainViewImpl();
+    	ContactsViewImpl contactsViewImpl = new ContactsViewImpl();
+    	NavigationViewImpl view = new NavigationViewImpl(mainView,contactsViewImpl);
+    	MainViewModel model = new MainViewModel();
+    	MainViewPresenter presenter = new MainViewPresenter(model, mainView);
+    	setContent(view);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
