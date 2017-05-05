@@ -1,6 +1,8 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
@@ -9,38 +11,65 @@ import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Button.ClickListener;
 
-public class DiaryViewImpl extends CustomComponent {
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.MainView;
+
+public class DiaryViewImpl extends CustomComponent implements MainView, ClickListener {
+	
+	private List<ButtonClickListener> listeners = new ArrayList<ButtonClickListener>();
+	private Button button;
+	
+	public DateField date;
+	public TextArea txtArea;
+	public Grid grid;
 	
 	
 	public DiaryViewImpl(){
-		
+	
 		VerticalLayout vLayout = new VerticalLayout();
 		//HorizontalLayout hLayout = new HorizontalLayout();
-		
-		//setCompositionRoot(hLayout);
-		setCompositionRoot(vLayout);
-		
-		
+	
 		// Create a DateField
-		DateField date = new DateField();
+		date = new DateField();
 		vLayout.addComponent(date);
 		date.setValue(LocalDate.now());
 		
 		// Create a text area
-		TextArea txtArea = new TextArea("Diary entry");
+		txtArea = new TextArea("Diary entry");
+		txtArea.setWidth("50%");
 		txtArea.setValue("What have you done today\n" + "How did you feel today?");
 		vLayout.addComponent(txtArea);
 		
 		//Button
-		Button button = new Button("Add");
+		button = new Button("Add");
 		vLayout.addComponent(button);
+		button.addClickListener(this);
 		
 		//Grid Table
-		Grid grid = new Grid("My diary entries");
+		grid = new Grid("My diary entries");
+		grid.setWidth("50%");
 		vLayout.addComponent(grid);
 		
+		//setCompositionRoot(hLayout);
+		setCompositionRoot(vLayout);
 		
+	}
+	
+	public void setName(String name) {
+		button.setCaption(name);
+	}
+
+	public void addListener(ButtonClickListener clickListener) {
+		listeners.add(clickListener);
+	}
+
+
+	public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
+		for(ButtonClickListener listener : listeners){
+			listener.buttonClick();
+		}
 	}
 
 }
