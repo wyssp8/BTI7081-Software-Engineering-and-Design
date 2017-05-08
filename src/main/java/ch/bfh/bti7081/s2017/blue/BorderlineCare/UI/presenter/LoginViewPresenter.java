@@ -16,6 +16,7 @@ public class LoginViewPresenter implements ButtonClickListener {
 		this.loginViewModel = loginViewModel;
 		this.loginViewImpl = loginViewImpl;
 		loginViewImpl.addListener(this);
+		asdfasdf
 		//loginViewImpl.setName("Clear Textarea");
 	}
 
