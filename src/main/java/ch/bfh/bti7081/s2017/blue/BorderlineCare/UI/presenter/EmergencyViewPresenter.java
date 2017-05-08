@@ -13,18 +13,16 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.EmergencyViewIm
 public class EmergencyViewPresenter implements CallButtonClickListener,MessageButtonClickListener {
 
 	private EmergencyViewModel emergencyViewModel;
-	private EmergencyViewImpl emergencyViewImpl;
 	
-	public EmergencyViewPresenter(EmergencyViewImpl emergencyViewImpl){
-		this.emergencyViewImpl = emergencyViewImpl;
-		emergencyViewModel = new EmergencyViewModel();
+	public EmergencyViewPresenter(EmergencyViewImpl emergencyViewImpl, EmergencyViewModel emergencyViewModel) {
+		this.emergencyViewModel = emergencyViewModel;
 		emergencyViewImpl.addCallButtonClickListener(this);
 		emergencyViewImpl.addMessageButtonClickListener(this);
 	}
 
 	@Override
 	public void messageButtonClick() {
-		String destination = emergencyViewModel.getMessageLink();
+		String destination = emergencyViewModel.getCallLink();
 		Page.getCurrent().open(destination,null);
 	}
 

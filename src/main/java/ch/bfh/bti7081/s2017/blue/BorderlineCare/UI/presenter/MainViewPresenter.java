@@ -1,17 +1,20 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
+import com.vaadin.external.org.slf4j.Logger;
+
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
 
 public class MainViewPresenter {
 
-	private MainViewModel mainViewModel;
-	private MainViewImpl mainViewImpl;
+	private MainViewModel model;
+	private MainViewImpl impl;
 	
 	
-	public MainViewPresenter(MainViewImpl view){
-    	this.mainViewModel = new MainViewModel();
-		this.mainViewImpl = view;
+	public MainViewPresenter(MainViewModel model, MainViewImpl view){
+		this.model = model;
+		this.impl = view;
 	}
 
 
