@@ -42,10 +42,8 @@ public class MyUI extends UI {
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
     	DiaryDashViewImpl diaryDashViewImpl = new DiaryDashViewImpl();
         EmergencyViewImpl emergencyViewImpl = new EmergencyViewImpl();
-    	EmergencyViewModel emergencyViewModel = new EmergencyViewModel();
-    	EmergencyViewPresenter emergencyViewPresenter = new EmergencyViewPresenter(emergencyViewImpl,emergencyViewModel);
+    	EmergencyViewPresenter emergencyViewPresenter = new EmergencyViewPresenter(emergencyViewImpl);
     	MainViewImpl mainView = new MainViewImpl(exerciseDashViewImpl,diaryDashViewImpl,emergencyViewImpl);
-    	MainViewModel model = new MainViewModel();
     	MainViewPresenter presenter = new MainViewPresenter(model, mainView);
     	
     	//Contact View
