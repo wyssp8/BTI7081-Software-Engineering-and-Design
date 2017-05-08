@@ -17,8 +17,6 @@ import com.vaadin.ui.VerticalLayout;
 
 public class MainViewImpl extends CustomComponent {
 	
-
-	
 	public MainViewImpl(ExerciseDashViewImpl exerciseDashViewImpl, DiaryDashViewImpl diaryDashViewImpl,EmergencyViewImpl emergencyViewImpl){
 		HorizontalLayout layout = new HorizontalLayout();
 		VerticalLayout layoutDashView = new VerticalLayout();
