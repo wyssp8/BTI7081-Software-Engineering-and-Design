@@ -14,12 +14,15 @@ import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.LoginViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.LoginViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.LoginViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.DiaryDashViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.EmergencyViewImpl;
@@ -59,7 +62,15 @@ public class MyUI extends UI {
     	//Navigation View 
     	NavigationViewImpl view = new NavigationViewImpl(mainView,contactsViewImpl,diaryViewImpl);
     	
+    	
+    	//Login View
+    	LoginViewModel loginViewModel = new LoginViewModel();
+    	LoginViewImpl loginViewImpl = new LoginViewImpl();
+    	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl);
+    	
     	setContent(view);
+   
+    	//setContent(loginViewImpl);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
