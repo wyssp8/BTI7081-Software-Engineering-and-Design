@@ -8,8 +8,8 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
 
 public class MainViewPresenter {
 
-	MainViewModel model;
-	MainViewImpl impl;
+	private MainViewModel model;
+	private MainViewImpl impl;
 	
 	
 	public MainViewPresenter(MainViewModel model, MainViewImpl view){

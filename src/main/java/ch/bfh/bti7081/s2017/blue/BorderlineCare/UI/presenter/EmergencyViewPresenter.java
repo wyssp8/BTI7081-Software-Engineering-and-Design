@@ -22,7 +22,7 @@ public class EmergencyViewPresenter implements CallButtonClickListener,MessageBu
 
 	@Override
 	public void messageButtonClick() {
-		String destination = emergencyViewModel.getMessageLink();
+		String destination = emergencyViewModel.getCallLink();
 		Page.getCurrent().open(destination,null);
 	}
 
