@@ -28,11 +28,11 @@ public class LoginViewPresenter implements LoginViewButtonClickListener {
 	public void loginButtonClick() {
 		// TODO Auto-generated method stub
 		loginViewImpl.loginPassword.setValue("Logged In");
+		
 	}
 
 	@Override
 	public void signUpButtonClick() {
-		// TODO Auto-generated method stub
 		loginViewImpl.loginPassword.setValue("Signed Up");
 	}
 }
