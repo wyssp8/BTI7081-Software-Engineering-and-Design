@@ -11,10 +11,12 @@ import com.vaadin.ui.UI;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExercisesViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
@@ -60,6 +62,8 @@ public class MyUI extends UI {
     	
     	//Exercises View
     	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
+    	ExercisesViewModel exercisesViewModel = new ExercisesViewModel();
+    	ExercisesViewPresenter exercisesViewPresenter = new ExercisesViewPresenter(exerciseViewImpl, exercisesViewModel);
     	
     	//Navigation View 
 
