@@ -15,7 +15,7 @@ Team:
 
 Kieliger Martin		(kielm1@bfh.ch)
 Polo Claudio Dano	(poloc1@bfh.ch)
-Frutiger Joël Paul	(jooolchef@gmail.com)
+Frutiger Joï¿½l Paul	(jooolchef@gmail.com)
 Argollo Pitta Andre	(andre2pi@gmail.com)
 Luder Sandro		(sa.lu@bluewin.ch)
 Wyss Patrick Sandro	(wyssp8@gmail.com)
@@ -34,7 +34,7 @@ Task:		Task01 und Task02 im Team am erarbeiten
 ------------------------------------------------------
 Anwesend:	Niemand aufgrund Unterrichtsausfall.
 
-Task:		Selbständiges erarbeiten der gestellten Aufgaben des Lehrers. RE 3.3 und Sommerville_SE9ed_pp082_091.pdf.
+Task:		Selbstï¿½ndiges erarbeiten der gestellten Aufgaben des Lehrers. RE 3.3 und Sommerville_SE9ed_pp082_091.pdf.
 
 ------------------------------------------------------
 07.03.2017
@@ -42,7 +42,7 @@ Task:		Selbständiges erarbeiten der gestellten Aufgaben des Lehrers. RE 3.3 und 
 Anwesend:	Kieliger, Pitta, Frutiger, Luder, Wyss, Polo
 
 <<<<<<< Updated upstream
-Task:		Selbständiges erarbeiten der Theorie RE 3.4 und Sommerville_SE9ed_pp100_109.pdf. Anschliessend erarbeiten des CS2 im Team.
+Task:		Selbstï¿½ndiges erarbeiten der Theorie RE 3.4 und Sommerville_SE9ed_pp100_109.pdf. Anschliessend erarbeiten des CS2 im Team.
 
 
 ------------------------------------------------------
@@ -50,7 +50,7 @@ Task:		Selbständiges erarbeiten der Theorie RE 3.4 und Sommerville_SE9ed_pp100_1
 ------------------------------------------------------
 Anwesend:	Niemand, aufgrund Unterrichtsausfall.
 
-Task:		Selbständiges erarbeiten der Theorie RE 3.6, 3.7, 3.8
+Task:		Selbstï¿½ndiges erarbeiten der Theorie RE 3.6, 3.7, 3.8
 
 
 ------------------------------------------------------
@@ -81,15 +81,43 @@ Task:		CS01 Task03 Design Thinking. Storyboards, Prototyps und Dokument am erste
 ------------------------------------------------------
 Anwensend:	Frutiger, Argollo, Luder, Wyss
 
-Task:		Abschluss des Projektes CS01 Task03 und erstellen der Präsentation.
+Task:		Abschluss des Projektes CS01 Task03 und erstellen der Prï¿½sentation.
 
 
 
-=======
-Selbständiges erarbeiten der Theorie RE 3.4 und Sommerville_SE9ed_pp100_109.pdf. Anschliessend erarbeiten des CS2 im Team.
-=======
+------------------------------------------------------
+SelbstÃ¤ndiges erarbeiten der Theorie RE 3.4 und Sommerville_SE9ed_pp100_109.pdf. Anschliessend erarbeiten des CS2 im Team.
+------------------------------------------------------
 Task:		Task01 und Task02 im Team am erarbeiten
-=======
-Diary
->>>>>>> Stashed changes
+
+
+------------------------------------------------------
+01.05.2017
+------------------------------------------------------
+Anwensend:	alle
+
+Task:		Arbeiten an Sprint 1
+
+------------------------------------------------------
+02.05.2017
+------------------------------------------------------
+Anwensend:	alle
+
+Task:		Arbeiten an Sprint 1
+
+------------------------------------------------------
+05.05.2017
+------------------------------------------------------
+Anwensend:	alle
+
+Task:		Arbeiten an Sprint 1
+
+------------------------------------------------------
+09.05.2017
+------------------------------------------------------
+Anwensend:	alle
+
+Task:		Arbeiten an Sprint 1
+
+
 

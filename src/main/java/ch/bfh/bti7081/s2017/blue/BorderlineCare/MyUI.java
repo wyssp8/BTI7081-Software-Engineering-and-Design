@@ -35,7 +35,9 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
 @Theme("mytheme")
 public class MyUI extends UI {
 
-    @Override
+	private static final long serialVersionUID = 8756061847229359826L;
+
+	@Override
     protected void init(VaadinRequest vaadinRequest) {
     	//Main View
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
@@ -85,5 +87,6 @@ public class MyUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
+		private static final long serialVersionUID = 7729956322024855965L;
     }
 }

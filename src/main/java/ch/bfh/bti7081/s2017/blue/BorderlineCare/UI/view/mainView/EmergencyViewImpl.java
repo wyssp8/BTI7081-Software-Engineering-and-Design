@@ -4,25 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vaadin.annotations.Theme;
-import com.vaadin.event.ContextClickEvent;
-import com.vaadin.event.ContextClickEvent.ContextClickListener;
-import com.vaadin.icons.VaadinIcons;
-import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FileResource;
-import com.vaadin.server.Resource;
 import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Image;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Link;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.EmergencyButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.EmergencyView;
 
@@ -36,6 +24,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.EmergencyView
  */
 public class EmergencyViewImpl extends CustomComponent implements EmergencyView {
 
+	private static final long serialVersionUID = 1L;
 	private List<EmergencyButtonClickListener> emergencyButtonListeners = new ArrayList<EmergencyButtonClickListener>();
 	private Button emergencyCallButton;
 	private Button emergencyMessageButton;

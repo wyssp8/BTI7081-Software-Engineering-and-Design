@@ -10,6 +10,8 @@ import com.vaadin.ui.VerticalLayout;
  */
 public class DiaryDashViewImpl extends DashView {
 
+	private static final long serialVersionUID = 1500529579085605966L;
+
 	public DiaryDashViewImpl() {
 		VerticalLayout layout = new VerticalLayout();
 		layout.addComponent(new Button("Placeholder: New Diary"));
