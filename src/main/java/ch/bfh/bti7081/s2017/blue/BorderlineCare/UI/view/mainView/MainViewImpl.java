@@ -14,7 +14,13 @@ import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
-
+/**
+ * 
+ * This View adds all the subviews to the Main View.
+ * 
+ * @author frutiger
+ *
+ */
 public class MainViewImpl extends CustomComponent {
 	
 	public MainViewImpl(ExerciseDashViewImpl exerciseDashViewImpl, DiaryDashViewImpl diaryDashViewImpl,EmergencyViewImpl emergencyViewImpl){

@@ -23,14 +23,20 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.CallButtonClickListener;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.MessageButtonClickListener;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.EmergencyButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.EmergencyView;
 
+/**
+ * 
+ * This view displays two buttons, one for doing a emergency call and another
+ * one to write a emergency message.
+ * 
+ * @author frutiger
+ *
+ */
 public class EmergencyViewImpl extends CustomComponent implements EmergencyView {
 
-	private List<CallButtonClickListener> callButtonListeners = new ArrayList<CallButtonClickListener>();
-	private List<MessageButtonClickListener> messageButtonListeners = new ArrayList<MessageButtonClickListener>();
+	private List<EmergencyButtonClickListener> emergencyButtonListeners = new ArrayList<EmergencyButtonClickListener>();
 	private Button emergencyCallButton;
 	private Button emergencyMessageButton;
 
@@ -44,13 +50,9 @@ public class EmergencyViewImpl extends CustomComponent implements EmergencyView 
 		emergencyCallButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
 		emergencyCallButton.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
 		emergencyCallButton.setIcon(phoneImage);
-		emergencyCallButton.addClickListener(new ClickListener() {
-			
-			@Override
-			public void buttonClick(ClickEvent event) {
-				for (CallButtonClickListener listener : callButtonListeners) {
-					listener.callButtonClick();
-				}
+		emergencyCallButton.addClickListener(e -> {
+			for (EmergencyButtonClickListener listener : emergencyButtonListeners) {
+				listener.callButtonClick();
 			}
 		});
 		emergencyCallButton.setHeight("200px");
@@ -63,14 +65,9 @@ public class EmergencyViewImpl extends CustomComponent implements EmergencyView 
 		emergencyMessageButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
 		emergencyMessageButton.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
 		emergencyMessageButton.setIcon(messageImage);
-		emergencyMessageButton.addClickListener(new ClickListener() {
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				for (MessageButtonClickListener listener : messageButtonListeners) {
-					listener.messageButtonClick();
-				}
-
+		emergencyMessageButton.addClickListener(e -> {
+			for (EmergencyButtonClickListener listener : emergencyButtonListeners) {
+				listener.messageButtonClick();
 			}
 		});
 		emergencyMessageButton.setHeight("200px");
@@ -81,13 +78,8 @@ public class EmergencyViewImpl extends CustomComponent implements EmergencyView 
 	}
 
 	@Override
-	public void addCallButtonClickListener(CallButtonClickListener clickListener) {
-		callButtonListeners.add(clickListener);
-	}
-
-	@Override
-	public void addMessageButtonClickListener(MessageButtonClickListener clickListener) {
-		messageButtonListeners.add(clickListener);
+	public void addEmergencyButtonClickListener(EmergencyButtonClickListener clickListener) {
+		emergencyButtonListeners.add(clickListener);
 	}
 
 }
