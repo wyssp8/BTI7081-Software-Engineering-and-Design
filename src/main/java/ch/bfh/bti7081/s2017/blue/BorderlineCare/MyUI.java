@@ -6,6 +6,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
@@ -63,14 +64,18 @@ public class MyUI extends UI {
     	NavigationViewImpl view = new NavigationViewImpl(mainView,contactsViewImpl,diaryViewImpl);
     	
     	
-    	//Login View
-    	LoginViewModel loginViewModel = new LoginViewModel();
-    	LoginViewImpl loginViewImpl = new LoginViewImpl();
-    	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl);
-    	
+//    	//Login View
+//    	LoginViewModel loginViewModel = new LoginViewModel();
+//    	LoginViewImpl loginViewImpl = new LoginViewImpl();
+//    	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl);
+//    	
+//        VerticalLayout vLayout = new VerticalLayout();
+//        vLayout.addComponent(loginViewImpl);
+//        vLayout.setSizeFull();
+//        vLayout.setComponentAlignment(loginViewImpl, Alignment.MIDDLE_CENTER);
+//        this.setContent(vLayout);
+        
     	setContent(view);
-   
-    	//setContent(loginViewImpl);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
