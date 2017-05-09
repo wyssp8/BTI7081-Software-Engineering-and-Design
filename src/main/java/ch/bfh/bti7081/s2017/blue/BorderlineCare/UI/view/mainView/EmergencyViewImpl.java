@@ -24,6 +24,8 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.EmergencyView
  */
 public class EmergencyViewImpl extends CustomComponent implements EmergencyView {
 
+
+
 	private static final long serialVersionUID = 1L;
 	private List<EmergencyButtonClickListener> emergencyButtonListeners = new ArrayList<EmergencyButtonClickListener>();
 	private Button emergencyCallButton;
