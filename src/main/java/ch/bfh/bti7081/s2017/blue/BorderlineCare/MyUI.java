@@ -18,6 +18,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresen
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ExerciseViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.DiaryDashViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.EmergencyViewImpl;
@@ -57,8 +58,14 @@ public class MyUI extends UI {
     	DiaryViewImpl diaryViewImpl = new DiaryViewImpl();
     	DiaryViewPresenter diaryViewPresenter = new DiaryViewPresenter(diaryViewModel, diaryViewImpl);
     	
+    	//Exercises View
+    	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
+    	
     	//Navigation View 
-    	NavigationViewImpl view = new NavigationViewImpl(mainView,contactViewImpl,diaryViewImpl);
+
+    	NavigationViewImpl view = new NavigationViewImpl(mainView,contactViewImpl,diaryViewImpl,exerciseViewImpl);
+
+
     	
     	
 //    	//Login View

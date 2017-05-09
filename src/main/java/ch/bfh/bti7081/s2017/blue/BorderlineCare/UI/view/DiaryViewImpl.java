@@ -13,6 +13,8 @@ import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickListener;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.MainView;
 
@@ -23,7 +25,9 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 	
 	public DateField date;
 	public TextArea txtArea;
-	public Grid grid;
+	
+	private Grid<DiaryEntry> grid;
+	private List<DiaryEntry> diaryEntry;
 	
 	
 	public DiaryViewImpl(){
@@ -48,8 +52,9 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 		button.addClickListener(this);
 		
 		//Grid Table
-		grid = new Grid("My diary entries");
-		grid.setWidth("50%");
+		grid = new Grid<>();
+		grid.addColumn(DiaryEntry::getDate).setCaption("Date");
+		grid.addColumn(DiaryEntry::getDiaryEntry).setCaption("Entry");
 		vLayout.addComponent(grid);
 		
 		//setCompositionRoot(hLayout);
@@ -70,6 +75,10 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 		for(ButtonClickListener listener : listeners){
 			listener.buttonClick();
 		}
+	}
+	
+	public void initializeDiaryEntry(List<DiaryEntry> diaryEntry){
+		grid.setItems(diaryEntry);
 	}
 
 }
