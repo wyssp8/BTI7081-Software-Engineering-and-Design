@@ -6,23 +6,27 @@ import com.vaadin.server.Resource;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.CallButtonClickListener;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.MessageButtonClickListener;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.EmergencyButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.EmergencyViewImpl;
-
-public class EmergencyViewPresenter implements CallButtonClickListener,MessageButtonClickListener {
+/**
+ * 
+ * This presenter handles clicking the Call and Message Button in the view.
+ * 
+ *  @author frutiger
+ *
+ */
+public class EmergencyViewPresenter implements EmergencyButtonClickListener {
 
 	private EmergencyViewModel emergencyViewModel;
 	
 	public EmergencyViewPresenter(EmergencyViewImpl emergencyViewImpl, EmergencyViewModel emergencyViewModel) {
 		this.emergencyViewModel = emergencyViewModel;
-		emergencyViewImpl.addCallButtonClickListener(this);
-		emergencyViewImpl.addMessageButtonClickListener(this);
+		emergencyViewImpl.addEmergencyButtonClickListener(this);
 	}
 
 	@Override
 	public void messageButtonClick() {
-		String destination = emergencyViewModel.getCallLink();
+		String destination = emergencyViewModel.getMessageLink();
 		Page.getCurrent().open(destination,null);
 	}
 
