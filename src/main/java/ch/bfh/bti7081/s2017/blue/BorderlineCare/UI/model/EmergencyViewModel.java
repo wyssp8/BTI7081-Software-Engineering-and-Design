@@ -3,6 +3,11 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.Resource;
 
+/**
+ * This Class provides methods to the emergency view.
+ * @author chef
+ *
+ */
 
 public class EmergencyViewModel {
 

@@ -5,7 +5,13 @@ import com.vaadin.external.org.slf4j.Logger;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
-
+/**
+ * 
+ * This presenter is not yes used.
+ * 
+ * @author frutiger
+ *
+ */
 public class MainViewPresenter {
 
 	private MainViewModel model;

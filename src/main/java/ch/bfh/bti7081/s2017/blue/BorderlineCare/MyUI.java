@@ -6,21 +6,32 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
+
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
+
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.LoginViewModel;
+
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
+
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExercisesViewPresenter;
+
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.LoginViewPresenter;
+
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ExerciseViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.LoginViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.DiaryDashViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.EmergencyViewImpl;
@@ -37,7 +48,9 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
 @Theme("mytheme")
 public class MyUI extends UI {
 
-    @Override
+	private static final long serialVersionUID = 8756061847229359826L;
+
+	@Override
     protected void init(VaadinRequest vaadinRequest) {
     	//Main View
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
@@ -89,5 +102,6 @@ public class MyUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
+		private static final long serialVersionUID = 7729956322024855965L;
     }
 }
