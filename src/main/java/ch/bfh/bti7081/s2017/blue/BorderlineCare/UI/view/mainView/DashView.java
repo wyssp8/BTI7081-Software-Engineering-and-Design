@@ -11,4 +11,6 @@ import com.vaadin.ui.CustomComponent;
  */
 public abstract class DashView extends CustomComponent {
 
+	private static final long serialVersionUID = -5210050279071716429L;
+
 }
