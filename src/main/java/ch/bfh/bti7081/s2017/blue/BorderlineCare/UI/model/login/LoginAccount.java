@@ -1,4 +1,4 @@
-package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model;
+package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login;
 
 import java.util.List;
 
@@ -54,5 +54,5 @@ public class LoginAccount {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}	
+	}
 }

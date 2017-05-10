@@ -3,7 +3,8 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
@@ -14,8 +15,14 @@ import com.vaadin.ui.VerticalLayout;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.LoginViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.LoginViewButtonClickListener;
 
-public class LoginViewImpl extends CustomComponent {
-
+/**
+ * @author cpolo
+ *
+ */
+public class LoginViewImpl extends CustomComponent implements View {
+	//Name of the View
+	public static final String NAME = "LoginView";
+	
 	// Components
 	private List<LoginViewButtonClickListener> listeners = new ArrayList<LoginViewButtonClickListener>();
 	private Button buttonLogin;
@@ -29,7 +36,7 @@ public class LoginViewImpl extends CustomComponent {
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.setSizeFull();
 		setCompositionRoot(vLayout);
-
+        
 		// Textfields
 		loginName = new TextField();
 		loginName.setCaption("Username");
@@ -63,7 +70,7 @@ public class LoginViewImpl extends CustomComponent {
 		vLayout.addComponent(buttonSignUp);
 		vLayout.addComponent(loginLabel);
 		vLayout.setComponentAlignment(buttonLogin, Alignment.MIDDLE_CENTER);
-		vLayout.setComponentAlignment(buttonSignUp, Alignment.MIDDLE_LEFT);
+		vLayout.setComponentAlignment(buttonSignUp, Alignment.MIDDLE_CENTER);
 		vLayout.setComponentAlignment(loginName, Alignment.MIDDLE_CENTER);
 		vLayout.setComponentAlignment(loginPassword, Alignment.MIDDLE_CENTER);
 		loginName.focus();
@@ -84,5 +91,11 @@ public class LoginViewImpl extends CustomComponent {
 
 	public void setLoginLabel(String loginLabel) {
 		this.loginLabel.setCaption(loginLabel);
+	}
+
+	@Override
+	public void enter(ViewChangeEvent event) {
+		// TODO Auto-generated method stub
+		
 	}
 }
