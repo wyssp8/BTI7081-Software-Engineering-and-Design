@@ -16,6 +16,10 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/wyssp8/ch.bfh.bti7081.s2017.blue.git
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;

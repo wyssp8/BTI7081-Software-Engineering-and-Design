@@ -8,12 +8,10 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickListener;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.MainView;
@@ -23,11 +21,10 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 	private List<ButtonClickListener> listeners = new ArrayList<ButtonClickListener>();
 	private Button button;
 	
-	public DateField date;
-	public TextArea txtArea;
+	private DateField date;
+	private TextArea txtArea;
 	
 	private Grid<DiaryEntry> grid;
-	private List<DiaryEntry> diaryEntry;
 	
 	
 	public DiaryViewImpl(){
@@ -65,6 +62,11 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 	public void setName(String name) {
 		button.setCaption(name);
 	}
+	
+	public TextArea getTextArea() {
+		return txtArea;
+	}
+	
 
 	public void addListener(ButtonClickListener clickListener) {
 		listeners.add(clickListener);

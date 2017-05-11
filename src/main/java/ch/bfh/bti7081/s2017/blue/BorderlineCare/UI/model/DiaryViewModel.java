@@ -7,11 +7,10 @@ import java.util.List;
 public class DiaryViewModel {
 	
 	private List<DiaryEntry> diaryEntry;
-	private LocalDate date;
 	
 	public DiaryViewModel(){
 		diaryEntry = new ArrayList<>();
-		diaryEntry.add(new DiaryEntry(date.now(), "TestEntry"));
+		diaryEntry.add(new DiaryEntry(LocalDate.now(), "TestEntry"));
 		
 	}
 	
