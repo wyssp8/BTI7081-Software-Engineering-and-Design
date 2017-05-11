@@ -18,9 +18,13 @@ public class ContactModel {
 		
 		
 	}
-	
-	public List<Contact> getContacts(){
+
+	public List<Contact> getContacts() {
 		return this.contacts;
+	}
+
+	public void remove(Contact contact) {
+		contacts.remove(0);
 	}
 
 }
