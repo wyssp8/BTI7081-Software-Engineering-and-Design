@@ -31,12 +31,11 @@ public class ContactViewImpl extends CustomComponent{
 	
 	public ContactViewImpl(){
 		grid = new Grid<>();
-		//grid.addColumn(Contact::getName).setCaption("Name");
-		Column columnName = grid.addColumn(Contact::getName);
+		Column<Contact, ?> columnName = grid.addColumn(Contact::getName);
 		columnName.setId("Name");
 		columnName.setCaption("Name");
 		
-		Column columnPhoneNumber = grid.addColumn(Contact::getPhoneNumber);
+		Column<Contact, ?> columnPhoneNumber = grid.addColumn(Contact::getPhoneNumber);
 		columnPhoneNumber.setId("Phonenumber");
 		columnPhoneNumber.setCaption("Phonenumber");
 		
@@ -44,11 +43,12 @@ public class ContactViewImpl extends CustomComponent{
 		header.join(header.getCell("Name"),
 					header.getCell("Phonenumber")).setText("My Contacts");
 		
-		Column delete = grid.addColumn(contacts -> "delete", 
-				new ButtonRenderer(clickEvent -> {
+		Column<Contact, String> delete = grid.addColumn(contacts -> "delete", 
+				new ButtonRenderer<Object>(clickEvent -> {
 					contacts.remove(clickEvent.getItem());
 					grid.setItems(contacts);
 				}));
+		
 		delete.setId("delete");
 		Button deleteButton = new Button("new Contact");
 		header.getCell("delete").setComponent(deleteButton);

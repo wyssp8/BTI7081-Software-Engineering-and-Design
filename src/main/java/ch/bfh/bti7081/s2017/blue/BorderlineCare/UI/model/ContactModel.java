@@ -10,6 +10,12 @@ public class ContactModel {
 	public ContactModel(){
 		contacts = new ArrayList<>();
 		contacts.add(new Contact("Sandro", 12345));
+		contacts.add(new Contact("André", 23456));
+		contacts.add(new Contact("Patrick", 34567));
+		contacts.add(new Contact("Martin", 45678));
+		contacts.add(new Contact("Joel", 56789));
+		contacts.add(new Contact("Polo", 67890));
+		
 		
 	}
 	
