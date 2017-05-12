@@ -14,7 +14,7 @@ public class ContactModel {
 		contacts.add(new Contact("Patrick", 34567));
 		contacts.add(new Contact("Martin", 45678));
 		contacts.add(new Contact("Joel", 56789));
-		contacts.add(new Contact("Polo", 67890));
+		contacts.add(new Contact("Polo", 67891));
 		
 		
 	}

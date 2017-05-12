@@ -44,14 +44,7 @@ public class ExercisesViewPresenter implements ExerciseClickListener {
 		Exercise currentExercise = exercisesViewModel.getExercises().get(exerciseNumber);
 		exerciseViewImpl.setTitleText(currentExercise.getTitle());
 		exerciseViewImpl.setDescriptionText(currentExercise.getDescription());
-
+		exerciseViewImpl.setImagePath(currentExercise.getImagePath());
 	}
 
-	
-
-	
-	
-	
-	
-	
 }

@@ -27,8 +27,8 @@ public class ContactViewPresenter implements ContactButtonClickListener{
 		contacts = new ArrayList<>();
 		contactViewImpl.initializeContacts(contactModel.getContacts());
 		contactViewImpl.addContactButtonClickListeneer(this);
-		
-		contactViewImpl.initializePopup();
+		contactViewImpl.initializeDeletePopup();
+		contactViewImpl.initNewContactPopup();
 	}
 	
 	
@@ -44,20 +44,12 @@ public class ContactViewPresenter implements ContactButtonClickListener{
 	@Override
 	public void deleteButtonClick() {
 		
-		
-//		popup.setVisible(true);	
-//		popup.addPopupVisibilityListener(event -> {
-//		    if (event.isPopupVisible()) {
-//		    	// ...	        
-//		    }});
-		// contacts.remove(0);
-		
 	}
 
 
 	@Override
 	public void newContactButtonClick() {
-		
+		contactViewImpl.getPopuop().setVisible(true);
 		
 	}
 
