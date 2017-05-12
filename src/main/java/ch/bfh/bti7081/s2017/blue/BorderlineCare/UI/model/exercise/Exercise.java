@@ -8,15 +8,12 @@ public abstract class Exercise {
 
 	private String title;
 	private String description;
-	private Image picture;
+	private String imagePath;
 	
-	public Exercise(String title, String description, String path){
+	public Exercise(String title, String description, String imagePath){
 		this.description = description;
 		this.title = title;
-		
-		//link the path to image
-		FileResource resource = new FileResource(new File(path));
-		this.picture = new Image(title, resource);
+		this.imagePath = imagePath;
 	}
 
 	public String getTitle() {
@@ -35,12 +32,12 @@ public abstract class Exercise {
 		this.description = description;
 	}
 
-	public Image getPicture() {
-		return picture;
+	public String getImagePath() {
+		return imagePath;
 	}
 
-	public void setPicture(Image picture) {
-		this.picture = picture;
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	
 }
