@@ -4,7 +4,11 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.Exercise;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ExerciseClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ExerciseViewImpl;
-
+/**
+ * 
+ * @author wyssp8
+ *
+ */
 public class ExercisesViewPresenter implements ExerciseClickListener {
 	
 	private ExercisesViewModel exercisesViewModel;

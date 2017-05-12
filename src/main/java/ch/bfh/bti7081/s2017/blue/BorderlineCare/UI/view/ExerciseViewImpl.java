@@ -18,7 +18,11 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ExerciseClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.ExerciseView;
-
+/**
+ * 
+ * @author wyssp8
+ *
+ */
 public class ExerciseViewImpl extends CustomComponent implements ExerciseView {
 
 	private List<ExerciseClickListener> listeners = new ArrayList<ExerciseClickListener>();

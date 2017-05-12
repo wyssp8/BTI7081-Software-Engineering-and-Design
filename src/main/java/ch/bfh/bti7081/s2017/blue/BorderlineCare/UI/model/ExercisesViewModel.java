@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.DailyExercise;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.Exercise;
-
+/**
+ * 
+ * @author wyssp8
+ *
+ */
 public class ExercisesViewModel {
 
 	private ArrayList<Exercise> exercises = new ArrayList<Exercise>();

@@ -1,9 +1,9 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise;
-
-import java.io.File;
-import com.vaadin.server.FileResource;
-import com.vaadin.ui.Image;
-
+/**
+ * 
+ * @author wyssp8
+ *
+ */
 public abstract class Exercise {
 
 	private String title;
