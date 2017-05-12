@@ -16,11 +16,6 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/wyssp8/ch.bfh.bti7081.s2017.blue.git
-
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
@@ -86,12 +81,12 @@ public class MyUI extends UI {
     	SettingsViewImpl settingsViewImpl = new SettingsViewImpl();   	
     	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl);
 
-//    	//Exercises View
-//    	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
-//    	ExercisesViewModel exercisesViewModel = new ExercisesViewModel();
-//    	ExercisesViewPresenter exercisesViewPresenter = new ExercisesViewPresenter(exerciseViewImpl, exercisesViewModel);
+    	//Exercises View
+    	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
+    	ExercisesViewModel exercisesViewModel = new ExercisesViewModel();
+    	ExercisesViewPresenter exercisesViewPresenter = new ExercisesViewPresenter(exerciseViewImpl, exercisesViewModel);
 
-    	NavigationViewImpl view = new NavigationViewImpl(mainView,contactViewImpl,diaryViewImpl,settingsViewImpl);
+    	NavigationViewImpl view = new NavigationViewImpl(mainView,contactViewImpl,diaryViewImpl,exerciseViewImpl,settingsViewImpl);
 
     	
     	
