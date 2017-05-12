@@ -2,16 +2,10 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model;
 
 import java.time.LocalDate;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
-
 public class DiaryEntry {
 	
 	private LocalDate date;
 	private String diaryEntry;
-	private DiaryViewImpl diaryViewImpl;
-	private LocalDate localDate;
-	
-	
 	
 	
 	public DiaryEntry(LocalDate date, String diaryEntry){
@@ -19,7 +13,6 @@ public class DiaryEntry {
 		this.diaryEntry = diaryEntry;		
 	}
 	
-
 
 	public LocalDate getDate() {
 		return date;

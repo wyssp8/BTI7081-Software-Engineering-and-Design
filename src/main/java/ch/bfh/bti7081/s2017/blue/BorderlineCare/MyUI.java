@@ -16,9 +16,13 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.LoginViewModel;
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/wyssp8/ch.bfh.bti7081.s2017.blue.git
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
@@ -28,11 +32,13 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExercisesViewPresen
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.LoginViewPresenter;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.SettingsViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ExerciseViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.LoginViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SettingsViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.DiaryDashViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.EmergencyViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.ExerciseDashViewImpl;
@@ -62,6 +68,7 @@ public class MyUI extends UI {
     	MainViewModel model = new MainViewModel();
     	MainViewPresenter presenter = new MainViewPresenter(model, mainView);
     	
+
     	//Contact View
     	ContactViewImpl contactViewImpl = new ContactViewImpl();
     	ContactModel contactModel = new ContactModel();
@@ -73,15 +80,18 @@ public class MyUI extends UI {
     	DiaryViewImpl diaryViewImpl = new DiaryViewImpl();
     	DiaryViewPresenter diaryViewPresenter = new DiaryViewPresenter(diaryViewModel, diaryViewImpl);
     	
-    	//Exercises View
-    	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
-    	ExercisesViewModel exercisesViewModel = new ExercisesViewModel();
-    	ExercisesViewPresenter exercisesViewPresenter = new ExercisesViewPresenter(exerciseViewImpl, exercisesViewModel);
-    	
-    	//Navigation View 
 
-    	NavigationViewImpl view = new NavigationViewImpl(mainView,contactViewImpl,diaryViewImpl,exerciseViewImpl);
+    	//Settings View
+    	SettingsViewModel settingsModel = new SettingsViewModel();
+    	SettingsViewImpl settingsViewImpl = new SettingsViewImpl();   	
+    	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl);
 
+//    	//Exercises View
+//    	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
+//    	ExercisesViewModel exercisesViewModel = new ExercisesViewModel();
+//    	ExercisesViewPresenter exercisesViewPresenter = new ExercisesViewPresenter(exerciseViewImpl, exercisesViewModel);
+
+    	NavigationViewImpl view = new NavigationViewImpl(mainView,contactViewImpl,diaryViewImpl,settingsViewImpl);
 
     	
     	

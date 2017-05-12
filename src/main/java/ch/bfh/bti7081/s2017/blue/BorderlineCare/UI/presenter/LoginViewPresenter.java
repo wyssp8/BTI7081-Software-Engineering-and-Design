@@ -1,38 +1,59 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.LoginViewModel;
+import com.vaadin.navigator.Navigator;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.ui.CustomComponent;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.LoginViewButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.LoginViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SignUpViewImpl;
 
-public class LoginViewPresenter implements LoginViewButtonClickListener {
+/**
+ * @author cpolo
+ *
+ */
+public class LoginViewPresenter extends CustomComponent implements LoginViewButtonClickListener, View {
 	
-	
-	// TODO Auto-generated method stub
-	LoginViewModel loginViewModel;
-	LoginViewImpl loginViewImpl;
+	private LoginViewModel loginViewModel;
+	private LoginViewImpl loginViewImpl;
+	private LoginAccount loginAccount;
+	private Navigator navigator;
 
 
-	public LoginViewPresenter(LoginViewModel loginViewModel, LoginViewImpl loginViewImpl){
+	public LoginViewPresenter(LoginViewModel loginViewModel, LoginViewImpl loginViewImpl, Navigator navigator){
 		this.loginViewModel = loginViewModel;
 		this.loginViewImpl = loginViewImpl;
+		this.navigator = navigator;
 		loginViewImpl.addListener(this);
-		//loginViewImpl.setName("Clear Textarea");
 	}
 
-//	@Override
-//	public void buttonClick() {
-//		
-//		
-//	}
-
 	public void loginButtonClick() {
-		// TODO Auto-generated method stub
-		loginViewImpl.loginPassword.setValue("Logged In");
-		
+		if(authenticateLogin()){
+			loginViewImpl.setLoginLabel("logged in");
+		}	
 	}
 
 	@Override
 	public void signUpButtonClick() {
-		loginViewImpl.loginPassword.setValue("Signed Up");
+		loginViewImpl.setLoginLabel("signed up");
+		navigator.navigateTo(SignUpViewImpl.NAME);
 	}
+
+	@Override
+	public boolean authenticateLogin() {
+		if(loginViewImpl.getLoginName().equals(loginViewModel.getLoginAccount().get(0).getLoginName())&&
+				loginViewImpl.getLoginPassword().equals(loginViewModel.getLoginAccount().get(0).getPassword())){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void enter(ViewChangeEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
