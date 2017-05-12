@@ -9,10 +9,9 @@ import com.vaadin.server.Resource;
 /**
  * This Class provides methods to the emergency view.
  * 
- * @author chef
+ * @author frutiger
  *
  */
-
 public class EmergencyViewModel {
 
 	private final static Logger logger = Logger.getLogger(EmergencyViewModel.class.getName());
