@@ -17,9 +17,9 @@ import com.vaadin.ui.renderers.ButtonRenderer;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.ContactView;
-
 public class ContactViewImpl extends CustomComponent implements ContactView {
 
+	private static final long serialVersionUID = -1924986860210433106L;
 	private Grid<Contact> grid;
 	private List<Contact> contacts;
 	private List<ContactButtonClickListener> contactButtonClickListeners = new ArrayList<>();
@@ -46,7 +46,6 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 				listener.newContactButtonClick();
 			}
 		});
-		header.getCell("delete").setComponent(newContactButton);
 		// add a new column to the grid with the function to delete the entire contact
 		// and therefore the entire column
 		Column<Contact, String> delete = grid.addColumn(contacts -> "delete",
@@ -59,6 +58,7 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 				}));
 
 		delete.setId("delete");
+		header.getCell("delete").setComponent(newContactButton);
 		grid.getEditor().setEnabled(true);
 		layout.addComponent(grid);
 		setCompositionRoot(layout);
