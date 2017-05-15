@@ -4,6 +4,7 @@ import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Alignment;
@@ -19,6 +20,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
@@ -54,6 +56,8 @@ public class MyUI extends UI {
 
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
+		Navigator navigator = new Navigator(this, this);
+		
     	//Main View
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
     	DiaryDashViewImpl diaryDashViewImpl = new DiaryDashViewImpl();
@@ -91,18 +95,21 @@ public class MyUI extends UI {
 
     	
     	
-//    	//Login View
-//    	LoginViewModel loginViewModel = new LoginViewModel();
-//    	LoginViewImpl loginViewImpl = new LoginViewImpl();
-//    	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl);
-//    	
+    	//Login View
+    	LoginViewModel loginViewModel = new LoginViewModel();
+    	LoginViewImpl loginViewImpl = new LoginViewImpl();
+    	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
+    	
 //        VerticalLayout vLayout = new VerticalLayout();
 //        vLayout.addComponent(loginViewImpl);
 //        vLayout.setSizeFull();
 //        vLayout.setComponentAlignment(loginViewImpl, Alignment.MIDDLE_CENTER);
 //        this.setContent(vLayout);
-        
-    	setContent(view);
+        //change
+        navigator.addView("LoginView", loginViewImpl);
+        navigator.addView("HomeView", view);
+        navigator.navigateTo("LoginView");
+    	//setContent(view);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

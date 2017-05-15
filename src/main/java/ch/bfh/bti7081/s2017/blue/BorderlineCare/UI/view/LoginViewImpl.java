@@ -27,6 +27,7 @@ public class LoginViewImpl extends CustomComponent implements View {
 	private List<LoginViewButtonClickListener> listeners = new ArrayList<LoginViewButtonClickListener>();
 	private Button buttonLogin;
 	private Button buttonSignUp;
+	private Button buttonBypass;
 	private TextField loginName;
 	private TextField loginPassword;
 	private Label loginLabel;
@@ -48,7 +49,7 @@ public class LoginViewImpl extends CustomComponent implements View {
 		loginLabel = new Label();
 		loginLabel.setCaption("not logged in");
 
-		// Buttons
+		// Buttons change
 		buttonLogin = new Button("Login");
 		buttonLogin.addClickListener(e ->{
 			for(LoginViewButtonClickListener listener : listeners){
@@ -62,15 +63,24 @@ public class LoginViewImpl extends CustomComponent implements View {
 				listener.signUpButtonClick();
 			}
 		});
+		
+		buttonBypass = new Button("Bypass Login");
+		buttonBypass.addClickListener(e ->{
+			for(LoginViewButtonClickListener listener : listeners){
+				listener.bypassButtonClick();
+			}
+		});
 
 		// Add all components
 		vLayout.addComponent(loginName);
 		vLayout.addComponent(loginPassword);
 		vLayout.addComponent(buttonLogin);
 		vLayout.addComponent(buttonSignUp);
+		vLayout.addComponent(buttonBypass);
 		vLayout.addComponent(loginLabel);
 		vLayout.setComponentAlignment(buttonLogin, Alignment.MIDDLE_CENTER);
 		vLayout.setComponentAlignment(buttonSignUp, Alignment.MIDDLE_CENTER);
+		vLayout.setComponentAlignment(buttonBypass, Alignment.MIDDLE_CENTER);
 		vLayout.setComponentAlignment(loginName, Alignment.MIDDLE_CENTER);
 		vLayout.setComponentAlignment(loginPassword, Alignment.MIDDLE_CENTER);
 		loginName.focus();
