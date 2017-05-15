@@ -8,6 +8,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.LoginViewButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.LoginViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SignUpViewImpl;
 
 /**
@@ -22,7 +23,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	private Navigator navigator;
 
 
-	public LoginViewPresenter(LoginViewModel loginViewModel, LoginViewImpl loginViewImpl, Navigator navigator){
+	public LoginViewPresenter(LoginViewModel loginViewModel, LoginViewImpl loginViewImpl, Navigator navigator){	//+navigation
 		this.loginViewModel = loginViewModel;
 		this.loginViewImpl = loginViewImpl;
 		this.navigator = navigator;
@@ -38,7 +39,13 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	@Override
 	public void signUpButtonClick() {
 		loginViewImpl.setLoginLabel("signed up");
-		navigator.navigateTo(SignUpViewImpl.NAME);
+		navigator.navigateTo("HomeView");
+	}
+	
+	@Override
+	public void bypassButtonClick() {
+		navigator.navigateTo("HomeView");
+		
 	}
 
 	@Override
@@ -55,5 +62,4 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 		// TODO Auto-generated method stub
 		
 	}
-	
 }
