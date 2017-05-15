@@ -46,7 +46,7 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 				listener.newContactButtonClick();
 			}
 		});
-		header.getCell("delete").setComponent(newContactButton);
+		
 		// add a new column to the grid with the function to delete the entire contact
 		// and therefore the entire column
 		Column<Contact, String> delete = grid.addColumn(contacts -> "delete",
@@ -59,6 +59,7 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 				}));
 
 		delete.setId("delete");
+		header.getCell("delete").setComponent(newContactButton);
 		grid.getEditor().setEnabled(true);
 		layout.addComponent(grid);
 		setCompositionRoot(layout);
