@@ -41,7 +41,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 		loginViewImpl.setLoginLabel("signed up");
 		navigator.navigateTo("HomeView");
 	}
-	
+	//temp
 	@Override
 	public void bypassButtonClick() {
 		navigator.navigateTo("HomeView");

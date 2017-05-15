@@ -105,7 +105,7 @@ public class MyUI extends UI {
 //        vLayout.setSizeFull();
 //        vLayout.setComponentAlignment(loginViewImpl, Alignment.MIDDLE_CENTER);
 //        this.setContent(vLayout);
-        
+        //change
         navigator.addView("LoginView", loginViewImpl);
         navigator.addView("HomeView", view);
         navigator.navigateTo("LoginView");

@@ -10,7 +10,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
 
 public class NavigationViewImpl extends TabSheet implements View {
 	
-	//Name of the View
+	//Name of the View1
 	public static final String NAME = "HomeView";
 	
 	public NavigationViewImpl(MainViewImpl mainView, ContactViewImpl contactsViewImpl, DiaryViewImpl diaryViewImpl, ExerciseViewImpl exerciseViewImpl,SettingsViewImpl settingsView) {
