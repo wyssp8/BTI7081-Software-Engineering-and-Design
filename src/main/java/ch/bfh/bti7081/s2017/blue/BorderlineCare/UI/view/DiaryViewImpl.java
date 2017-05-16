@@ -19,7 +19,11 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.MainView;
 public class DiaryViewImpl extends CustomComponent implements MainView, ClickListener {
 	
 	private List<ButtonClickListener> listeners = new ArrayList<ButtonClickListener>();
-	private Button button;
+	
+	private Button buttonAdd;
+	private Button buttonGood;
+	private Button buttonMedium;
+	private Button buttonBad;
 	
 	private DateField date;
 	private TextArea txtArea;
@@ -37,21 +41,33 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 		vLayout.addComponent(date);
 		date.setValue(LocalDate.now());
 		
+		//Buttons Status
+		buttonGood = new Button("Good");
+		buttonMedium = new Button("Medium");
+		buttonBad = new Button("Bad");
+		vLayout.addComponent(buttonGood);
+		vLayout.addComponent(buttonMedium);
+		vLayout.addComponent(buttonBad);
+		
 		// Create a text area
 		txtArea = new TextArea("Diary entry");
 		txtArea.setWidth("50%");
 		txtArea.setValue("What have you done today\n" + "How did you feel today?");
 		vLayout.addComponent(txtArea);
 		
-		//Button
-		button = new Button("Add");
-		vLayout.addComponent(button);
-		button.addClickListener(this);
+		//Button Add
+		buttonAdd = new Button("Add");
+		vLayout.addComponent(buttonAdd);
+		
+		buttonAdd.addClickListener(this);
 		
 		//Grid Table
 		grid = new Grid<>();
 		grid.addColumn(DiaryEntry::getDate).setCaption("Date");
+		grid.addColumn(DiaryEntry::getStatus).setCaption("Status");
+		grid.addColumn(DiaryEntry::getTitle).setCaption("Title");
 		grid.addColumn(DiaryEntry::getDiaryEntry).setCaption("Entry");
+		grid.setWidth("1000");
 		vLayout.addComponent(grid);
 		
 		//setCompositionRoot(hLayout);
@@ -60,7 +76,7 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 	}
 	
 	public void setName(String name) {
-		button.setCaption(name);
+		buttonAdd.setCaption(name);
 	}
 	
 	public TextArea getTextArea() {

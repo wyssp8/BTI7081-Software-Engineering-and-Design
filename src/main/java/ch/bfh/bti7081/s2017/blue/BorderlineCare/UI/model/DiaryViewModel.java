@@ -4,13 +4,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vaadin.ui.Button;
+
 public class DiaryViewModel {
 	
 	private List<DiaryEntry> diaryEntry;
+	private Button buttonSatus;
 	
 	public DiaryViewModel(){
 		diaryEntry = new ArrayList<>();
-		diaryEntry.add(new DiaryEntry(LocalDate.now(), "TestEntry"));
+		buttonSatus = new Button("Test");
+		diaryEntry.add(new DiaryEntry(LocalDate.now(), buttonSatus, "Test Title", "TestEntry"));
 		
 	}
 	

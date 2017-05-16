@@ -20,7 +20,6 @@ public class DiaryViewPresenter implements ButtonClickListener {
 		this.diaryViewModel = diaryViewModel;
 		this.diaryViewImpl = diaryViewImpl;
 		diaryViewImpl.addListener(this);
-		diaryViewImpl.setName("Clear Textarea");
 		diaryEntry = new ArrayList<>();
 		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry());
 	}
