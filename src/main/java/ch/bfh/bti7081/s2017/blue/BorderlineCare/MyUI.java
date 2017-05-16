@@ -7,9 +7,7 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
@@ -100,16 +98,10 @@ public class MyUI extends UI {
     	LoginViewImpl loginViewImpl = new LoginViewImpl();
     	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
     	
-//        VerticalLayout vLayout = new VerticalLayout();
-//        vLayout.addComponent(loginViewImpl);
-//        vLayout.setSizeFull();
-//        vLayout.setComponentAlignment(loginViewImpl, Alignment.MIDDLE_CENTER);
-//        this.setContent(vLayout);
-      
+     
         navigator.addView("LoginView", loginViewImpl);
         navigator.addView("HomeView", view);
         navigator.navigateTo("LoginView");
-    	//setContent(view);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

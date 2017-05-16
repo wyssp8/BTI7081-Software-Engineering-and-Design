@@ -8,7 +8,7 @@ import com.vaadin.ui.VerticalLayout;
 public class SignUpViewImpl extends CustomComponent implements View {
 	public static final String NAME = "SignUpView";
 	
-	public void SignUpView(){
+	public void SignUpViewImpl(){
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.setSizeFull();
 		setCompositionRoot(vLayout);
