@@ -49,7 +49,7 @@ public class LoginViewImpl extends CustomComponent implements View {
 		loginLabel = new Label();
 		loginLabel.setCaption("not logged in");
 
-		// Buttons change
+		// Buttons
 		buttonLogin = new Button("Login");
 		buttonLogin.addClickListener(e ->{
 			for(LoginViewButtonClickListener listener : listeners){
