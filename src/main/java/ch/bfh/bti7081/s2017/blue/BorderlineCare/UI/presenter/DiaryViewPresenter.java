@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,9 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 
 	@Override
 	public void smileyGoodButtonClick() {
-		diaryViewImpl.getTextArea().clear();
+		diaryViewModel.getDiaryEntry().add(new DiaryEntry(LocalDate.now(), "Good", "Test Title", "TestEintrag"));
+		
+		//diaryEntry.add(new DiaryEntry(LocalDate.now(), "Good", "Test Title", "TestEintrag"));
 	}
 
 	@Override

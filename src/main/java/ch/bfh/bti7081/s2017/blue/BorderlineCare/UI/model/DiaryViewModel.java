@@ -9,12 +9,10 @@ import com.vaadin.ui.Button;
 public class DiaryViewModel {
 	
 	private List<DiaryEntry> diaryEntry;
-	private Button buttonSatus;
 	
 	public DiaryViewModel(){
 		diaryEntry = new ArrayList<>();
-		buttonSatus = new Button("Test");
-		diaryEntry.add(new DiaryEntry(LocalDate.now(), buttonSatus, "Test Title", "TestEintrag"));
+		diaryEntry.add(new DiaryEntry(LocalDate.now(), "Good", "Test Title", "TestEintrag"));
 		
 	}
 	
