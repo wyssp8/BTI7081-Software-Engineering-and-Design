@@ -61,8 +61,8 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 				listener.smileyGoodButtonClick();
 			}
 		});
-		buttonGood.setHeight("50px");
-		buttonGood.setWidth("50px");
+		buttonGood.setHeight("42px");
+		buttonGood.setWidth("41px");
 		vLayout.addComponent(buttonGood);
 		
 		
@@ -76,8 +76,8 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 				listener.smileyGoodButtonClick();
 			}
 		});
-		buttonMedium.setHeight("50px");
-		buttonMedium.setWidth("50px");
+		buttonMedium.setHeight("42px");
+		buttonMedium.setWidth("41px");
 		vLayout.addComponent(buttonMedium);
 		
 		
@@ -91,8 +91,8 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 				listener.smileyGoodButtonClick();
 			}
 		});
-		buttonBad.setHeight("50px");
-		buttonBad.setWidth("50px");
+		buttonBad.setHeight("42px");
+		buttonBad.setWidth("41px");
 		vLayout.addComponent(buttonBad);
 		
 		// Create a text area
