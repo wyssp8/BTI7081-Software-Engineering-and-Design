@@ -17,33 +17,44 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 
 	private DiaryViewModel diaryViewModel;
 	private DiaryViewImpl diaryViewImpl;
-	private List<DiaryEntry> diaryEntry;
+
 
 
 	public DiaryViewPresenter(DiaryViewModel diaryViewModel, DiaryViewImpl diaryViewImpl){
 		this.diaryViewModel = diaryViewModel;
 		this.diaryViewImpl = diaryViewImpl;
 
-		diaryEntry = new ArrayList<>();
 		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry());
 		diaryViewImpl.addDiaryButtonClickListener(this);
+
 }
+
+	
+	public void addButtonClick() {
+		
+		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry()); //Inhalt wird ins Grid geschrieben
+		diaryViewModel.setDiaryEntry();
+		
+	}
+
 
 	@Override
 	public void smileyGoodButtonClick() {
-		//diaryViewModel.getDiaryEntry().add(new DiaryEntry(LocalDate.now(), "Good", "Test Title", "TestEintrag"));
+		// TODO Auto-generated method stub
 		
-		//diaryEntry.add(new DiaryEntry(LocalDate.now(), "Good", "Test Title", "TestEintrag"));
 	}
+
 
 	@Override
 	public void smileyMediumButtonClick() {
-		diaryViewImpl.getTextArea().clear();
-	}
-	
-	@Override
-	public void smileyBadButtonClick() {
-		diaryViewImpl.getTextArea().clear();
+		// TODO Auto-generated method stub
+		
 	}
 
+
+	@Override
+	public void smileyBadButtonClick() {
+		// TODO Auto-generated method stub
+		
+	}
 }
