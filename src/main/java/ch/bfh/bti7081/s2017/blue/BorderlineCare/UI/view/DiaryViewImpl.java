@@ -1,24 +1,31 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vaadin.server.FileResource;
+import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.DiaryButtonClickListener;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.EmergencyButtonClickListener;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.DiaryView;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.MainView;
 
-public class DiaryViewImpl extends CustomComponent implements MainView, ClickListener {
+public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	
-	private List<ButtonClickListener> listeners = new ArrayList<ButtonClickListener>();
+	private List<DiaryButtonClickListener> diaryButtonListeners = new ArrayList<DiaryButtonClickListener>();
 	
 	private Button buttonAdd;
 	private Button buttonGood;
@@ -35,18 +42,35 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 	
 		VerticalLayout vLayout = new VerticalLayout();
 		//HorizontalLayout hLayout = new HorizontalLayout();
+		
+		String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
 	
 		// Create a DateField
 		date = new DateField();
 		vLayout.addComponent(date);
 		date.setValue(LocalDate.now());
 		
-		//Buttons Status
+		//Buttons SmileyGood
+		FileResource goodImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_good.jpg"));
 		buttonGood = new Button("Good");
-		buttonMedium = new Button("Medium");
-		buttonBad = new Button("Bad");
+		buttonGood.setIcon(goodImage);
+		
+		buttonGood.addClickListener(e -> {
+			for (DiaryButtonClickListener listener : diaryButtonListeners) {
+				listener.smileyGoodButtonClick();
+			}
+		});
+		
 		vLayout.addComponent(buttonGood);
+		
+		
+		//Buttons SmileyMedium
+		buttonMedium = new Button("Medium");
 		vLayout.addComponent(buttonMedium);
+		
+		
+		//Buttons SmileyBad
+		buttonBad = new Button("Bad");
 		vLayout.addComponent(buttonBad);
 		
 		// Create a text area
@@ -59,7 +83,7 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 		buttonAdd = new Button("Add");
 		vLayout.addComponent(buttonAdd);
 		
-		buttonAdd.addClickListener(this);
+		
 		
 		//Grid Table
 		grid = new Grid<>();
@@ -82,21 +106,14 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 	public TextArea getTextArea() {
 		return txtArea;
 	}
-	
 
-	public void addListener(ButtonClickListener clickListener) {
-		listeners.add(clickListener);
-	}
-
-
-	public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
-		for(ButtonClickListener listener : listeners){
-			listener.buttonClick();
-		}
-	}
-	
 	public void initializeDiaryEntry(List<DiaryEntry> diaryEntry){
 		grid.setItems(diaryEntry);
 	}
 
+	@Override
+	public void addDiaryButtonClickListener(DiaryButtonClickListener clickListener) {
+		diaryButtonListeners.add(clickListener);
+		
+	}
 }
