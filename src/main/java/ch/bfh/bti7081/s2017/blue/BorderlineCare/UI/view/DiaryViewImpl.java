@@ -55,27 +55,44 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		FileResource goodImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_good.JPG"));
 		buttonGood = new Button();
 		buttonGood.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-		//buttonGood.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
 		buttonGood.setIcon(goodImage);
-		
 		buttonGood.addClickListener(e -> {
 			for (DiaryButtonClickListener listener : diaryButtonListeners) {
 				listener.smileyGoodButtonClick();
 			}
 		});
-		
 		buttonGood.setHeight("50px");
 		buttonGood.setWidth("50px");
 		vLayout.addComponent(buttonGood);
 		
 		
 		//Buttons SmileyMedium
-		buttonMedium = new Button("Medium");
+		FileResource mediumImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_medium.JPG"));
+		buttonMedium = new Button();
+		buttonMedium.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+		buttonMedium.setIcon(mediumImage);
+		buttonMedium.addClickListener(e -> {
+			for (DiaryButtonClickListener listener : diaryButtonListeners) {
+				listener.smileyGoodButtonClick();
+			}
+		});
+		buttonMedium.setHeight("50px");
+		buttonMedium.setWidth("50px");
 		vLayout.addComponent(buttonMedium);
 		
 		
 		//Buttons SmileyBad
-		buttonBad = new Button("Bad");
+		FileResource badImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_bad.JPG"));
+		buttonBad = new Button();
+		buttonBad.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+		buttonBad.setIcon(badImage);
+		buttonBad.addClickListener(e -> {
+			for (DiaryButtonClickListener listener : diaryButtonListeners) {
+				listener.smileyGoodButtonClick();
+			}
+		});
+		buttonBad.setHeight("50px");
+		buttonBad.setWidth("50px");
 		vLayout.addComponent(buttonBad);
 		
 		// Create a text area
