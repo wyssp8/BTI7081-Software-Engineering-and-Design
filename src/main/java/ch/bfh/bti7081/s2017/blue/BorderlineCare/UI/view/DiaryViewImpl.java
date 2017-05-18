@@ -54,8 +54,8 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		//Buttons SmileyGood
 		FileResource goodImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_good.JPG"));
 		buttonGood = new Button();
-		buttonGood.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-		buttonGood.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
+		//buttonGood.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+		//buttonGood.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
 		buttonGood.setIcon(goodImage);
 		
 		buttonGood.addClickListener(e -> {
