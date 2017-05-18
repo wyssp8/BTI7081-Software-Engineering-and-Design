@@ -14,7 +14,7 @@ public class DiaryViewModel {
 	public DiaryViewModel(){
 		diaryEntry = new ArrayList<>();
 		buttonSatus = new Button("Test");
-		diaryEntry.add(new DiaryEntry(LocalDate.now(), buttonSatus, "Test Title", "TestEntry"));
+		diaryEntry.add(new DiaryEntry(LocalDate.now(), buttonSatus, "Test Title", "TestEintrag"));
 		
 	}
 	
