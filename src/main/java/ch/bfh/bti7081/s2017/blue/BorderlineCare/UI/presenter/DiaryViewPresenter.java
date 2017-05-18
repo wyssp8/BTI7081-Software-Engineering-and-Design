@@ -31,7 +31,7 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 
 	@Override
 	public void smileyGoodButtonClick() {
-		diaryViewModel.getDiaryEntry().add(new DiaryEntry(LocalDate.now(), "Good", "Test Title", "TestEintrag"));
+		//diaryViewModel.getDiaryEntry().add(new DiaryEntry(LocalDate.now(), "Good", "Test Title", "TestEintrag"));
 		
 		//diaryEntry.add(new DiaryEntry(LocalDate.now(), "Good", "Test Title", "TestEintrag"));
 	}
