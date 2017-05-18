@@ -15,6 +15,7 @@ import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.ValoTheme;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
@@ -51,8 +52,10 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		date.setValue(LocalDate.now());
 		
 		//Buttons SmileyGood
-		FileResource goodImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_good.jpg"));
+		FileResource goodImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_good.JPG"));
 		buttonGood = new Button("Good");
+		buttonGood.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+		buttonGood.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
 		buttonGood.setIcon(goodImage);
 		
 		buttonGood.addClickListener(e -> {
@@ -61,6 +64,8 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 			}
 		});
 		
+		buttonGood.setHeight("50px");
+		buttonGood.setWidth("50px");
 		vLayout.addComponent(buttonGood);
 		
 		
