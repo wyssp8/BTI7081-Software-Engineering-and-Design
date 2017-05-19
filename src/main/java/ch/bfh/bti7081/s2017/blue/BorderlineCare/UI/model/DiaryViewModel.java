@@ -6,15 +6,16 @@ import java.util.List;
 
 import com.vaadin.ui.Button;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
+
 public class DiaryViewModel {
 	
 	private List<DiaryEntry> diaryEntry;
-	private Button buttonSatus;
+	private DiaryViewImpl diaryViewImpl;
 	
 	public DiaryViewModel(){
 		diaryEntry = new ArrayList<>();
-		buttonSatus = new Button("Test");
-		diaryEntry.add(new DiaryEntry(LocalDate.now(), buttonSatus, "Test Title", "TestEntry"));
+		diaryEntry.add(new DiaryEntry(LocalDate.now(), "HeHe", "Test Title", "TestEintrag"));
 		
 	}
 	
@@ -22,4 +23,12 @@ public class DiaryViewModel {
 		return this.diaryEntry;
 	}
 
+	
+	public void setDiaryEntry() {
+		
+		
+		
+		diaryEntry.add(new DiaryEntry(LocalDate.now(), "Good", "test", "TestEintrag"));
+	}
+		
 }
