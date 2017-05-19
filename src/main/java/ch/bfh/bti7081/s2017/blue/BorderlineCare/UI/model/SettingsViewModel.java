@@ -1,24 +1,30 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model;
 
+import java.util.List;
+
+
 public class SettingsViewModel {
 
-	private String eContact1;
-	private String eContact2;
-	private String eContact3;
+	//The list contacts will be imported from the contactModel 
+	private List<Contact> contacts;
+	
+	private Contact eContact1;
+	private Contact eContact2;
+	private Contact eContact3;
+
 	
 	private String login;
 	private String password;
 	
+	
 	public SettingsViewModel() {
-		eContact1 = "079 555 666 777";
-		eContact2 = "077 222 333 444";
-		eContact3 = "076 999 888 777";
+		
 		login ="JohnDoe";
 		password ="BFHBFH";
 		
 	}
 
-	public String geteContact1() {
+	public Contact geteContact1() {
 		return eContact1;
 	}
 
@@ -38,23 +44,23 @@ public class SettingsViewModel {
 		this.password = password;
 	}
 
-	public void seteContact1(String eContact1) {
+	public void seteContact1(Contact eContact1) {
 		this.eContact1 = eContact1;
 	}
 
-	public String geteContact2() {
+	public Contact geteContact2() {
 		return eContact2;
 	}
 
-	public void seteContact2(String eContact2) {
+	public void seteContact2(Contact eContact2) {
 		this.eContact2 = eContact2;
 	}
 
-	public String geteContact3() {
+	public Contact geteContact3() {
 		return eContact3;
 	}
 
-	public void seteContact3(String eContact3) {
+	public void seteContact3(Contact eContact3) {
 		this.eContact3 = eContact3;
 	}
 

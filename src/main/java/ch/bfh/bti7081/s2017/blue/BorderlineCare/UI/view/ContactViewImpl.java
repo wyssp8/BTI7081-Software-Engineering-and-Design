@@ -1,32 +1,50 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view;
 
+import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vaadin.server.FontAwesome;
+import com.vaadin.server.ThemeResource;
+import com.vaadin.server.UserError;
+import com.vaadin.shared.data.sort.SortDirection;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.Column;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.PopupView;
+import com.vaadin.ui.PopupView.Content;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.grid.HeaderRow;
 import com.vaadin.ui.renderers.ButtonRenderer;
+import com.vaadin.ui.renderers.ImageRenderer;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.ContactView;
+
 public class ContactViewImpl extends CustomComponent implements ContactView {
 
 	private static final long serialVersionUID = -1924986860210433106L;
 	private Grid<Contact> grid;
 	private List<Contact> contacts;
 	private List<ContactButtonClickListener> contactButtonClickListeners = new ArrayList<>();
-	private PopupView popup;
-	HorizontalLayout deletePopupContent, newContactPopup;
-	VerticalLayout layout = new VerticalLayout();
-	
+	private PopupView newContactPopup, deleteContactPopup;
+	private VerticalLayout newContactPopupContent = new VerticalLayout();
+	private VerticalLayout deleteContactPopupContent = new VerticalLayout();
+	private VerticalLayout layout = new VerticalLayout();
+	private Button delete, save, cancel;
+	private Label label;
+	private TextField tfName, tfPhoneNumber;
 
 	public ContactViewImpl() {
 		grid = new Grid<>();
@@ -37,58 +55,77 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 		Column<Contact, ?> columnPhoneNumber = grid.addColumn(Contact::getPhoneNumber);
 		columnPhoneNumber.setId("Phonenumber");
 		columnPhoneNumber.setCaption("Phonenumber");
-		// add a header to the grid with a button for creating new contacts...
+		
 		HeaderRow header = grid.prependHeaderRow();
 		header.join(header.getCell("Name"), header.getCell("Phonenumber")).setText("My Contacts");
-		Button newContactButton = new Button("new Contact");
-		newContactButton.addClickListener(clickevent -> {
-			for (ContactButtonClickListener listener : contactButtonClickListeners) {
-				listener.newContactButtonClick();
-			}
-		});
-		// add a new column to the grid with the function to delete the entire contact
+		// add a new column to the grid with the function to delete the entire
+		// contact
 		// and therefore the entire column
 		Column<Contact, String> delete = grid.addColumn(contacts -> "delete",
 				new ButtonRenderer<Contact>(clickEvent -> {
 					for (ContactButtonClickListener listener : contactButtonClickListeners) {
-						// contacts.remove(clickEvent.getItem());
-						listener.deleteButtonClick();
+						deleteContactPopup = new PopupView(null, deleteContactPopupContent);
+						layout.addComponent(deleteContactPopup);
+						Contact toDelete = clickEvent.getItem();
+						listener.deleteButtonClick(deleteContactPopup, toDelete);
 					}
-					grid.setItems(contacts);
 				}));
-
 		delete.setId("delete");
-		header.getCell("delete").setComponent(newContactButton);
+		newContactPopup = new PopupView("+ new Contact", newContactPopupContent);
+		header.getCell("delete").setComponent(newContactPopup);
 		grid.getEditor().setEnabled(true);
 		layout.addComponent(grid);
 		setCompositionRoot(layout);
 
 	}
-	
-	
-	
 
 	public void initializeContacts(List<Contact> contacts) {
 		grid.setItems(contacts);
 	}
 
 	public void initializeDeletePopup() {
-		deletePopupContent = new HorizontalLayout();
-		deletePopupContent.addComponent(new Label("Are you sure to delete this Contact?"));
-		deletePopupContent.addComponent(new Button("delete"));
-		deletePopupContent.addComponent(new Button("cancel"));
-		popup = new PopupView(null, deletePopupContent);
-		layout.addComponent(popup);
+		label = new Label("Are your sure to delete this contact?");
+		delete = new Button("delete");
+		cancel = new Button("cancel");
+		cancel.addClickListener(clickEvent -> {
+			for (ContactButtonClickListener listener : contactButtonClickListeners) {
+				listener.cancelButtonClick();
+			}
+		});
+		deleteContactPopupContent.addComponents(label, delete, cancel);
 	}
 
-	// for test reasens, same content as other deltePopupContent...
 	public void initNewContactPopup() {
-		newContactPopup = new HorizontalLayout();
-		newContactPopup.addComponent(new Label("Are you sure to delete this Contact?"));
-		newContactPopup.addComponent(new Button("delete"));
-		newContactPopup.addComponent(new Button("cancel"));
-		popup = new PopupView(null, newContactPopup);
-		layout.addComponent(popup);
+		tfName = new TextField("Name:");
+		tfName.setIcon(FontAwesome.USER);
+		tfName.setRequiredIndicatorVisible(true);
+		
+		tfPhoneNumber = new TextField("Phonenumber:");
+		tfPhoneNumber.setIcon(FontAwesome.PHONE);
+		tfPhoneNumber.setRequiredIndicatorVisible(true);
+		save = new Button("save");
+		save.addClickListener(clickEvent -> {
+			for (ContactButtonClickListener listener : contactButtonClickListeners) {
+				String stringInput = getNameField().getValue();
+				try {
+					int integerInput = Integer.parseInt(getPhoneNUmberField().getValue());
+					listener.saveButtonClick(stringInput, integerInput);
+				} catch (NumberFormatException e) {
+					Notification.show("Phonenumber must consist only of numbers", Notification.TYPE_WARNING_MESSAGE);
+				}
+			}
+		});
+		cancel = new Button("cancel");
+		cancel.addClickListener(clickEvent -> {
+			for (ContactButtonClickListener listener : contactButtonClickListeners) {
+				listener.cancelButtonClick();
+			}
+		});
+		newContactPopupContent.addComponents(tfName, tfPhoneNumber, save, cancel);
+	}
+
+	public void defaultSort() {
+		grid.sort("Name", SortDirection.ASCENDING);
 	}
 
 	@Override
@@ -97,8 +134,28 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 
 	}
 
-	public PopupView getPopuop() {
-		return this.popup;
+	public PopupView getContactPopup() {
+		return this.newContactPopup;
+	}
+
+	public PopupView getDeleteContactPopup() {
+		return this.deleteContactPopup;
+	}
+
+	public Button getSaveButton() {
+		return this.save;
+	}
+
+	public TextField getNameField() {
+		return this.tfName;
+	}
+
+	public TextField getPhoneNUmberField() {
+		return this.tfPhoneNumber;
+	}
+
+	public Button getDeleteButton() {
+		return this.delete;
 	}
 
 }

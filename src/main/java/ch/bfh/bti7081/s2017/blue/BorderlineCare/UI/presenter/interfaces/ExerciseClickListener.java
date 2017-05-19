@@ -5,6 +5,11 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces;
  *
  */
 public interface ExerciseClickListener {
-	public void prevButtonClick();
-	public void nextButtonClick();
+	public void prevButtonClickCalm();
+	public void nextButtonClickCalm();
+	public void prevButtonClickDaily();
+	public void nextButtonClickDaily();
+	public void exerciseStarted();
+	public void exerciseCanceled();
+	public void exerciseDone();
 }

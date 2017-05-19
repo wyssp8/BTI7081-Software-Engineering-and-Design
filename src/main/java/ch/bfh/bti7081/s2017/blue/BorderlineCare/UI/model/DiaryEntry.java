@@ -7,12 +7,12 @@ import com.vaadin.ui.Button;
 public class DiaryEntry {
 	
 	private LocalDate date;
-	private Button diaryStatus;
+	private String diaryStatus;
 	private String diaryTitle;
 	private String diaryEntry;
 	
 	
-	public DiaryEntry(LocalDate date, Button diaryStatus, String diaryTitle, String diaryEntry){
+	public DiaryEntry(LocalDate date, String diaryStatus, String diaryTitle, String diaryEntry){
 		this.date = date;
 		this.diaryStatus = diaryStatus;
 		this.diaryTitle = diaryTitle;
@@ -28,11 +28,11 @@ public class DiaryEntry {
 		this.date = date;
 	}
 	
-	public Button getStatus() {
+	public String getStatus() {
 		return diaryStatus;
 	}
 	
-	public void setStatus(Button diaryStatus) {
+	public void setStatus(String diaryStatus) {
 		this.diaryStatus = diaryStatus;
 	}
 	

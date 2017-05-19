@@ -18,6 +18,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SignUpViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
@@ -29,12 +30,14 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.LoginViewPresenter;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.SettingsViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.SignUpViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ExerciseViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.LoginViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SettingsViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SignUpViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.DiaryDashViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.EmergencyViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.ExerciseDashViewImpl;
@@ -82,7 +85,7 @@ public class MyUI extends UI {
     	//Settings View
     	SettingsViewModel settingsModel = new SettingsViewModel();
     	SettingsViewImpl settingsViewImpl = new SettingsViewImpl();   	
-    	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl);
+    	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel);
 
     	//Exercises View
     	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
@@ -91,16 +94,19 @@ public class MyUI extends UI {
 
     	NavigationViewImpl view = new NavigationViewImpl(mainView,contactViewImpl,diaryViewImpl,exerciseViewImpl,settingsViewImpl);
 
-    	
-    	
     	//Login View
     	LoginViewModel loginViewModel = new LoginViewModel();
     	LoginViewImpl loginViewImpl = new LoginViewImpl();
     	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
     	
+    	//SignUp View
+    	SignUpViewModel signUpViewModel = new SignUpViewModel();
+    	SignUpViewImpl signUpViewImpl = new SignUpViewImpl();
+    	SignUpViewPresenter signUpViewPresenter = new SignUpViewPresenter(signUpViewModel,signUpViewImpl, navigator);
      
         navigator.addView("LoginView", loginViewImpl);
         navigator.addView("HomeView", view);
+        navigator.addView("SignUpView", signUpViewImpl);
         navigator.navigateTo("LoginView");
     }
 

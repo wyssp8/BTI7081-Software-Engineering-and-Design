@@ -23,7 +23,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	private Navigator navigator;
 
 
-	public LoginViewPresenter(LoginViewModel loginViewModel, LoginViewImpl loginViewImpl, Navigator navigator){	//+navigation
+	public LoginViewPresenter(LoginViewModel loginViewModel, LoginViewImpl loginViewImpl, Navigator navigator){
 		this.loginViewModel = loginViewModel;
 		this.loginViewImpl = loginViewImpl;
 		this.navigator = navigator;
@@ -40,7 +40,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	@Override
 	public void signUpButtonClick() {
 		loginViewImpl.setLoginLabel("signed up");
-		navigator.navigateTo("SigneUpView");
+		navigator.navigateTo("SignUpView");
 	}
 	
 	@Override
@@ -51,7 +51,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 	@Override
 	public boolean authenticateLogin() {
-		if(loginViewImpl.getLoginName().equals(loginViewModel.getLoginAccount().get(0).getLoginName())&&
+		if(loginViewImpl.getLoginName().equals(loginViewModel.getLoginAccount().get(0).getEmail())&&
 				loginViewImpl.getLoginPassword().equals(loginViewModel.getLoginAccount().get(0).getPassword())){
 			return true;
 		}
