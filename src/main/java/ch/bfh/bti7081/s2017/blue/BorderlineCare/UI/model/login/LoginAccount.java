@@ -15,6 +15,8 @@ public class LoginAccount {
 	private String password;
 	private String passwordConfirmation;
 	
+	
+	
 	public LoginAccount(String firstName, String lastName, String street, String zipCode, String city, String email,
 			String password, String passwordConfirmation) {
 		super();
@@ -26,6 +28,7 @@ public class LoginAccount {
 		this.email = email;
 		this.password = password;
 		this.passwordConfirmation = passwordConfirmation;
+		//LoginViewModel loginViewModel = new LoginViewModel();
 	}
 
 	public String getFirstName() {

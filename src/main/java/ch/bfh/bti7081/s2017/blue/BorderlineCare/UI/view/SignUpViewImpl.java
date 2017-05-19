@@ -29,6 +29,7 @@ public class SignUpViewImpl extends CustomComponent implements View {
 	private TextField street;
 	private TextField zipCode;
 	private TextField city;
+	private TextField tel;
 	private TextField email;
 	private TextField password;
 	private TextField passwordConfirmation;
@@ -115,5 +116,42 @@ public class SignUpViewImpl extends CustomComponent implements View {
 	public void enter(ViewChangeEvent event) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	public String getFirstName() {
+		return firstName.getValue();
+	}
+
+	public String getLastName() {
+		return lastName.getValue();
+	}
+
+	public String getStreet() {
+		return street.getValue();
+	}
+
+	public String getZipCode() {
+		return zipCode.getValue();
+	}
+
+	public String getCity() {
+		return city.getValue();
+	}
+
+	public String getTel() {
+		return tel.getValue();
+	}
+
+	public String getEmail() {
+		return email.getValue();
+	}
+
+	public String getPassword() {
+		return password.getValue();
+	}
+
+	public String getPasswordConfirmation() {
+		return passwordConfirmation.getValue();
 	}
 }
