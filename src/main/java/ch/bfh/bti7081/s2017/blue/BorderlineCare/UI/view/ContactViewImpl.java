@@ -120,7 +120,7 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 				listener.cancelButtonClick();
 			}
 		});
-		newContactPopupContent.addComponents( tfName, tfPhoneNumber, save, cancel);
+		newContactPopupContent.addComponents(tfName, tfPhoneNumber, save, cancel);
 	}
 		
 

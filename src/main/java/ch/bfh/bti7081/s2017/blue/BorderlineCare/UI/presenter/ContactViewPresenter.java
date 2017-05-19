@@ -47,6 +47,7 @@ public class ContactViewPresenter implements ContactButtonClickListener{
 	
 	@Override
 	public void deleteContact(){
+		
 		this.contacts.remove(0);
 		contactViewImpl.initializeContacts(this.contacts);
 	}
