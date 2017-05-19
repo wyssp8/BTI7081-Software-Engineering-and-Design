@@ -9,11 +9,28 @@ import java.util.List;
  */
 public class LoginViewModel {
 	
+//	private String firstName;
+//	private String lastName;
+//	private String street;
+//	private String zipCode;
+//	private String city;
+//	private String email;
+//	private String password;
+//	private String passwordConfirmation;
+	
 	private List<LoginAccount> loginAccounts;
 	
 	public LoginViewModel(){
 		loginAccounts = new ArrayList<>();
-		loginAccounts.add(new LoginAccount("Claudio","Polo","poloc1","test"));
+		loginAccounts.add(new LoginAccount(
+				"Claudio",						//First Name
+				"Polo",							//Last Name
+				"Panoramastrasse 3",			//Street
+				"3600", 						//Zip Code
+				"Thun", 						//City
+				"polo@test.com",				//Email
+				"test", 						//Password
+				"null"));							//Password Confirmation
 		
 	}
 	

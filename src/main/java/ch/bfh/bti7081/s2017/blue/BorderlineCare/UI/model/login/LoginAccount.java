@@ -2,18 +2,30 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login;
 
 import java.util.List;
 
+import com.vaadin.ui.TextField;
+
 public class LoginAccount {
+	
 	private String firstName;
 	private String lastName;
-	private String loginName;
-	private String password;
+	private String street;
+	private String zipCode;
+	private String city;
 	private String email;
-
-	public LoginAccount(String firstName, String lastName, String loginName, String password) {
+	private String password;
+	private String passwordConfirmation;
+	
+	public LoginAccount(String firstName, String lastName, String street, String zipCode, String city, String email,
+			String password, String passwordConfirmation) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.loginName = loginName;
+		this.street = street;
+		this.zipCode = zipCode;
+		this.city = city;
+		this.email = email;
 		this.password = password;
+		this.passwordConfirmation = passwordConfirmation;
 	}
 
 	public String getFirstName() {
@@ -32,12 +44,36 @@ public class LoginAccount {
 		this.lastName = lastName;
 	}
 
-	public String getLoginName() {
-		return loginName;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -48,11 +84,12 @@ public class LoginAccount {
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getPasswordConfirmation() {
+		return passwordConfirmation;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPasswordConfirmation(String passwordConfirmation) {
+		this.passwordConfirmation = passwordConfirmation;
 	}
+
 }
