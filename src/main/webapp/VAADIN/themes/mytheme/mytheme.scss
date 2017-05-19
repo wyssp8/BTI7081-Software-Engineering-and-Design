@@ -34,5 +34,22 @@
 @mixin mytheme {
   @include valo;
 
-  // Insert your own theme rules here
+	
+ 	.ready-label{
+		background: white;
+		color: blue;
+		border: 2px solid blue;
+		padding: 7px 28px 7px 28px;
+		font-weight: 400;
+		font-size: 15px;
+	}
+	
+ 	.in-progress-label{
+		background: white;
+		color: orange;
+		border: 2px solid orange;
+		padding: 7px 28px 7px 28px;
+		font-weight: 400;
+		font-size: 15px;
+	}
 }
