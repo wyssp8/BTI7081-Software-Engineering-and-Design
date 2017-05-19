@@ -1,10 +1,9 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.DB;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-
-import com.mysql.jdbc.Connection;
 
 public class DBConnector {
 
@@ -21,8 +20,9 @@ public Connection getConnection() throws SQLException {
     connectionProps.put("user", "root");
     connectionProps.put("password", "22JrCCM5$");
     connectionProps.put("useSSL","false");
+    connectionProps.put("serverTimezone", "UTC");
     
-    conn = (Connection) DriverManager.getConnection(
+    conn = DriverManager.getConnection(
                    "jdbc:" + this.dbms + "://" +
                    this.serverName +
                    ":" + this.portNumber + "/" +
@@ -37,7 +37,6 @@ public static void main(String[] args) {
 	try {
 		new DBConnector().getConnection();
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 }
