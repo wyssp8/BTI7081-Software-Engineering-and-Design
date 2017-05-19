@@ -25,35 +25,63 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.ExerciseView;
  */
 public class ExerciseViewImpl extends CustomComponent implements ExerciseView {
 
+	private static final long serialVersionUID = 2890501565667684097L;
 	private List<ExerciseClickListener> listeners = new ArrayList<ExerciseClickListener>();
-	private String titleText;
-	private String descriptionText;
-	private String imagePath;
-	private Label title = new Label(titleText);
-	private Label description = new Label(titleText);
-	private Button rightButton = new Button();
-	private Button leftButton = new Button();
-	private Image image = new Image();
+	private Label titleCalm = new Label();
+	private Label descriptionCalm = new Label();
+	private Label titleDaily = new Label();
+	private Label descriptionDaily = new Label();
+	private Button rightButtonCalm = new Button();
+	private Button leftButtonCalm = new Button();
+	private Button rightButtonDaily = new Button();
+	private Button leftButtonDaily = new Button();
+	private Image imageCalm = new Image();
+	private Image imageDaily = new Image();
+	
+	private Label dailyExerciseStateDescription;
+	private Button dailyExerciseStartButton;
+	private Button dailyExerciseCancelButton;
+	private Button dailyExerciseDoneButton;
+	
+	private static String TITLE_DAILY_EXERCISE = "Daily exercise";
+	private static String TITLE_CALM_DOWN_EXERCISE = "Calm-down exercise";
 	
 	public ExerciseViewImpl(){
 		
 		String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
 		
 		FileResource leftArrowImage = new FileResource(new File(basepath + "/WEB-INF/images/arrow-left.png"));
-		leftButton = new Button("Prev");
-		leftButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-		leftButton.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
-		leftButton.setIcon(leftArrowImage);
-		leftButton.setHeight("100%");
-		leftButton.setWidth("100%");
+		leftButtonCalm = new Button("Prev");
+		leftButtonCalm.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+		leftButtonCalm.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
+		leftButtonCalm.setIcon(leftArrowImage);
+		leftButtonCalm.setHeight("100%");
+		leftButtonCalm.setWidth("100%");
 		
 		FileResource rightArrowImage = new FileResource(new File(basepath + "/WEB-INF/images/arrow-right.png"));
-		rightButton = new Button("Next");
-		rightButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-		rightButton.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
-		rightButton.setIcon(rightArrowImage);
-		rightButton.setHeight("100%");
-		rightButton.setWidth("100%");
+		rightButtonCalm = new Button("Next");
+		rightButtonCalm.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+		rightButtonCalm.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
+		rightButtonCalm.setIcon(rightArrowImage);
+		rightButtonCalm.setHeight("100%");
+		rightButtonCalm.setWidth("100%");
+		
+		
+		leftButtonDaily = new Button("Prev");
+		leftButtonDaily.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+		leftButtonDaily.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
+		leftButtonDaily.setIcon(leftArrowImage);
+		leftButtonDaily.setHeight("100%");
+		leftButtonDaily.setWidth("100%");
+		
+		rightButtonDaily = new Button("Next");
+		rightButtonDaily.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+		rightButtonDaily.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
+		rightButtonDaily.setIcon(rightArrowImage);
+		rightButtonDaily.setHeight("100%");
+		rightButtonDaily.setWidth("100%");
+		
+		
 		
 		HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.addStyleName("outlined");
@@ -62,54 +90,126 @@ public class ExerciseViewImpl extends CustomComponent implements ExerciseView {
         horizontalLayout.setSizeFull();
         
         VerticalLayout verticalLayout = new VerticalLayout();
-        title.setCaption(titleText);
-        description.setCaption(descriptionText);
-        horizontalLayout.addComponent(leftButton);
+        horizontalLayout.addComponent(leftButtonCalm);
         horizontalLayout.addComponent(verticalLayout);
-        verticalLayout.addComponent(title);
-        verticalLayout.addComponent(image);
-        verticalLayout.addComponent(description);
-        horizontalLayout.addComponent(rightButton);
+        verticalLayout.addComponent(titleCalm);
+        verticalLayout.addComponent(imageCalm);
+        verticalLayout.addComponent(descriptionCalm);
+        horizontalLayout.addComponent(rightButtonCalm);
         
        
         
-        rightButton.addClickListener(e -> {
+        rightButtonCalm.addClickListener(e -> {
         	for (ExerciseClickListener listener: listeners) {
-				listener.nextButtonClick();
+				listener.nextButtonClickCalm();
 			}
         });
-        leftButton.addClickListener(e -> {
+        leftButtonCalm.addClickListener(e -> {
         	for (ExerciseClickListener listener: listeners) {
-				listener.prevButtonClick();
+				listener.prevButtonClickCalm();
+			}
+        });
+        rightButtonDaily.addClickListener(e -> {
+        	for (ExerciseClickListener listener: listeners) {
+				listener.nextButtonClickDaily();
+			}
+        });
+        leftButtonDaily.addClickListener(e -> {
+        	for (ExerciseClickListener listener: listeners) {
+				listener.prevButtonClickDaily();
 			}
         });
         horizontalLayout.setSizeFull();
-        horizontalLayout.setComponentAlignment(leftButton, Alignment.MIDDLE_CENTER);
-        horizontalLayout.setComponentAlignment(rightButton, Alignment.MIDDLE_CENTER);
-        verticalLayout.setComponentAlignment(title, Alignment.MIDDLE_CENTER);
-        verticalLayout.setComponentAlignment(image, Alignment.MIDDLE_CENTER);
-        verticalLayout.setComponentAlignment(description, Alignment.MIDDLE_CENTER);
+        horizontalLayout.setComponentAlignment(leftButtonCalm, Alignment.MIDDLE_CENTER);
+        horizontalLayout.setComponentAlignment(rightButtonCalm, Alignment.MIDDLE_CENTER);
+        verticalLayout.setComponentAlignment(titleCalm, Alignment.MIDDLE_CENTER);
+        verticalLayout.setComponentAlignment(imageCalm, Alignment.MIDDLE_CENTER);
+        verticalLayout.setComponentAlignment(descriptionCalm, Alignment.MIDDLE_CENTER);
         
-		this.setCompositionRoot(horizontalLayout);
+		VerticalLayout baseVerticalLayout = new VerticalLayout();
+		
+		
+		
+		
+		dailyExerciseStateDescription = new Label();
+		
+		Label headTitleDaily = new Label(TITLE_DAILY_EXERCISE);
+		Label headTitleCalmDown = new Label(TITLE_CALM_DOWN_EXERCISE);
+		
+		dailyExerciseStartButton = new Button("Start");
+		dailyExerciseStartButton.setStyleName(ValoTheme.BUTTON_FRIENDLY);
+		dailyExerciseStartButton.addClickListener(click ->{
+        	for (ExerciseClickListener listener: listeners) {
+				listener.exerciseStarted();
+			}
+		});
+		
+		dailyExerciseCancelButton = new Button("Cancel");
+		dailyExerciseCancelButton.setStyleName(ValoTheme.BUTTON_DANGER);
+		dailyExerciseCancelButton.addClickListener(click ->{
+        	for (ExerciseClickListener listener: listeners) {
+				listener.exerciseCanceled();
+			}
+			
+		});
+		
+		dailyExerciseDoneButton = new Button("Done");
+		dailyExerciseDoneButton.setStyleName(ValoTheme.BUTTON_FRIENDLY);
+		dailyExerciseDoneButton.addClickListener(click ->{
+        	for (ExerciseClickListener listener: listeners) {
+				listener.exerciseDone();
+			}
+		});
+        
+		
+		HorizontalLayout horizontalLayoutDaily = new HorizontalLayout();
+        horizontalLayoutDaily.addStyleName("outlined");
+        horizontalLayoutDaily.setSpacing(false);
+        horizontalLayoutDaily.setMargin(false);
+        horizontalLayoutDaily.setSizeFull();
+        horizontalLayoutDaily.addComponent(leftButtonDaily);
+        
+        VerticalLayout imageStateLayout = new VerticalLayout();
+        imageStateLayout.addComponent(imageDaily);
+        imageStateLayout.addComponent(dailyExerciseStateDescription);
+        horizontalLayoutDaily.addComponent(imageStateLayout);
+        
+        VerticalLayout layoutDescription = new VerticalLayout();
+        layoutDescription.addComponent(titleDaily);
+        layoutDescription.addComponent(descriptionDaily);
+		horizontalLayoutDaily.addComponent(layoutDescription);
+		
+		VerticalLayout layoutButtons = new VerticalLayout();
+		layoutButtons.addComponent(dailyExerciseStartButton);
+		layoutButtons.addComponent(dailyExerciseCancelButton);
+		layoutButtons.addComponent(dailyExerciseDoneButton);
+		
+		horizontalLayoutDaily.addComponent(layoutButtons);
+        horizontalLayoutDaily.addComponent(rightButtonDaily);
+        horizontalLayoutDaily.setComponentAlignment(imageStateLayout, Alignment.MIDDLE_CENTER);
+        horizontalLayoutDaily.setComponentAlignment(layoutButtons, Alignment.MIDDLE_CENTER);
+        horizontalLayoutDaily.setComponentAlignment(leftButtonDaily, Alignment.MIDDLE_CENTER);
+        horizontalLayoutDaily.setComponentAlignment(rightButtonDaily, Alignment.MIDDLE_CENTER);
+		
+		
+		baseVerticalLayout.addComponent(headTitleCalmDown);
+        baseVerticalLayout.setComponentAlignment(headTitleCalmDown, Alignment.MIDDLE_CENTER);
+		baseVerticalLayout.addComponent(horizontalLayout);
+		baseVerticalLayout.addComponent(headTitleDaily);
+        baseVerticalLayout.setComponentAlignment(headTitleDaily, Alignment.MIDDLE_CENTER);
+		baseVerticalLayout.addComponent(horizontalLayoutDaily);
+		this.setCompositionRoot(baseVerticalLayout);
 		
 	}
 
-	public String getTitleText() {
-		return titleText;
+
+	public void setTitleTextCalm(String titleText) {
+		this.titleCalm.setValue(titleText);
 	}
 
-	public void setTitleText(String titleText) {
-		this.titleText = titleText;
-		this.title.setCaption(titleText);
-	}
 
-	public String getDescriptionText() {
-		return descriptionText;
-	}
-
-	public void setDescriptionText(String descriptionText) {
-		this.descriptionText = descriptionText;
-		this.description.setCaption(descriptionText);
+	public void setDescriptionTextCalm(String descriptionText) {
+		this.descriptionCalm.setValue(descriptionText);
 	}
 	
 	@Override
@@ -117,15 +217,51 @@ public class ExerciseViewImpl extends CustomComponent implements ExerciseView {
 		listeners.add(clickListener);
 	}
 
-	public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setImagePathCalm(String imagePath) {
 		String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
 		FileResource exerciseImage = new FileResource(new File(basepath + "/WEB-INF/images/exercises/"+ imagePath));
-		image.setIcon(exerciseImage);
+		imageCalm.setIcon(exerciseImage);
 	}
+	
+	public void setImagePathDaily(String imagePath) {
+		String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
+		FileResource exerciseImage = new FileResource(new File(basepath + "/WEB-INF/images/exercises/"+ imagePath));
+		imageDaily.setIcon(exerciseImage);
+	}
+
+	public void setTitleTextDaily(String titleText) {
+		this.titleDaily.setValue(titleText);
+	}
+
+
+	public void setDescriptionTextDaily(String descriptionText) {
+		this.descriptionDaily.setValue(descriptionText);
+	}
+	
+	public void setDailyExerciseStateDescription(String label) {
+		this.dailyExerciseStateDescription.setValue(label);
+	}
+
+
+	public void setDailyExerciseButton(Button dailyExerciseButton) {
+		this.dailyExerciseStartButton = dailyExerciseButton;
+	}
+	
+	public void setDailyExerciseStartButtonVisibility(boolean visibility){
+		dailyExerciseStartButton.setVisible(visibility);
+	}
+	
+	public void setDailyExerciseCancelButtonVisibility(boolean visibility){
+		dailyExerciseCancelButton.setVisible(visibility);
+	}
+	
+	public void setDailyExerciseDoneButtonVisibility(boolean visibility){
+		dailyExerciseDoneButton.setVisible(visibility);
+	}
+	
+	public void setStateStyle(String styleName){
+		dailyExerciseStateDescription.setStyleName(styleName);
+	}
+	
 
 }

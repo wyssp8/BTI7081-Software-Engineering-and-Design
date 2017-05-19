@@ -1,7 +1,12 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.DailyExercise;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.Exercise;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.state.ExcerciseDone;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.state.ExerciseCanceled;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.state.ExerciseStarted;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.state.State;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ExerciseClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ExerciseViewImpl;
 /**
@@ -13,42 +18,100 @@ public class ExercisesViewPresenter implements ExerciseClickListener {
 	
 	private ExercisesViewModel exercisesViewModel;
 	private ExerciseViewImpl exerciseViewImpl;
-	private int exerciseNumber = 0;
+	private DailyExercise currentDailyExercise;
+	private int exerciseNumberDaily = 0;
+	private int exerciseNumberCalm = 0;
 	
 	public ExercisesViewPresenter(ExerciseViewImpl exerciseViewImpl, ExercisesViewModel exercisesViewModel){
 		this.exercisesViewModel = exercisesViewModel;
 		this.exerciseViewImpl = exerciseViewImpl;
 		exerciseViewImpl.addButtonClickListener(this);
-		initExercise();
+		initExerciseCalm();
+		initExerciseDaily();
 	}
 	
 	@Override
-	public void nextButtonClick() {
-		nextExercise();
+	public void nextButtonClickCalm() {
+		nextExerciseCalm();
 	}
 	
 	@Override
-	public void prevButtonClick() {
-		prevExercise();
+	public void prevButtonClickCalm() {
+		prevExerciseCalm();
 		
 	}
 	
-	public void nextExercise(){
-		exerciseNumber = (exerciseNumber+1) % exercisesViewModel.getExercises().size();
-		initExercise();
+	@Override
+	public void prevButtonClickDaily() {
+		prevExerciseDaily();
+	}
+
+	@Override
+	public void nextButtonClickDaily() {
+		nextExerciseDaily();
 	}
 	
-	public void prevExercise(){
-		int amountOfExercises = exercisesViewModel.getExercises().size();
-		exerciseNumber = (amountOfExercises+exerciseNumber-1) % amountOfExercises;
-		initExercise();
+	public void nextExerciseCalm(){
+		exerciseNumberCalm = (exerciseNumberCalm+1) % exercisesViewModel.getExercisesCalm().size();
+		initExerciseCalm();
 	}
 	
-	public void initExercise(){
-		Exercise currentExercise = exercisesViewModel.getExercises().get(exerciseNumber);
-		exerciseViewImpl.setTitleText(currentExercise.getTitle());
-		exerciseViewImpl.setDescriptionText(currentExercise.getDescription());
-		exerciseViewImpl.setImagePath(currentExercise.getImagePath());
+	public void prevExerciseCalm(){
+		int amountOfExercises = exercisesViewModel.getExercisesCalm().size();
+		exerciseNumberCalm = (amountOfExercises+exerciseNumberCalm-1) % amountOfExercises;
+		initExerciseCalm();
 	}
+	
+	public void initExerciseCalm(){
+		Exercise currentExercise = exercisesViewModel.getExercisesCalm().get(exerciseNumberCalm);
+		exerciseViewImpl.setTitleTextCalm(currentExercise.getTitle());
+		exerciseViewImpl.setDescriptionTextCalm(currentExercise.getDescription());
+		exerciseViewImpl.setImagePathCalm(currentExercise.getImagePath());
+	}
+	
+	public void nextExerciseDaily(){
+		exerciseNumberDaily = (exerciseNumberDaily+1) % exercisesViewModel.getExercisesDaily().size();
+		initExerciseDaily();
+	}
+	
+	public void prevExerciseDaily(){
+		int amountOfExercises = exercisesViewModel.getExercisesDaily().size();
+		exerciseNumberDaily = (amountOfExercises+exerciseNumberDaily-1) % amountOfExercises;
+		initExerciseDaily();
+	}
+	
+	public void initExerciseDaily(){
+		currentDailyExercise = (DailyExercise) exercisesViewModel.getExercisesDaily().get(exerciseNumberDaily);
+		exerciseViewImpl.setImagePathDaily(currentDailyExercise.getImagePath());
+		exerciseViewImpl.setTitleTextDaily(currentDailyExercise.getTitle());
+		exerciseViewImpl.setDescriptionTextDaily(currentDailyExercise.getDescription());
+		
+		State currentState = currentDailyExercise.getState();
+		exerciseViewImpl.setDailyExerciseStateDescription(currentState.getTitle());
+		exerciseViewImpl.setDailyExerciseStartButtonVisibility(currentState.isStartButtonVisible());
+		exerciseViewImpl.setDailyExerciseCancelButtonVisibility(currentState.isCancelButtonVisible());
+		exerciseViewImpl.setDailyExerciseDoneButtonVisibility(currentState.isDoneButtonVisible());
+		exerciseViewImpl.setStateStyle(currentState.getStateStyle());
+	}
+
+
+	@Override
+	public void exerciseDone() {
+		currentDailyExercise.setState(new ExcerciseDone());
+		initExerciseDaily();
+	}
+
+	@Override
+	public void exerciseStarted() {
+		currentDailyExercise.setState(new ExerciseStarted());
+		initExerciseDaily();
+	}
+
+	@Override
+	public void exerciseCanceled() {
+		currentDailyExercise.setState(new ExerciseCanceled());
+		initExerciseDaily();
+	}
+
 
 }

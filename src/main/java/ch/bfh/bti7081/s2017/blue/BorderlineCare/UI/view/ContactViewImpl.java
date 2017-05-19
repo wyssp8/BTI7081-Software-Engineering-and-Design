@@ -1,29 +1,37 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view;
 
+import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.server.UserError;
+import com.vaadin.shared.data.sort.SortDirection;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.Column;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.PopupView;
 import com.vaadin.ui.PopupView.Content;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.grid.HeaderRow;
 import com.vaadin.ui.renderers.ButtonRenderer;
+import com.vaadin.ui.renderers.ImageRenderer;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.ContactView;
+
 public class ContactViewImpl extends CustomComponent implements ContactView {
 
 	private static final long serialVersionUID = -1924986860210433106L;
@@ -38,8 +46,6 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 	private Label label;
 	private TextField tfName, tfPhoneNumber;
 
-	
-
 	public ContactViewImpl() {
 		grid = new Grid<>();
 		// create two columns, set the ID's and add the captions
@@ -49,12 +55,12 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 		Column<Contact, ?> columnPhoneNumber = grid.addColumn(Contact::getPhoneNumber);
 		columnPhoneNumber.setId("Phonenumber");
 		columnPhoneNumber.setCaption("Phonenumber");
-		// add a header to the grid with a button for creating new contacts...
+		
 		HeaderRow header = grid.prependHeaderRow();
 		header.join(header.getCell("Name"), header.getCell("Phonenumber")).setText("My Contacts");
-		// add a new column to the grid with the function to delete the entire contact
+		// add a new column to the grid with the function to delete the entire
+		// contact
 		// and therefore the entire column
-		
 		Column<Contact, String> delete = grid.addColumn(contacts -> "delete",
 				new ButtonRenderer<Contact>(clickEvent -> {
 					for (ContactButtonClickListener listener : contactButtonClickListeners) {
@@ -65,44 +71,35 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 					}
 				}));
 		delete.setId("delete");
-		newContactPopup = new PopupView("new Contact", newContactPopupContent);
+		newContactPopup = new PopupView("+ new Contact", newContactPopupContent);
 		header.getCell("delete").setComponent(newContactPopup);
 		grid.getEditor().setEnabled(true);
 		layout.addComponent(grid);
 		setCompositionRoot(layout);
 
 	}
-	
-	
-	
 
 	public void initializeContacts(List<Contact> contacts) {
 		grid.setItems(contacts);
 	}
-		
+
 	public void initializeDeletePopup() {
 		label = new Label("Are your sure to delete this contact?");
 		delete = new Button("delete");
-		delete.addClickListener(clickEvent -> {
-			for(ContactButtonClickListener listener : contactButtonClickListeners) {
-				listener.deleteContact();
-			}
-		});
 		cancel = new Button("cancel");
 		cancel.addClickListener(clickEvent -> {
-			for(ContactButtonClickListener listener : contactButtonClickListeners) {
+			for (ContactButtonClickListener listener : contactButtonClickListeners) {
 				listener.cancelButtonClick();
 			}
 		});
 		deleteContactPopupContent.addComponents(label, delete, cancel);
 	}
-	
-
 
 	public void initNewContactPopup() {
 		tfName = new TextField("Name:");
 		tfName.setIcon(FontAwesome.USER);
 		tfName.setRequiredIndicatorVisible(true);
+		
 		tfPhoneNumber = new TextField("Phonenumber:");
 		tfPhoneNumber.setIcon(FontAwesome.PHONE);
 		tfPhoneNumber.setRequiredIndicatorVisible(true);
@@ -110,8 +107,12 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 		save.addClickListener(clickEvent -> {
 			for (ContactButtonClickListener listener : contactButtonClickListeners) {
 				String stringInput = getNameField().getValue();
-				int integerInput = Integer.parseInt(getPhoneNUmberField().getValue());
-				listener.saveButtonClick(stringInput, integerInput);
+				try {
+					int integerInput = Integer.parseInt(getPhoneNUmberField().getValue());
+					listener.saveButtonClick(stringInput, integerInput);
+				} catch (NumberFormatException e) {
+					Notification.show("Phonenumber must consist only of numbers", Notification.TYPE_WARNING_MESSAGE);
+				}
 			}
 		});
 		cancel = new Button("cancel");
@@ -120,34 +121,41 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 				listener.cancelButtonClick();
 			}
 		});
-		newContactPopupContent.addComponents(tfName,  tfPhoneNumber, save, cancel);
+		newContactPopupContent.addComponents(tfName, tfPhoneNumber, save, cancel);
 	}
-		
+
+	public void defaultSort() {
+		grid.sort("Name", SortDirection.ASCENDING);
+	}
 
 	@Override
 	public void addContactButtonClickListeneer(ContactButtonClickListener clickListener) {
 		contactButtonClickListeners.add(clickListener);
 
 	}
-	
-	public PopupView getContactPopup(){
+
+	public PopupView getContactPopup() {
 		return this.newContactPopup;
 	}
-	
-	public PopupView getDeleteContactPopup(){
+
+	public PopupView getDeleteContactPopup() {
 		return this.deleteContactPopup;
 	}
-	
-	public Button getSaveButton(){
+
+	public Button getSaveButton() {
 		return this.save;
 	}
-	
-	public TextField getNameField(){
+
+	public TextField getNameField() {
 		return this.tfName;
 	}
-	
-	public TextField getPhoneNUmberField(){
+
+	public TextField getPhoneNUmberField() {
 		return this.tfPhoneNumber;
+	}
+
+	public Button getDeleteButton() {
+		return this.delete;
 	}
 
 }

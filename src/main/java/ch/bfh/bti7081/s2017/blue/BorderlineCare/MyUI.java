@@ -85,7 +85,7 @@ public class MyUI extends UI {
     	//Settings View
     	SettingsViewModel settingsModel = new SettingsViewModel();
     	SettingsViewImpl settingsViewImpl = new SettingsViewImpl();   	
-    	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl);
+    	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel);
 
     	//Exercises View
     	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
