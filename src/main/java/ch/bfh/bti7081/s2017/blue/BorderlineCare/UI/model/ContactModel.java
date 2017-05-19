@@ -23,8 +23,6 @@ public class ContactModel {
 		return this.contacts;
 	}
 
-	public void remove(Contact contact) {
-		contacts.remove(0);
-	}
+
 
 }
