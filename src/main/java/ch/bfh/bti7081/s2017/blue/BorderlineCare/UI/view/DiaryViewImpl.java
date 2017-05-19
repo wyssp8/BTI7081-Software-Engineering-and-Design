@@ -1,27 +1,44 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vaadin.server.FileResource;
+import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.TextArea;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.ValoTheme;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.DiaryButtonClickListener;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.EmergencyButtonClickListener;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.DiaryView;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.MainView;
 
-public class DiaryViewImpl extends CustomComponent implements MainView, ClickListener {
+public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	
-	private List<ButtonClickListener> listeners = new ArrayList<ButtonClickListener>();
-	private Button button;
+	private List<DiaryButtonClickListener> diaryButtonListeners = new ArrayList<DiaryButtonClickListener>();
+	
+	private Button buttonAdd;
+	private Button buttonGood;
+	private Button buttonMedium;
+	private Button buttonBad;
+	
+	private RadioButtonGroup<String> smileyRadioGroup;
 	
 	private DateField date;
+	private TextField textField;
 	private TextArea txtArea;
 	
 	private Grid<DiaryEntry> grid;
@@ -31,11 +48,67 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 	
 		VerticalLayout vLayout = new VerticalLayout();
 		//HorizontalLayout hLayout = new HorizontalLayout();
+		
+		String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
 	
 		// Create a DateField
 		date = new DateField();
 		vLayout.addComponent(date);
 		date.setValue(LocalDate.now());
+		
+		//Smiley RadioButton Group
+		FileResource smileyRadio = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_good.JPG"));
+		smileyRadioGroup = new RadioButtonGroup<>("How did you feel today?");
+		smileyRadioGroup.setItems("Good", "Medium", "Bad");
+		vLayout.addComponent(smileyRadioGroup);
+		
+		//Buttons SmileyGood
+		FileResource goodImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_good.JPG"));
+		buttonGood = new Button("Good");
+		buttonGood.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+		buttonGood.setHeight("42px");
+		buttonGood.setWidth("41px");
+		buttonGood.setIcon(goodImage);
+		buttonGood.addClickListener(e -> {
+			for (DiaryButtonClickListener listener : diaryButtonListeners) {
+				listener.smileyGoodButtonClick();
+			}
+		});
+		vLayout.addComponent(buttonGood);
+		
+		
+		//Buttons SmileyMedium
+		FileResource mediumImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_medium.JPG"));
+		buttonMedium = new Button("Medium");
+		buttonMedium.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+		buttonMedium.setHeight("42px");
+		buttonMedium.setWidth("41px");
+		buttonMedium.setIcon(mediumImage);
+		buttonMedium.addClickListener(e -> {
+			for (DiaryButtonClickListener listener : diaryButtonListeners) {
+				listener.smileyMediumButtonClick();
+			}
+		});
+		vLayout.addComponent(buttonMedium);
+		
+		
+		//Buttons SmileyBad
+		FileResource badImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_bad.JPG"));
+		buttonBad = new Button("Bad");
+		buttonBad.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+		buttonBad.setHeight("42px");
+		buttonBad.setWidth("41px");
+		buttonBad.setIcon(badImage);
+		buttonBad.addClickListener(e -> {
+			for (DiaryButtonClickListener listener : diaryButtonListeners) {
+				listener.smileyBadButtonClick();
+			}
+		});
+		vLayout.addComponent(buttonBad);
+		
+		//Title Textfield
+		textField = new TextField("Title");
+		vLayout.addComponent(textField);
 		
 		// Create a text area
 		txtArea = new TextArea("Diary entry");
@@ -43,15 +116,24 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 		txtArea.setValue("What have you done today\n" + "How did you feel today?");
 		vLayout.addComponent(txtArea);
 		
-		//Button
-		button = new Button("Add");
-		vLayout.addComponent(button);
-		button.addClickListener(this);
+		//Button Add
+		buttonAdd = new Button("Add");
+		buttonAdd.addClickListener(e -> {
+			for (DiaryButtonClickListener listener : diaryButtonListeners) {
+				listener.addButtonClick();
+			}
+		});
+		vLayout.addComponent(buttonAdd);
+		
+		
 		
 		//Grid Table
 		grid = new Grid<>();
 		grid.addColumn(DiaryEntry::getDate).setCaption("Date");
+		grid.addColumn(DiaryEntry::getStatus).setCaption("Status");
+		grid.addColumn(DiaryEntry::getTitle).setCaption("Title");
 		grid.addColumn(DiaryEntry::getDiaryEntry).setCaption("Entry");
+		grid.setWidth("1000");
 		vLayout.addComponent(grid);
 		
 		//setCompositionRoot(hLayout);
@@ -60,27 +142,28 @@ public class DiaryViewImpl extends CustomComponent implements MainView, ClickLis
 	}
 	
 	public void setName(String name) {
-		button.setCaption(name);
+		buttonAdd.setCaption(name);
+	}
+	
+	public String getTextField() {
+		return textField.getValue();
 	}
 	
 	public TextArea getTextArea() {
 		return txtArea;
 	}
 	
-
-	public void addListener(ButtonClickListener clickListener) {
-		listeners.add(clickListener);
+	public DateField getDateField() {
+		return date;
 	}
 
-
-	public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
-		for(ButtonClickListener listener : listeners){
-			listener.buttonClick();
-		}
-	}
-	
 	public void initializeDiaryEntry(List<DiaryEntry> diaryEntry){
 		grid.setItems(diaryEntry);
 	}
 
+	@Override
+	public void addDiaryButtonClickListener(DiaryButtonClickListener clickListener) {
+		diaryButtonListeners.add(clickListener);
+		
+	}
 }

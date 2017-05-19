@@ -18,14 +18,15 @@ public class ContactViewPresenter implements ContactButtonClickListener{
 	private ContactModel contactModel;
 	private ContactViewImpl contactViewImpl;
 	private List<Contact> contacts;
+	private PopupView popup;
 
 	
 	
 	public ContactViewPresenter(ContactModel model, ContactViewImpl view){
 		this.contactModel = model;
 		this.contactViewImpl = view;
-		contacts = new ArrayList<>();
-		contactViewImpl.initializeContacts(contactModel.getContacts());
+		contacts = contactModel.getContacts();
+		contactViewImpl.initializeContacts(contacts);
 		contactViewImpl.addContactButtonClickListeneer(this);
 		contactViewImpl.initializeDeletePopup();
 		contactViewImpl.initNewContactPopup();
@@ -36,21 +37,31 @@ public class ContactViewPresenter implements ContactButtonClickListener{
 		return this.contacts;
 	}
 	
-	public void remove() {
-		contacts.remove(0);
+
+	@Override
+	public Contact deleteButtonClick(PopupView popup, Contact toDelete) {
+		popup = contactViewImpl.getDeleteContactPopup();
+		popup.setPopupVisible(true);
+		return toDelete;
 	}
 	
-
 	@Override
-	public void deleteButtonClick() {
-		
+	public void deleteContact(){
+		this.contacts.remove(0);
+		contactViewImpl.initializeContacts(this.contacts);
 	}
 
 
 	@Override
-	public void newContactButtonClick() {
-		contactViewImpl.getPopuop().setVisible(true);
-		
+	public void saveButtonClick(String stringInput, int integerInput) {
+		this.contacts.add(new Contact(stringInput, integerInput));
+		contactViewImpl.initializeContacts(this.contacts);
+		contactViewImpl.getContactPopup().setPopupVisible(false);
+	}
+	
+	@Override
+	public void cancelButtonClick(){
+		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}
 
 
