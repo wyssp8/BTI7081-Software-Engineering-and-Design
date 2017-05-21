@@ -300,9 +300,9 @@ public class SettingsViewImpl extends CustomComponent {
 				cityTextField.setEnabled(false);
 				passwordTextField.setEnabled(false);
 
-				editedContact = new LoginAccount(firstNameTextField.getValue(), lastNameTextField.getValue(),
-				streetTextField.getValue(), zipCodeTextField.getValue(), cityTextField.getValue(),
-				emailTextField.getValue(), passwordTextField.getValue(), passwordTextField.getValue());
+//				editedContact = new LoginAccount(firstNameTextField.getValue(), lastNameTextField.getValue(),
+//				streetTextField.getValue(), zipCodeTextField.getValue(), cityTextField.getValue(),
+//				emailTextField.getValue(), passwordTextField.getValue(), passwordTextField.getValue());
 
 			}
 

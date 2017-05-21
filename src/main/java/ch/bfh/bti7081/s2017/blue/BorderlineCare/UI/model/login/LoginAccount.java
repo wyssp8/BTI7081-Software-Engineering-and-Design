@@ -13,12 +13,12 @@ public class LoginAccount {
 	private String city;
 	private String email;
 	private String password;
-	private String passwordConfirmation;
+	//private String passwordConfirmation;
 	
 	
 	
 	public LoginAccount(String firstName, String lastName, String street, String zipCode, String city, String email,
-			String password, String passwordConfirmation) {
+			String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -27,7 +27,6 @@ public class LoginAccount {
 		this.city = city;
 		this.email = email;
 		this.password = password;
-		this.passwordConfirmation = passwordConfirmation;
 		//LoginViewModel loginViewModel = new LoginViewModel();
 	}
 
@@ -86,13 +85,4 @@ public class LoginAccount {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getPasswordConfirmation() {
-		return passwordConfirmation;
-	}
-
-	public void setPasswordConfirmation(String passwordConfirmation) {
-		this.passwordConfirmation = passwordConfirmation;
-	}
-
 }

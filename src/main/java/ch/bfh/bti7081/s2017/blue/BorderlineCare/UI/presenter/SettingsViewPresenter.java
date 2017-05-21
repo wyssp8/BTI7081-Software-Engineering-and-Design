@@ -46,13 +46,13 @@ public class SettingsViewPresenter {
 		/**
 		 * initialize settings text fields
 		 */
-		settingsView.loginTextField().setValue(settingsModel.getEmail());
-		settingsView.getPasswordTextField().setValue(settingsModel.getPassword());
-		settingsView.getFirstNAmeTextField().setValue(settingsModel.getFirstName());
-		settingsView.getLastNameTextField().setValue(settingsModel.getLastName());
-		settingsView.getStreetTextField().setValue(settingsModel.getStreet());
-		settingsView.getCityTextField().setValue(settingsModel.getCity());
-		settingsView.getZipCodeTextField().setValue(settingsModel.getZipCode());
+//		settingsView.loginTextField().setValue(settingsModel.getEmail());
+//		settingsView.getPasswordTextField().setValue(settingsModel.getPassword());
+//		settingsView.getFirstNAmeTextField().setValue(settingsModel.getFirstName());
+//		settingsView.getLastNameTextField().setValue(settingsModel.getLastName());
+//		settingsView.getStreetTextField().setValue(settingsModel.getStreet());
+//		settingsView.getCityTextField().setValue(settingsModel.getCity());
+//		settingsView.getZipCodeTextField().setValue(settingsModel.getZipCode());
 		
 	}
 		/**
@@ -75,13 +75,13 @@ public class SettingsViewPresenter {
 	 */
 	public void loadUserinfo() {
 
-		settingsModel.setEmail((account.getLoginAccount().get(0).getEmail()));
-		settingsModel.setFirstName(account.getLoginAccount().get(0).getFirstName());
-		settingsModel.setLastName(account.getLoginAccount().get(0).getLastName());
-		settingsModel.setStreet(account.getLoginAccount().get(0).getStreet());
-		settingsModel.setZipCode(account.getLoginAccount().get(0).getZipCode());
-		settingsModel.setCity(account.getLoginAccount().get(0).getCity());
-		settingsModel.setPassword(account.getLoginAccount().get(0).getPassword());
+//		settingsModel.setEmail((account.getLoginAccounts().get(0).getEmail()));
+//		settingsModel.setFirstName(account.getLoginAccounts().get(0).getFirstName());
+//		settingsModel.setLastName(account.getLoginAccounts().get(0).getLastName());
+//		settingsModel.setStreet(account.getLoginAccounts().get(0).getStreet());
+//		settingsModel.setZipCode(account.getLoginAccounts().get(0).getZipCode());
+//		settingsModel.setCity(account.getLoginAccounts().get(0).getCity());
+//		settingsModel.setPassword(account.getLoginAccounts().get(0).getPassword());
 	}
 
 	
