@@ -41,14 +41,19 @@ public class LoginViewImpl extends CustomComponent implements View {
 		// Textfields
 		loginName = new TextField();
 		loginName.setCaption("Username");
-
+		//Remove later
+		loginName.setValue("polo@test.com");
+		
 		loginPassword = new TextField();
 		loginPassword.setCaption("Password");
+		//Remove later
+		loginPassword.setValue("test");
 		
 		//Labels
 		loginLabel = new Label();
 		loginLabel.setCaption("not logged in");
-
+		
+		
 		// Buttons
 		buttonLogin = new Button("Login");
 		buttonLogin.addClickListener(e ->{
