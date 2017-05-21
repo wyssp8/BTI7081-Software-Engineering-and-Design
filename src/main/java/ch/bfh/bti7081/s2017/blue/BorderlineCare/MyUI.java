@@ -82,10 +82,16 @@ public class MyUI extends UI {
     	DiaryViewPresenter diaryViewPresenter = new DiaryViewPresenter(diaryViewModel, diaryViewImpl);
     	
 
+    	//Login View
+    	LoginViewModel loginViewModel = new LoginViewModel();
+    	LoginViewImpl loginViewImpl = new LoginViewImpl();
+    	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
+    	
     	//Settings View
     	SettingsViewModel settingsModel = new SettingsViewModel();
     	SettingsViewImpl settingsViewImpl = new SettingsViewImpl();   	
-    	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel);
+    	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel, loginViewModel , navigator  );
+    	
 
     	//Exercises View
     	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
@@ -94,11 +100,6 @@ public class MyUI extends UI {
 
     	NavigationViewImpl view = new NavigationViewImpl(mainView,contactViewImpl,diaryViewImpl,exerciseViewImpl,settingsViewImpl);
 
-    	//Login View
-    	LoginViewModel loginViewModel = new LoginViewModel();
-    	LoginViewImpl loginViewImpl = new LoginViewImpl();
-    	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
-    	
     	//SignUp View
     	SignUpViewModel signUpViewModel = new SignUpViewModel();
     	SignUpViewImpl signUpViewImpl = new SignUpViewImpl();
