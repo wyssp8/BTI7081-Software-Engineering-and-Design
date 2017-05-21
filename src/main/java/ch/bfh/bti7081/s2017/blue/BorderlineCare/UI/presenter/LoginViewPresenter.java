@@ -19,7 +19,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	
 	private LoginViewModel loginViewModel;
 	private LoginViewImpl loginViewImpl;
-	private LoginAccount loginAccount;
+	//private LoginAccount loginAccount;
 	private Navigator navigator;
 
 
@@ -51,8 +51,9 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 	@Override
 	public boolean authenticateLogin() {
-		if(loginViewImpl.getLoginName().equals(loginViewModel.getLoginAccount().get(0).getEmail())&&
-				loginViewImpl.getLoginPassword().equals(loginViewModel.getLoginAccount().get(0).getPassword())){
+		for(LoginAccount loginAccount : loginViewModel.getLoginAccounts())
+		if(loginViewImpl.getLoginName().equals(loginAccount.getEmail())&&
+				loginViewImpl.getLoginPassword().equals(loginAccount.getPassword())){
 			return true;
 		}
 		return false;

@@ -18,8 +18,8 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SignUpViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.SignUpViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
