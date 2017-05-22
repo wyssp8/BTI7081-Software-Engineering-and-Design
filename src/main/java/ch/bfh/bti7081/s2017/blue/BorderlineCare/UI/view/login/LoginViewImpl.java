@@ -47,13 +47,8 @@ public class LoginViewImpl extends CustomComponent implements View {
 		loginPassword.setCaption("Password");
 
 		// Labels
-		//Remove later
-		loginName.setValue("polo@test.com");
-		
 		loginPassword = new PasswordField();
 		loginPassword.setCaption("Password");
-		//Remove later
-		loginPassword.setValue("test");
 		
 		//Labels
 		loginLabel = new Label();

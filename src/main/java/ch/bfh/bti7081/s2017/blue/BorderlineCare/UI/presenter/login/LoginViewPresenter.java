@@ -59,7 +59,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	@Override
 	public boolean validateLogin() {
 
-		for (LoginAccount loginAccount : loginViewModel.getLoginAccounts()) {
+		LoginAccount loginAccount = loginViewModel.getLoginAccount();
 
 			try {
 				passwordMatched = validatePassword(loginViewImpl.getLoginPassword(), loginAccount.getPassword());
@@ -76,7 +76,6 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 				//getSession().setAttribute("user",loginAccount.getFirstName());
 			}
-		}
 		return false;
 	}
 
