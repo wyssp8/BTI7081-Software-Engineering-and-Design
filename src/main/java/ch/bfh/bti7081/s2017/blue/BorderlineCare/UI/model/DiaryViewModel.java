@@ -22,13 +22,4 @@ public class DiaryViewModel {
 	public List<DiaryEntry> getDiaryEntry(){
 		return this.diaryEntry;
 	}
-
-	
-	public void setDiaryEntry() {
-		
-		
-		
-		diaryEntry.add(new DiaryEntry(LocalDate.now(), "Good", "test", "TestEintrag"));
-	}
-		
 }

@@ -11,6 +11,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
@@ -20,6 +21,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.ValoTheme;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.DiaryButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.EmergencyButtonClickListener;
@@ -118,17 +120,12 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		txtArea.setValue("What have you done today\n" + "How did you feel today?");
 		vLayout.addComponent(txtArea);
 		
+		
+		
 		//Button Add
 		buttonAdd = new Button("Add");
-		buttonAdd.addClickListener(e -> {
-			for (DiaryButtonClickListener listener : diaryButtonListeners) {
-				listener.addButtonClick();
-			}
-		});
 		vLayout.addComponent(buttonAdd);
-		
-		
-		
+	
 		//Grid Table
 		grid = new Grid<>();
 		grid.addColumn(DiaryEntry::getDate).setCaption("Date");
@@ -141,6 +138,15 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		//setCompositionRoot(hLayout);
 		setCompositionRoot(vLayout);
 		
+	}
+	
+	public void initAddDiaryEntry() {
+		buttonAdd.addClickListener(clickEvent -> {
+			for (DiaryButtonClickListener listener : diaryButtonListeners) {
+				String stringInput = getTextField();
+				listener.addButtonClick(stringInput);
+			}
+		});
 	}
 	
 	public void setName(String name) {
