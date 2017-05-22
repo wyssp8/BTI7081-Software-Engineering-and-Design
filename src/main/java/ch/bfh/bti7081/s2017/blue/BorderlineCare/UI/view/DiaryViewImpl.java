@@ -60,6 +60,7 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		FileResource smileyRadio = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_good.JPG"));
 		smileyRadioGroup = new RadioButtonGroup<>("How did you feel today?");
 		smileyRadioGroup.setItems("Good", "Medium", "Bad");
+		smileyRadioGroup.addStyleName("mytheme");
 		vLayout.addComponent(smileyRadioGroup);
 		
 		//Buttons SmileyGood
