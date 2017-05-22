@@ -27,12 +27,12 @@ public class LoginViewModel {
 		return this.loginAccount;
 	}
 	
-	public void addLoginAccount(LoginAccount loginAccount){
-		this.loginAccount=loginAccount;
-		
 //		for(LoginAccount login :loginAccount){
 //			System.out.println(login.getEmail()+"\n"+login.getPassword()+"\n");
 //		}
+
+	public void setLoginAccount(LoginAccount loginAccount) {
+		this.loginAccount = loginAccount;
 	}
 
 
