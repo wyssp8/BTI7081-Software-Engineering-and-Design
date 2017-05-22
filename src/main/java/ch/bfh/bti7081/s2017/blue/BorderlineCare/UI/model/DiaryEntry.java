@@ -44,12 +44,12 @@ public class DiaryEntry {
 		this.diaryTitle = diaryTitle;
 	}
 
-	public String getDiaryEntry() {
-		return diaryEntry;
-	}
-
 	public void setDiaryEntry(String diaryEntry) {
 		this.diaryEntry = diaryEntry;
+	}
+	
+	public String getDiaryEntry() {
+		return diaryEntry;
 	}
 	
 }

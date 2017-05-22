@@ -5,5 +5,5 @@ public interface DiaryButtonClickListener {
 	public void smileyGoodButtonClick();
 	public void smileyMediumButtonClick();
 	public void smileyBadButtonClick();
-	public void addButtonClick();
+	public void addButtonClick(String stringInput);
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.vaadin.server.Page;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
@@ -17,23 +18,28 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 
 	private DiaryViewModel diaryViewModel;
 	private DiaryViewImpl diaryViewImpl;
+	private List<DiaryEntry> diaryEntry;
 
 
 
-	public DiaryViewPresenter(DiaryViewModel diaryViewModel, DiaryViewImpl diaryViewImpl){
-		this.diaryViewModel = diaryViewModel;
-		this.diaryViewImpl = diaryViewImpl;
+	public DiaryViewPresenter(DiaryViewModel model, DiaryViewImpl view){
+		this.diaryViewModel = model;
+		this.diaryViewImpl = view;
+		diaryEntry = diaryViewModel.getDiaryEntry();
 
 		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry());
 		diaryViewImpl.addDiaryButtonClickListener(this);
-
+		diaryViewImpl.initAddDiaryEntry();
 }
 
+	public List<DiaryEntry> getDiaryEntry() {
+		return this.diaryEntry;
+	}
 	
-	public void addButtonClick() {
+	public void addButtonClick(String stringInput) {
 		
+		diaryEntry.add(new DiaryEntry(LocalDate.now(), "Good", stringInput, "test"));
 		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry()); //Inhalt wird ins Grid geschrieben
-		diaryViewModel.setDiaryEntry();
 		
 	}
 
