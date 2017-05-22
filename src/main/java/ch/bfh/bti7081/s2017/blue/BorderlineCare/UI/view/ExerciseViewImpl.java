@@ -25,6 +25,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.ExerciseView;
  */
 public class ExerciseViewImpl extends CustomComponent implements ExerciseView {
 
+	private static final long serialVersionUID = 2890501565667684097L;
 	private List<ExerciseClickListener> listeners = new ArrayList<ExerciseClickListener>();
 	private Label titleCalm = new Label();
 	private Label descriptionCalm = new Label();

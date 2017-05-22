@@ -1,0 +1,12 @@
+@import "../valo/valo.scss";
+
+@mixin radiobutton {
+  @include valo;
+  
+   
+    .v-select-option.v-radiobutton {
+    
+    $v-font-size: 30px;
+    
+    }  
+ }
