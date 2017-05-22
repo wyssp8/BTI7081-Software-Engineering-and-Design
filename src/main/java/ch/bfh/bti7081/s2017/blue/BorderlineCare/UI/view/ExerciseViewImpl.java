@@ -194,9 +194,17 @@ public class ExerciseViewImpl extends CustomComponent implements ExerciseView {
 		baseVerticalLayout.addComponent(headTitleCalmDown);
         baseVerticalLayout.setComponentAlignment(headTitleCalmDown, Alignment.MIDDLE_CENTER);
 		baseVerticalLayout.addComponent(horizontalLayout);
+		
+		Label emptyLabel = new Label();
+		emptyLabel.setHeight("70px");
+		
+		baseVerticalLayout.addComponent(emptyLabel);
 		baseVerticalLayout.addComponent(headTitleDaily);
         baseVerticalLayout.setComponentAlignment(headTitleDaily, Alignment.MIDDLE_CENTER);
 		baseVerticalLayout.addComponent(horizontalLayoutDaily);
+		Label emptyLabelBottom = new Label();
+		emptyLabel.setHeight("100px");
+		baseVerticalLayout.addComponent(emptyLabelBottom);
 		this.setCompositionRoot(baseVerticalLayout);
 		
 	}
