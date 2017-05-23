@@ -11,6 +11,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.TextArea;
@@ -59,56 +60,14 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		date.setValue(LocalDate.now());
 		
 		//Smiley RadioButton Group
-		FileResource smileyRadio = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_good.JPG"));
+		//FileResource smileyRadio = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_good.JPG"));
 		smileyRadioGroup = new RadioButtonGroup<>("How did you feel today?");
 		smileyRadioGroup.setItems("Good", "Medium", "Bad");
 		smileyRadioGroup.addStyleName("option");
-		smileyRadioGroup.setIcon(smileyRadio);
+		//smileyRadioGroup.setIcon(smileyRadio);
+		
 		vLayout.addComponent(smileyRadioGroup);
 		
-		//Buttons SmileyGood
-		FileResource goodImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_good.JPG"));
-		buttonGood = new Button("Good");
-		buttonGood.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-		buttonGood.setHeight("42px");
-		buttonGood.setWidth("41px");
-		buttonGood.setIcon(goodImage);
-		buttonGood.addClickListener(e -> {
-			for (DiaryButtonClickListener listener : diaryButtonListeners) {
-				listener.smileyGoodButtonClick();
-			}
-		});
-		vLayout.addComponent(buttonGood);
-		
-		
-		//Buttons SmileyMedium
-		FileResource mediumImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_medium.JPG"));
-		buttonMedium = new Button("Medium");
-		buttonMedium.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-		buttonMedium.setHeight("42px");
-		buttonMedium.setWidth("41px");
-		buttonMedium.setIcon(mediumImage);
-		buttonMedium.addClickListener(e -> {
-			for (DiaryButtonClickListener listener : diaryButtonListeners) {
-				listener.smileyMediumButtonClick();
-			}
-		});
-		vLayout.addComponent(buttonMedium);
-		
-		
-		//Buttons SmileyBad
-		FileResource badImage = new FileResource(new File(basepath + "/WEB-INF/images/diary/smiley_bad.JPG"));
-		buttonBad = new Button("Bad");
-		buttonBad.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-		buttonBad.setHeight("42px");
-		buttonBad.setWidth("41px");
-		buttonBad.setIcon(badImage);
-		buttonBad.addClickListener(e -> {
-			for (DiaryButtonClickListener listener : diaryButtonListeners) {
-				listener.smileyBadButtonClick();
-			}
-		});
-		vLayout.addComponent(buttonBad);
 		
 		//Title Textfield
 		textField = new TextField("Title");
@@ -143,8 +102,11 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	public void initAddDiaryEntry() {
 		buttonAdd.addClickListener(clickEvent -> {
 			for (DiaryButtonClickListener listener : diaryButtonListeners) {
-				String stringInput = getTextField();
-				listener.addButtonClick(stringInput);
+				LocalDate dateInput = getDateField();
+				String radioInput = getRadioGroup();
+				String titleInput = getTextField();
+				String diaryInput = getTextArea();
+				listener.addButtonClick(dateInput, radioInput, titleInput, diaryInput);
 			}
 		});
 	}
@@ -153,17 +115,22 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		buttonAdd.setCaption(name);
 	}
 	
+	public LocalDate getDateField() {
+		return date.getValue();
+	}
+	
+	public String getRadioGroup() {
+		return smileyRadioGroup.getValue();
+	}
+	
 	public String getTextField() {
 		return textField.getValue();
 	}
 	
-	public TextArea getTextArea() {
-		return txtArea;
+	public String getTextArea() {
+		return txtArea.getValue();
 	}
 	
-	public DateField getDateField() {
-		return date;
-	}
 
 	public void initializeDiaryEntry(List<DiaryEntry> diaryEntry){
 		grid.setItems(diaryEntry);

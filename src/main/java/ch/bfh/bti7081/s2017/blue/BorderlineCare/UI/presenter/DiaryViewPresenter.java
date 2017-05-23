@@ -36,9 +36,9 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 		return this.diaryEntry;
 	}
 	
-	public void addButtonClick(String stringInput) {
+	public void addButtonClick(LocalDate dateInput, String radioInput, String titleInput, String diaryInput) {
 		
-		diaryEntry.add(new DiaryEntry(LocalDate.now(), "Good", stringInput, "test"));
+		diaryEntry.add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput));
 		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry()); //Inhalt wird ins Grid geschrieben
 		
 	}
