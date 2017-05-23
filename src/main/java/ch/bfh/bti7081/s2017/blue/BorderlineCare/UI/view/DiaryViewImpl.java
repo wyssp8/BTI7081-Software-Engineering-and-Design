@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.vaadin.server.FileResource;
 import com.vaadin.server.VaadinService;
+import com.vaadin.shared.data.sort.SortDirection;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.DateField;
@@ -87,11 +88,12 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	
 		//Grid Table
 		grid = new Grid<>();
-		grid.addColumn(DiaryEntry::getDate).setCaption("Date");
-		grid.addColumn(DiaryEntry::getStatus).setCaption("Status");
-		grid.addColumn(DiaryEntry::getTitle).setCaption("Title");
+		grid.addColumn(DiaryEntry::getDate).setCaption("Date").setWidth(120);
+		grid.addColumn(DiaryEntry::getStatus).setCaption("Status").setWidth(100);
+		grid.addColumn(DiaryEntry::getTitle).setCaption("Title").setWidth(200);
 		grid.addColumn(DiaryEntry::getDiaryEntry).setCaption("Entry");
-		grid.setWidth("1000");
+		
+		grid.setWidth("1200");
 		vLayout.addComponent(grid);
 		
 		//setCompositionRoot(hLayout);
