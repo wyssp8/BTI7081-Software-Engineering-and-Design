@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.server.Page;
+import com.vaadin.ui.PopupView;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
@@ -43,24 +44,10 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 		
 	}
 
-
 	@Override
-	public void smileyGoodButtonClick() {
-		// TODO Auto-generated method stub
+	public void deleteButtonClick(DiaryEntry toDelete) {
 		
-	}
-
-
-	@Override
-	public void smileyMediumButtonClick() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void smileyBadButtonClick() {
-		// TODO Auto-generated method stub
-		
+		diaryEntry.remove(toDelete);
+		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry());
 	}
 }

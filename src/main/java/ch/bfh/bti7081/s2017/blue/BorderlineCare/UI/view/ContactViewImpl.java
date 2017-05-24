@@ -4,6 +4,7 @@ import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vaadin.annotations.Theme;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.UserError;
