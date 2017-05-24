@@ -15,7 +15,9 @@ public class DiaryViewModel {
 	
 	public DiaryViewModel(){
 		diaryEntry = new ArrayList<>();
-		diaryEntry.add(new DiaryEntry(LocalDate.now(), "HeHe", "Test Title", "TestEintrag"));
+		diaryEntry.add(new DiaryEntry(LocalDate.now(), "Good", "Test Title1", "TestEintrag1"));
+		diaryEntry.add(new DiaryEntry(LocalDate.now(), "Medium", "Test Title2", "TestEintrag2"));
+		diaryEntry.add(new DiaryEntry(LocalDate.now(), "Bad", "Test Title3", "TestEintrag3"));
 		
 	}
 	

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.server.Page;
+import com.vaadin.ui.PopupView;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
@@ -36,31 +37,17 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 		return this.diaryEntry;
 	}
 	
-	public void addButtonClick(String stringInput) {
+	public void addButtonClick(LocalDate dateInput, String radioInput, String titleInput, String diaryInput) {
 		
-		diaryEntry.add(new DiaryEntry(LocalDate.now(), "Good", stringInput, "test"));
+		diaryEntry.add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput));
 		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry()); //Inhalt wird ins Grid geschrieben
 		
 	}
 
-
 	@Override
-	public void smileyGoodButtonClick() {
-		// TODO Auto-generated method stub
+	public void deleteButtonClick(DiaryEntry toDelete) {
 		
-	}
-
-
-	@Override
-	public void smileyMediumButtonClick() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void smileyBadButtonClick() {
-		// TODO Auto-generated method stub
-		
+		diaryEntry.remove(toDelete);
+		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry());
 	}
 }
