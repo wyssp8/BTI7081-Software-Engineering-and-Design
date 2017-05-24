@@ -20,19 +20,19 @@ public class LoginViewModel {
 	
 	private LoginAccount loginAccount;
 	public LoginViewModel(){
-
+		//loginAccount = new LoginAccount(null, null, null, null, null, null, null);
+		
 	}
 
+	//Laden der Accounttabelle der Datenbank
 	public LoginAccount getLoginAccount() {
 		return this.loginAccount;
 	}
 	
-//		for(LoginAccount login :loginAccount){
-//			System.out.println(login.getEmail()+"\n"+login.getPassword()+"\n");
-//		}
-
+	//Speicher auf Accounttabelle der Datenbank
 	public void setLoginAccount(LoginAccount loginAccount) {
 		this.loginAccount = loginAccount;
+		System.out.println(loginAccount.getEmail()+"\n"+loginAccount.getPassword()+"\n");
 	}
 
 

@@ -65,7 +65,7 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 		}
         System.out.println(generatedSecuredPasswordHash);
 		
-		loginViewModel.addLoginAccount(
+		loginViewModel.setLoginAccount(
 		new LoginAccount(
 				signUpViewImpl.getFirstName(),
 				signUpViewImpl.getLastName(),
