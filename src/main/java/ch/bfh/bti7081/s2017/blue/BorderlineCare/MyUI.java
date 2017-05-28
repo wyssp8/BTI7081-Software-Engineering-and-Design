@@ -22,6 +22,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.SignUpViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
@@ -64,7 +65,9 @@ public class MyUI extends UI {
 		Navigator navigator = new Navigator(this, this);
 		
 		DBConnector dbConnector = new DBConnector();
-		dbConnector.getConnection("wyssp8@bfh.ch");
+		//Als Beispiel wie der Loginaccount aufgerufen wird
+		LoginAccount loginAccount = dbConnector.getLoginAccount("wyssp8@bfh.ch");
+		loginAccount.getContacts();
 		
     	//Main View
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
