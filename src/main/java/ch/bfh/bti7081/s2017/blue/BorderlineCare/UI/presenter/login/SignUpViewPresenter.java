@@ -65,15 +65,15 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 		}
         System.out.println(generatedSecuredPasswordHash);
 		
-		loginViewModel.addLoginAccount(
-		new LoginAccount(
-				signUpViewImpl.getFirstName(),
-				signUpViewImpl.getLastName(),
-				signUpViewImpl.getStreet(),
-				signUpViewImpl.getZipCode(),
-				signUpViewImpl.getCity(),
-				signUpViewImpl.getEmail(),
-				generatedSecuredPasswordHash));		
+		// loginViewModel.addLoginAccount(
+//		new LoginAccount(
+//				signUpViewImpl.getFirstName(),
+//				signUpViewImpl.getLastName(),
+//				signUpViewImpl.getStreet(),
+//				signUpViewImpl.getZipCode(),
+//				signUpViewImpl.getCity(),
+//				signUpViewImpl.getEmail(),
+//				generatedSecuredPasswordHash));		
 		//to do: clear all textfields
 		navigator.navigateTo("LoginView");
 	}

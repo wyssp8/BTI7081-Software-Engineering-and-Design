@@ -5,6 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
+
 public class DBConnector {
 
 private String dbms = "mysql";
@@ -15,7 +21,9 @@ private Connection conn = null;
 
 
 public Connection getConnection() throws SQLException {
-    
+	EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("borderlinecare");
+	EntityManager em = emFactory.createEntityManager();
+	Contact find = em.find(Contact.class, 1);
     Properties connectionProps = new Properties();
     connectionProps.put("user", "root");
     connectionProps.put("password", "22JrCCM5$");
@@ -29,6 +37,7 @@ public Connection getConnection() throws SQLException {
                    this.dbname,
                    connectionProps);
    
+    System.out.println(connectionProps);
     System.out.println("Connected to database: " + this.dbname);
     return conn;
     

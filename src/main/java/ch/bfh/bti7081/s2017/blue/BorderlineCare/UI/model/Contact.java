@@ -1,16 +1,28 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Contact {
 	
+	@Id
+	@GeneratedValue
+	private int id;
+	
 	private String name;
+	
 	private int phoneNumber;
 	
-	public Contact(String name, int phoneNumber){
+	public Contact(){};
+	public Contact(int id, String name, int phoneNumber){
+		this.id = id;
 		this.name = name;
 		this.phoneNumber = phoneNumber;		
 	}
 	
-
 
 	public String getName() {
 		return name;
@@ -27,9 +39,13 @@ public class Contact {
 	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	
-	
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 }
