@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +11,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
@@ -63,8 +63,8 @@ public class MyUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
 		Navigator navigator = new Navigator(this, this);
 		
-		
-		
+		DBConnector dbConnector = new DBConnector();
+		dbConnector.getConnection("wyssp8@bfh.ch");
 		
     	//Main View
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();

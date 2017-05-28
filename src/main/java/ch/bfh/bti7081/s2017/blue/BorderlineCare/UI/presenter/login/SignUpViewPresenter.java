@@ -74,6 +74,339 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 //				signUpViewImpl.getCity(),
 //				signUpViewImpl.getEmail(),
 //				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
+		loginViewModel.setLoginAccount(
+		new LoginAccount(
+				signUpViewImpl.getFirstName(),
+				signUpViewImpl.getLastName(),
+				signUpViewImpl.getStreet(),
+				signUpViewImpl.getZipCode(),
+				signUpViewImpl.getCity(),
+				signUpViewImpl.getEmail(),
+				generatedSecuredPasswordHash));		
 		//to do: clear all textfields
 		navigator.navigateTo("LoginView");
 	}

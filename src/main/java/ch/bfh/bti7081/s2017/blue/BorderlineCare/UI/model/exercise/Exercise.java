@@ -1,28 +1,29 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 
 /**
  * 
  * @author wyssp8
  *
  */
-@Entity
+
 public abstract class Exercise {
 
-	@Id
-	@GeneratedValue
-	private int id;
-	
 	private String title;
-	
+
 	private String description;
-	
+
 	private String imagePath;
+
+	public Exercise(){
+	}
 	
-	public Exercise(String title, String description, String imagePath){
+	public Exercise(String title, String description, String imagePath) {
 		this.description = description;
 		this.title = title;
 		this.imagePath = imagePath;
@@ -52,13 +53,5 @@ public abstract class Exercise {
 		this.imagePath = imagePath;
 	}
 
-	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	
 }
