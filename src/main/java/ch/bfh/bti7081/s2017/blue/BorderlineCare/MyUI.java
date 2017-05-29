@@ -90,7 +90,6 @@ public class MyUI extends UI {
     	//Settings View
     	SettingsViewModel settingsModel = new SettingsViewModel();
     	SettingsViewImpl settingsViewImpl = new SettingsViewImpl();   	
-    	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel, loginViewModel , navigator  );
     	
 
     	//Exercises View
@@ -109,6 +108,10 @@ public class MyUI extends UI {
         navigator.addView("HomeView", view);
         navigator.addView("SignUpView", signUpViewImpl);
         navigator.navigateTo("LoginView");
+
+        
+        //SettingsViewPresente part of settings
+        SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel, loginViewModel , navigator  );
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

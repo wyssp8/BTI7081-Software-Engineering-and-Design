@@ -20,16 +20,17 @@ public class SettingsViewPresenter {
 	private SettingsViewImpl settingsView;
 	private SettingsViewModel settingsModel;
 	private ContactModel contacts;
-	private LoginViewModel account;
+	private LoginViewModel loginModel;
 	
 	private ArrayList<Contact> eContacts = new ArrayList<>();
+	
 
 	public SettingsViewPresenter(SettingsViewModel settingsModel, SettingsViewImpl settingsView, ContactModel contacts,
 		LoginViewModel account, Navigator navigator) {
 		this.settingsView = settingsView;
 		this.settingsModel = settingsModel;
 		this.contacts = contacts;
-		this.account = account;
+		this.loginModel = account;
 		
 		/**
 		 * pass the navigator object on to the SettingsView object 
@@ -40,7 +41,7 @@ public class SettingsViewPresenter {
 		/**
 		 * Load contacts into ViewImpl object
 		 */
-		loadUserinfo();
+		loadLogininfo();
 		loadContacts();
 
 		/**
@@ -53,7 +54,6 @@ public class SettingsViewPresenter {
 //		settingsView.getStreetTextField().setValue(settingsModel.getStreet());
 //		settingsView.getCityTextField().setValue(settingsModel.getCity());
 //		settingsView.getZipCodeTextField().setValue(settingsModel.getZipCode());
-		
 	}
 		/**
 		 * load contatcs on the dropdown menu Emergency contacs
@@ -73,15 +73,27 @@ public class SettingsViewPresenter {
 	/**
 	 * load info of the logged user on the Account Settings
 	 */
-	public void loadUserinfo() {
-
-//		settingsModel.setEmail((account.getLoginAccounts().get(0).getEmail()));
-//		settingsModel.setFirstName(account.getLoginAccounts().get(0).getFirstName());
-//		settingsModel.setLastName(account.getLoginAccounts().get(0).getLastName());
-//		settingsModel.setStreet(account.getLoginAccounts().get(0).getStreet());
-//		settingsModel.setZipCode(account.getLoginAccounts().get(0).getZipCode());
-//		settingsModel.setCity(account.getLoginAccounts().get(0).getCity());
-//		settingsModel.setPassword(account.getLoginAccounts().get(0).getPassword());
+	public void loadLogininfo() {
+/** corrigir esse methode com polo 
+ * 
+ */
+	
+		
+/**
+		Método está correto, ele joga no SettingsModel as infos do objeto LoginAccount que está dentro do LoginViewModel. 
+		no momento não há como testar o método pois a um problema no SignUpViewPresenter , o método loginViewModel.addLoginAccount esta 
+		 incorreto. temos que esperar o polo corrigir.
+		
+		settingsModel.setEmail((loginModel.getLoginAccount().getEmail()));
+		settingsModel.setFirstName(loginModel.getLoginAccount().getFirstName());
+		settingsModel.setLastName(loginModel.getLoginAccount().getLastName());
+		settingsModel.setStreet(loginModel.getLoginAccount().getStreet());
+		settingsModel.setZipCode(loginModel.getLoginAccount().getZipCode());
+		settingsModel.setCity(loginModel.getLoginAccount().getCity());
+		settingsModel.setPassword(loginModel.getLoginAccount().getPassword());
+		}
+ * 
+ */
 	}
 
 	
