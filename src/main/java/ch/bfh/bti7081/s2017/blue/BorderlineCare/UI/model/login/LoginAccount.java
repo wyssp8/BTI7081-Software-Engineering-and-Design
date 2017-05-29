@@ -1,21 +1,39 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
 
-import com.vaadin.ui.TextField;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.CalmDownExercise;
+
+@Entity
 public class LoginAccount {
+	
+	@Id
+	private String email;
 	
 	private String firstName;
 	private String lastName;
 	private String street;
 	private String zipCode;
 	private String city;
-	private String email;
 	private String password;
+	
+	@OneToMany(mappedBy = "loginAccount")
+	private Set<CalmDownExercise> calmDownExercises;
+	@OneToMany(mappedBy = "loginAccount")
+	private Set<Contact> contacts;
+	@OneToMany(mappedBy = "loginAccount")
+	private Set<DiaryEntry> diaryEntries;
 	//private String passwordConfirmation;
 	
-	
+	public LoginAccount(){
+	}
 	
 	public LoginAccount(String firstName, String lastName, String street, String zipCode, String city, String email,
 			String password) {
@@ -85,4 +103,29 @@ public class LoginAccount {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public Set<CalmDownExercise> getCalmDownExercises() {
+		return calmDownExercises;
+	}
+
+	public void setCalmDownExercises(Set<CalmDownExercise> calmDownExercises) {
+		this.calmDownExercises = calmDownExercises;
+	}
+
+	public Set<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(Set<Contact> contacts) {
+		this.contacts = contacts;
+	}
+
+	public Set<DiaryEntry> getDiaryEntries() {
+		return diaryEntries;
+	}
+
+	public void setDiaryEntries(Set<DiaryEntry> diaryEntries) {
+		this.diaryEntries = diaryEntries;
+	}
+
 }

@@ -52,7 +52,7 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 
 	@Override
 	public void saveButtonClick(String stringInput, int integerInput) {
-		this.contacts.add(new Contact(stringInput, integerInput));
+		this.contacts.add(new Contact(10, stringInput, integerInput));
 		contactViewImpl.initializeContacts(this.contacts);
 		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}

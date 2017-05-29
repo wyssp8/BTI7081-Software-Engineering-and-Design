@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence persistence_1_0.xsd" version="1.0">
+    <persistence-unit name="borderlinecare" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact</class>
+        <class>ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry</class>
+        <class>ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.CalmDownExercise</class>
+        <class>ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/borderlinecare?useTimezone=true&amp;serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="22JrCCM5$"/>
+<!--             <property name="eclipselink.ddl-generation" value="create-tables" /> -->
+        </properties>
+    </persistence-unit>
+</persistence>
