@@ -25,7 +25,4 @@ public class ContactModel {
 	public List<Contact> getContacts() {
 		return this.contacts;
 	}
-
-
-
 }

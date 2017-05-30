@@ -28,9 +28,9 @@ public class DBConnector {
 		return loginAccount;
 	}
 
-	public void refreshData(LoginAccount loginAccount) {
+	public void writeDataToDB() {
 		em.getTransaction().begin();
-		em.persist(loginAccount);
+		em.persist(this.getLoginAccount());
 		em.getTransaction().commit();
 	}
 
