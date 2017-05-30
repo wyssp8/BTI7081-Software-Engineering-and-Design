@@ -14,8 +14,8 @@ public class ContactModel {
 	
 	public ContactModel(){
 		contacts = new ArrayList<>();
-		DBConnector dbConnector = new DBConnector();
-		LoginAccount loginAccount = dbConnector.getLoginAccount("wyssp8@bfh.ch");
+		DBConnector dbConnector = DBConnector.getDBConnector();
+		LoginAccount loginAccount = dbConnector.getLoginAccount();
 		
 		for (Contact contact : loginAccount.getContacts()) {
 			contacts.add(contact);
@@ -25,7 +25,4 @@ public class ContactModel {
 	public List<Contact> getContacts() {
 		return this.contacts;
 	}
-
-
-
 }
