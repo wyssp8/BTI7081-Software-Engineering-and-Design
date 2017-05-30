@@ -72,7 +72,7 @@ public class MyUI extends UI {
 		LoginAccount loginAccount = dbConnector.getLoginAccount();
 		Set<Contact> contacts = loginAccount.getContacts();
 		loginAccount.setContacts(contacts);
-		dbConnector.refreshData(loginAccount);
+		dbConnector.writeDataToDB();
 		
     	//Main View
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
