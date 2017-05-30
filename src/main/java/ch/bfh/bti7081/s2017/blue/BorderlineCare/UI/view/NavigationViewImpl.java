@@ -18,10 +18,12 @@ public class NavigationViewImpl extends TabSheet implements View {
 	public static final String NAME = "HomeView";
 	private String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
 	private ExerciseViewImpl exerciseviewImpl;
+	private DiaryViewImpl diaryViewImpl;
 	
 	public NavigationViewImpl(MainViewImpl mainView, ContactViewImpl contactsViewImpl, DiaryViewImpl diaryViewImpl, ExerciseViewImpl exerciseViewImpl,SettingsViewImpl settingsView) {
 
 		this.exerciseviewImpl = exerciseViewImpl;
+		this.diaryViewImpl = diaryViewImpl;
 		addTab(mainView,"Home", new FileResource(new File(basepath + "/WEB-INF/images/icons/home.png")));
 		addTab(contactsViewImpl,"Contacts", new FileResource(new File(basepath + "/WEB-INF/images/icons/contacts.png")));
 		addTab(diaryViewImpl,"Diary", new FileResource(new File(basepath + "/WEB-INF/images/icons/diary.png")));
@@ -40,6 +42,10 @@ public class NavigationViewImpl extends TabSheet implements View {
 
 	public void selectExercisesTab() {
 		setSelectedTab(exerciseviewImpl);
+	}
+
+	public void selectDiaryTab() {
+		setSelectedTab(diaryViewImpl);
 	}
 
 

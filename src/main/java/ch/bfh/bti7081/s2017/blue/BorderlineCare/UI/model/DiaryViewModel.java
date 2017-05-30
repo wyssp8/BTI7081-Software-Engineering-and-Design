@@ -24,4 +24,8 @@ public class DiaryViewModel {
 	public List<DiaryEntry> getDiaryEntry(){
 		return this.diaryEntry;
 	}
+	
+	public DiaryEntry getLatestDiaryEntry(){
+		return diaryEntry.get(diaryEntry.size()-1);
+	}
 }
