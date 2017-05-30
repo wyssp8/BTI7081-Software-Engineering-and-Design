@@ -28,10 +28,10 @@ public class Contact {
 	public Contact() {
 	}
 
-	public Contact(int id, String name, int phoneNumber) {
-		this.id = id;
+	public Contact(String name, int phoneNumber, LoginAccount loginAccount) {
 		this.name = name;
 		this.phoneNumber = phoneNumber;
+		this.loginAccount = loginAccount;
 	}
 
 	public String getName() {
