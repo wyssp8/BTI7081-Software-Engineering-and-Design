@@ -237,7 +237,7 @@ public class ExerciseViewImpl extends CustomComponent implements ExerciseView {
 		imageDaily.setIcon(exerciseImage);
 	}
 
-	public void setTitleTextDaily(String titleText) {
+	public void setTitleTextDaily(String titleText) { 
 		this.titleDaily.setValue(titleText);
 	}
 
