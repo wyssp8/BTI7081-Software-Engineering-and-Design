@@ -66,9 +66,10 @@ public class MyUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
 		Navigator navigator = new Navigator(this, this);
 		
-		DBConnector dbConnector = new DBConnector();
+		DBConnector dbConnector = DBConnector.getDBConnector();
+		dbConnector.setAccountEmail("wyssp8@bfh.ch");
 		//Als Beispiel wie der Loginaccount aufgerufen wird
-		LoginAccount loginAccount = dbConnector.getLoginAccount("wyssp8@bfh.ch");
+		LoginAccount loginAccount = dbConnector.getLoginAccount();
 		Set<Contact> contacts = loginAccount.getContacts();
 		loginAccount.setContacts(contacts);
 		dbConnector.refreshData(loginAccount);
