@@ -1,6 +1,7 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.CalmDownExercise;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.DailyExercise;
@@ -26,12 +27,11 @@ public class ExercisesViewModel {
 		calmDownExercises.add(new CalmDownExercise("Write a letter", "Please open the door", "letter.png"));
 		calmDownExercises.add(new CalmDownExercise("Write a diary", "Please open the door", "diary.png"));
 		calmDownExercises.add(new CalmDownExercise("Clean you room", "Please open the door", "cleaning.png"));
-		
+
 		dailyExercises.add(new DailyExercise("Take a Walk", "Go outside and take a walk", "walking.png"));
 		dailyExercises.add(new DailyExercise("Diary entry", "Write your daily diary entry.", "diary.png"));
 		dailyExercises.add(new DailyExercise("Reading", "Read 10 pages of your book.", "reading.png"));
-		
-		
+
 	}
 
 	public void addExercise(Exercise exercise) {
@@ -41,9 +41,17 @@ public class ExercisesViewModel {
 	public ArrayList<Exercise> getExercisesCalm() {
 		return calmDownExercises;
 	}
-	
+
 	public ArrayList<Exercise> getExercisesDaily() {
 		return dailyExercises;
+	}
+
+	public Exercise getRandomExercise() {
+		try {
+			return dailyExercises.get((new Random()).nextInt(dailyExercises.size()));
+		} catch (Throwable e) {
+			return null;
+		}
 	}
 
 }

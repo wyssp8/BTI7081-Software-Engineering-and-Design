@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.FontAwesome;

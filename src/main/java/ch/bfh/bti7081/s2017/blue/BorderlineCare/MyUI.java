@@ -1,5 +1,7 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare;
 
+import java.util.Set;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +30,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.SignUpViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
-
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExerciseDashViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExercisesViewPresenter;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.login.LoginViewPresenter;
@@ -67,7 +69,9 @@ public class MyUI extends UI {
 		DBConnector dbConnector = new DBConnector();
 		//Als Beispiel wie der Loginaccount aufgerufen wird
 		LoginAccount loginAccount = dbConnector.getLoginAccount("wyssp8@bfh.ch");
-		loginAccount.getContacts();
+		Set<Contact> contacts = loginAccount.getContacts();
+		loginAccount.setContacts(contacts);
+		dbConnector.refreshData(loginAccount);
 		
     	//Main View
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
@@ -115,6 +119,8 @@ public class MyUI extends UI {
     	SignUpViewImpl signUpViewImpl = new SignUpViewImpl();
     	SignUpViewPresenter signUpViewPresenter = new SignUpViewPresenter(signUpViewModel,signUpViewImpl, navigator,loginViewModel);
      
+    	ExerciseDashViewPresenter exerciseDashViewPresenter = new ExerciseDashViewPresenter(exerciseDashViewImpl, exercisesViewModel, view);
+    	
         navigator.addView("LoginView", loginViewImpl);
         navigator.addView("HomeView", view);
         navigator.addView("SignUpView", signUpViewImpl);
