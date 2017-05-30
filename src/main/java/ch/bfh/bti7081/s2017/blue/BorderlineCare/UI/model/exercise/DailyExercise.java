@@ -1,7 +1,5 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise;
 
-import java.util.List;
-
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.state.ExercisePending;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.state.State;
 

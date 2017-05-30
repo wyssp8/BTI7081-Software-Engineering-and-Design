@@ -8,12 +8,17 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 
 public class DBConnector {
 
-	public LoginAccount getLoginAccount(String email){
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("borderlinecare");
-		EntityManager em = emFactory.createEntityManager();
+	private EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("borderlinecare");
+	private EntityManager em = emFactory.createEntityManager();
+
+	public LoginAccount getLoginAccount(String email) {
 		LoginAccount loginAccount = em.find(LoginAccount.class, email);
-		System.out.println(loginAccount.getFirstName());
 		return loginAccount;
 	}
 
+	public void refreshData(LoginAccount loginAccount) {
+		em.getTransaction().begin();
+		em.persist(loginAccount);
+		em.getTransaction().commit();
+	}
 }

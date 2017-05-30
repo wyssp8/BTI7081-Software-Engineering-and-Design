@@ -1,5 +1,7 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare;
 
+import java.util.Set;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.annotation.WebServlet;
@@ -67,7 +69,9 @@ public class MyUI extends UI {
 		DBConnector dbConnector = new DBConnector();
 		//Als Beispiel wie der Loginaccount aufgerufen wird
 		LoginAccount loginAccount = dbConnector.getLoginAccount("wyssp8@bfh.ch");
-		loginAccount.getContacts();
+		Set<Contact> contacts = loginAccount.getContacts();
+		loginAccount.setContacts(contacts);
+		dbConnector.refreshData(loginAccount);
 		
     	//Main View
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
