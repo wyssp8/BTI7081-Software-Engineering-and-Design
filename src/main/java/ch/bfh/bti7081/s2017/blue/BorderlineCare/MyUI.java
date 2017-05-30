@@ -23,7 +23,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.SignUpViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
-
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExerciseDashViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExercisesViewPresenter;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.login.LoginViewPresenter;
@@ -105,6 +105,8 @@ public class MyUI extends UI {
     	SignUpViewImpl signUpViewImpl = new SignUpViewImpl();
     	SignUpViewPresenter signUpViewPresenter = new SignUpViewPresenter(signUpViewModel,signUpViewImpl, navigator,loginViewModel);
      
+    	ExerciseDashViewPresenter exerciseDashViewPresenter = new ExerciseDashViewPresenter(exerciseDashViewImpl, exercisesViewModel, view);
+    	
         navigator.addView("LoginView", loginViewImpl);
         navigator.addView("HomeView", view);
         navigator.addView("SignUpView", signUpViewImpl);
