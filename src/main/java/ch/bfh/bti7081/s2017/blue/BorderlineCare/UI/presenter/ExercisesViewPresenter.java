@@ -1,5 +1,10 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.DailyExercise;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.Exercise;

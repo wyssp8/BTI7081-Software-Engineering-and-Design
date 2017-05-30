@@ -9,12 +9,12 @@ public class ContactModel {
 	
 	public ContactModel(){
 		contacts = new ArrayList<>();
-		contacts.add(new Contact("Sandro", 12345));
-		contacts.add(new Contact("André", 23456));
-		contacts.add(new Contact("Patrick", 34567));
-		contacts.add(new Contact("Martin", 45678));
-		contacts.add(new Contact("Joel", 56789));
-		contacts.add(new Contact("Polo", 67891));
+		contacts.add(new Contact(1, "Sandro", 12345));
+		contacts.add(new Contact(2, "André", 23456));
+		contacts.add(new Contact(3, "Patrick", 34567));
+		contacts.add(new Contact(4, "Martin", 45678));
+		contacts.add(new Contact(5, "Joel", 56789));
+		contacts.add(new Contact(6, "Polo", 67891));
 		
 		
 	}

@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.server.Page;
+import com.vaadin.ui.PopupView;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
@@ -17,44 +19,35 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 
 	private DiaryViewModel diaryViewModel;
 	private DiaryViewImpl diaryViewImpl;
+	private List<DiaryEntry> diaryEntry;
 
 
 
-	public DiaryViewPresenter(DiaryViewModel diaryViewModel, DiaryViewImpl diaryViewImpl){
-		this.diaryViewModel = diaryViewModel;
-		this.diaryViewImpl = diaryViewImpl;
+	public DiaryViewPresenter(DiaryViewModel model, DiaryViewImpl view){
+		this.diaryViewModel = model;
+		this.diaryViewImpl = view;
+		diaryEntry = diaryViewModel.getDiaryEntry();
 
 		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry());
 		diaryViewImpl.addDiaryButtonClickListener(this);
-
+		diaryViewImpl.initAddDiaryEntry();
 }
 
+	public List<DiaryEntry> getDiaryEntry() {
+		return this.diaryEntry;
+	}
 	
-	public void addButtonClick() {
+	public void addButtonClick(LocalDate dateInput, String radioInput, String titleInput, String diaryInput) {
 		
+		diaryEntry.add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput));
 		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry()); //Inhalt wird ins Grid geschrieben
-		diaryViewModel.setDiaryEntry();
 		
 	}
 
-
 	@Override
-	public void smileyGoodButtonClick() {
-		// TODO Auto-generated method stub
+	public void deleteButtonClick(DiaryEntry toDelete) {
 		
-	}
-
-
-	@Override
-	public void smileyMediumButtonClick() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void smileyBadButtonClick() {
-		// TODO Auto-generated method stub
-		
+		diaryEntry.remove(toDelete);
+		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry());
 	}
 }

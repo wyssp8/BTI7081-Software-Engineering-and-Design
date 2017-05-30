@@ -5,7 +5,6 @@ import java.util.List;
 
 public class SignUpViewModel {
 
-	private List<LoginAccount> loginAccounts = new ArrayList<>();
 
 	public SignUpViewModel() {
 		
