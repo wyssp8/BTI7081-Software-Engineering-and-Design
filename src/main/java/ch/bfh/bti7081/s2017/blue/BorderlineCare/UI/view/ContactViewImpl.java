@@ -90,9 +90,7 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 		
 		search = new TextField();
 		search.setValue("searchContact");
-//		search.addValueChangeListener(event -> {
-//			// search function will be implemented here
-//		});
+
 
 		buttonLayout.addComponents(newContactButton, deleteSelected, search);
 		layout.addComponents(grid, newContactPopup, buttonLayout);
