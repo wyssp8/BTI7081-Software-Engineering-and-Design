@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.data.provider.DataProvider;
+import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.UserError;
@@ -39,15 +41,15 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 
 	private static final long serialVersionUID = -1924986860210433106L;
 	private Grid<Contact> grid;
-	private List<Contact> contacts;
 	private List<ContactButtonClickListener> contactButtonClickListeners = new ArrayList<>();
 	private PopupView newContactPopup, deleteContactPopup;
 	private VerticalLayout newContactPopupContent = new VerticalLayout();
 	private VerticalLayout deleteContactPopupContent = new VerticalLayout();
 	private VerticalLayout layout = new VerticalLayout();
-	private Button deleteP, save, cancel, delete, newContactButton;
+	private HorizontalLayout buttonLayout = new HorizontalLayout();
+	private Button deleteP, save, cancel, deleteSelected, newContactButton;
 	private Label label;
-	private TextField tfName, tfPhoneNumber;
+	private TextField tfName, tfPhoneNumber, search;
 
 	public ContactViewImpl() {
 		grid = new Grid<>();
@@ -61,36 +63,39 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 		
 		HeaderRow header = grid.prependHeaderRow();
 		header.join(header.getCell("Name"), header.getCell("Phonenumber")).setText("My Contacts");
-		
+	
+		deleteSelected = new Button("deleteSelected");
+
 		
 		MultiSelectionModel<Contact> selectionModel = (MultiSelectionModel<Contact>) grid.setSelectionMode(SelectionMode.MULTI);
 		selectionModel.selectAll();
 		
-		delete = new Button("delete");
-		
-		
-
-//		// add a new column to the grid with the function to delete the entire
-//		// contact
-//		// and therefore the entire column
-//		Column<Contact, String> delete = grid.addColumn(contacts -> "delete",
-//				new ButtonRenderer<Contact>(clickEvent -> {
-//					for (ContactButtonClickListener listener : contactButtonClickListeners) {
-//						deleteContactPopup = new PopupView(null, deleteContactPopupContent);
-//						layout.addComponent(deleteContactPopup);
-//						Contact toDelete = clickEvent.getItem();
-//						listener.deleteButtonClick(deleteContactPopup, toDelete);
-//					}
-//				}));
-//		delete.setId("delete");
+		selectionModel.addMultiSelectionListener(event -> {
+				Set<Contact> toDelete = event.getAllSelectedItems();
+				deleteSelected.addClickListener(clieckEvent -> {
+					for(ContactButtonClickListener l : contactButtonClickListeners){
+						deleteContactPopup = new PopupView(null, deleteContactPopupContent);
+						layout.addComponent(deleteContactPopup);
+						l.deleteButtonClick(deleteContactPopup, toDelete);			
+					}
+				});
+			
+				
+		});
+				
 		newContactPopup = new PopupView(null, newContactPopupContent);
-		newContactButton = new Button("+ new Contact", click -> {
+		newContactButton = new Button("new Contact", click -> {
 			newContactPopup.setPopupVisible(true);
 		});
-//		header.getCell("delete").setComponent(newContactPopup);
 		
-		deleteContactPopup = new PopupView(null, deleteContactPopupContent);
-		layout.addComponents(grid, newContactPopup, newContactButton, deleteContactPopup);
+		search = new TextField();
+		search.setValue("searchContact");
+//		search.addValueChangeListener(event -> {
+//			// search function will be implemented here
+//		});
+
+		buttonLayout.addComponents(newContactButton, deleteSelected, search);
+		layout.addComponents(grid, newContactPopup, buttonLayout);
 		setCompositionRoot(layout);
 
 	}
@@ -115,7 +120,7 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 		tfName = new TextField("Name:");
 		tfName.setIcon(FontAwesome.USER);
 		tfName.setRequiredIndicatorVisible(true);
-		
+
 		tfPhoneNumber = new TextField("Phonenumber:");
 		tfPhoneNumber.setIcon(FontAwesome.PHONE);
 		tfPhoneNumber.setRequiredIndicatorVisible(true);
