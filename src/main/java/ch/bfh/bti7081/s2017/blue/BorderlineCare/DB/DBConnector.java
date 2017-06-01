@@ -21,7 +21,7 @@ public class DBConnector {
 		}
 		return dbConnector;
 	}
-
+	
 	public LoginAccount getLoginAccount() {
 		LoginAccount loginAccount = em.find(LoginAccount.class, accountEmail);
 		return loginAccount;
@@ -31,6 +31,7 @@ public class DBConnector {
 		em.getTransaction().begin();
 		em.persist(this.getLoginAccount());
 		em.getTransaction().commit();
+		em.clear();
 	}
 
 	public String getAccountEmail() {
@@ -39,6 +40,13 @@ public class DBConnector {
 
 	public void setAccountEmail(String accountEmail) {
 		this.accountEmail = accountEmail;
+	}
+	
+	public void addNewLoginAccountToDB(LoginAccount loginAccount){
+		em.getTransaction().begin();
+		em.persist(loginAccount);
+		em.getTransaction().commit();
+		em.clear();
 	}
 
 }

@@ -63,70 +63,24 @@ public class MyUI extends UI {
 
 	private static final long serialVersionUID = 8756061847229359826L;
 	private static boolean startup = true;
+	Navigator navigator;
 
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
-		Navigator navigator = new Navigator(this, this);
+		 this.navigator = new Navigator(this, this);
 		
-		DBConnector dbConnector = DBConnector.getDBConnector();
-		dbConnector.setAccountEmail("wyssp8@bfh.ch");
-		//Als Beispiel wie der Loginaccount aufgerufen wird
-		LoginAccount loginAccount = dbConnector.getLoginAccount();
-		Set<Contact> contacts = loginAccount.getContacts();
-		loginAccount.setContacts(contacts);
-		dbConnector.writeDataToDB();
-		System.out.println(dbConnector.getAllLoginAccountEmails().get(0));
-		
-    	//Main View
-    	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
-    	DiaryDashViewImpl diaryDashViewImpl = new DiaryDashViewImpl();
-        EmergencyViewImpl emergencyViewImpl = new EmergencyViewImpl();
-    	EmergencyViewModel emergencyViewModel = new EmergencyViewModel();
-    	EmergencyViewPresenter emergencyViewPresenter = new EmergencyViewPresenter(emergencyViewImpl,emergencyViewModel);
-    	MainViewImpl mainView = new MainViewImpl(exerciseDashViewImpl,diaryDashViewImpl,emergencyViewImpl);
-    	MainViewModel model = new MainViewModel();
-    	MainViewPresenter presenter = new MainViewPresenter(model, mainView);
     	
-
-    	//Contact View
-    	ContactViewImpl contactViewImpl = new ContactViewImpl();
-    	ContactModel contactModel = new ContactModel();
-    	ContactViewPresenter contactViewPresenter = new ContactViewPresenter(contactModel, contactViewImpl);
-    	
-    	
-    	//Diary View
-    	DiaryViewModel diaryViewModel = new DiaryViewModel();
-    	DiaryViewImpl diaryViewImpl = new DiaryViewImpl();
-    	DiaryViewPresenter diaryViewPresenter = new DiaryViewPresenter(diaryViewModel, diaryViewImpl);
-    	
-
     	//Login View
     	LoginViewModel loginViewModel = new LoginViewModel();
     	LoginViewImpl loginViewImpl = new LoginViewImpl();
     	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
     	
-    	//Settings View
-    	SettingsViewModel settingsModel = new SettingsViewModel();
-    	SettingsViewImpl settingsViewImpl = new SettingsViewImpl();   	
-    	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel, loginViewModel , navigator  );
-    	
-
-    	//Exercises View
-    	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
-    	ExercisesViewModel exercisesViewModel = new ExercisesViewModel();
-    	ExercisesViewPresenter exercisesViewPresenter = new ExercisesViewPresenter(exerciseViewImpl, exercisesViewModel);
-
-    	NavigationViewImpl view = new NavigationViewImpl(mainView,contactViewImpl,diaryViewImpl,exerciseViewImpl,settingsViewImpl);
-
     	//SignUp View
     	SignUpViewModel signUpViewModel = new SignUpViewModel();
     	SignUpViewImpl signUpViewImpl = new SignUpViewImpl();
     	SignUpViewPresenter signUpViewPresenter = new SignUpViewPresenter(signUpViewModel,signUpViewImpl, navigator,loginViewModel);
-     
-    	ExerciseDashViewPresenter exerciseDashViewPresenter = new ExerciseDashViewPresenter(exerciseDashViewImpl, exercisesViewModel, view);
     	
         navigator.addView("LoginView", loginViewImpl);
-        navigator.addView("HomeView", view);
         navigator.addView("SignUpView", signUpViewImpl);
        // navigator.navigateTo("HomeView");
         
@@ -138,7 +92,6 @@ public class MyUI extends UI {
         	startup=false;
         }
         if(isLoggedIn&&!startup){
-        	//set "default" view to HomeView. Directs you to homeview if you are logged in and go to localhost:8080 
         	getNavigator().navigateTo("HomeView");	
         }
         
@@ -171,6 +124,8 @@ public class MyUI extends UI {
             }
         });
     }
+	
+	
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)

@@ -56,10 +56,6 @@ public class Contact {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public LoginAccount getLoginAccount(){
-		return this.loginAccount;
-	}
 
 	@Override
 	public int hashCode() {
