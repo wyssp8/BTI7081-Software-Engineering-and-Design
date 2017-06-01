@@ -37,6 +37,11 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.ContactView;
 
+/*
+ * 
+ * @author ludes2
+ * 
+ */
 public class ContactViewImpl extends CustomComponent implements ContactView {
 
 	private static final long serialVersionUID = -1924986860210433106L;
@@ -60,37 +65,35 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 		Column<Contact, ?> columnPhoneNumber = grid.addColumn(Contact::getPhoneNumber);
 		columnPhoneNumber.setId("Phonenumber");
 		columnPhoneNumber.setCaption("Phonenumber");
-		
+
 		HeaderRow header = grid.prependHeaderRow();
 		header.join(header.getCell("Name"), header.getCell("Phonenumber")).setText("My Contacts");
-	
+
 		deleteSelected = new Button("deleteSelected");
 
-		
-		MultiSelectionModel<Contact> selectionModel = (MultiSelectionModel<Contact>) grid.setSelectionMode(SelectionMode.MULTI);
+		MultiSelectionModel<Contact> selectionModel = (MultiSelectionModel<Contact>) grid
+				.setSelectionMode(SelectionMode.MULTI);
 		selectionModel.selectAll();
-		
+
 		selectionModel.addMultiSelectionListener(event -> {
-				Set<Contact> toDelete = event.getAllSelectedItems();
-				deleteSelected.addClickListener(clieckEvent -> {
-					for(ContactButtonClickListener l : contactButtonClickListeners){
-						deleteContactPopup = new PopupView(null, deleteContactPopupContent);
-						layout.addComponent(deleteContactPopup);
-						l.deleteButtonClick(deleteContactPopup, toDelete);			
-					}
-				});
-			
-				
+			Set<Contact> toDelete = event.getAllSelectedItems();
+			deleteSelected.addClickListener(clieckEvent -> {
+				for (ContactButtonClickListener l : contactButtonClickListeners) {
+					deleteContactPopup = new PopupView(null, deleteContactPopupContent);
+					layout.addComponent(deleteContactPopup);
+					l.deleteButtonClick(deleteContactPopup, toDelete);
+				}
+			});
+
 		});
-				
+
 		newContactPopup = new PopupView(null, newContactPopupContent);
 		newContactButton = new Button("new Contact", click -> {
 			newContactPopup.setPopupVisible(true);
 		});
-		
+
 		search = new TextField();
 		search.setValue("searchContact");
-
 
 		buttonLayout.addComponents(newContactButton, deleteSelected, search);
 		layout.addComponents(grid, newContactPopup, buttonLayout);
@@ -103,7 +106,7 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 	}
 
 	public void initializeDeletePopup() {
-		label = new Label("Are your sure to delete this contact?");
+		label = new Label("Are your sure that you want to delete these contacts?");
 		deleteP = new Button("delete");
 		cancel = new Button("cancel");
 		cancel.addClickListener(clickEvent -> {
