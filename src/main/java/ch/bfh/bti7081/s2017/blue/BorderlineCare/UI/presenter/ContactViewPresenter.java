@@ -12,6 +12,11 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
 
+/*
+ * 
+ * @author ludes2
+ * 
+ */
 public class ContactViewPresenter implements ContactButtonClickListener {
 
 	private ContactModel contactModel;
@@ -35,22 +40,38 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		return this.contacts;
 	}
 
+	/*
+	 *
+	 *
+	 */
 	@Override
 	public void deleteButtonClick(PopupView popup, Set<Contact> toDelete) {
 		popup = contactViewImpl.getDeleteContactPopup();
 		popup.setPopupVisible(true);
 		contactViewImpl.getDeleteButton().addClickListener(clickEvent -> {
 			deleteSelected(toDelete);
+			
 		});
 	}
+	
 
+	/*
+	 * 
+	 * 
+	 */
 	@Override
-	public void deleteContact(Contact contact) {
-		this.contacts.remove(contact);
-//		contactViewImpl.initializeContacts(this.contacts);
-//		contactViewImpl.getContactPopup().setPopupVisible(false);
+	public void deleteContacts(List<Contact> toRemove) {
+		this.contacts.removeAll(toRemove);
+		contactViewImpl.initializeContacts(this.contacts);
+		contactViewImpl.getContactPopup().setPopupVisible(false);
+		//dbconnector.writeDataToDB();
+		
 	}
 
+	/*
+	 * 
+	 * 
+	 */
 	@Override
 	public void saveButtonClick(String stringInput, int integerInput) {
 		dbconnector.getLoginAccount().getContacts().add(new Contact(stringInput, integerInput, dbconnector.getLoginAccount()));
@@ -65,39 +86,28 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}
 
+	/*
+	 * creates a new ArrayList for avoid a ConcurrentModificationException
+	 * Iterates over the ArrayList of contacts and compares them with the contacts in the Set, if they are equal, it adds it to the new ArrayList
+	 * and in the end deletes all of the contacts ath once.
+	 * 
+	 *@param the Set of contact selected on the Grid.
+	 *
+	 */
 	@Override
 	public void deleteSelected(Set<Contact> contacts) {
+		List<Contact> toRemove = new ArrayList<>();
 		Iterator<Contact> i = contacts.iterator();
 		while (i.hasNext()) {
 			Contact c = i.next();
 			for (Contact contact : this.contacts) {
 				if (contact.equals(c)) {
-					deleteContact(contact);
+					toRemove.add(contact);
 				}
 			}
+			deleteContacts(toRemove);
 		}
-		contactViewImpl.initializeContacts(this.contacts);
-		contactViewImpl.getContactPopup().setPopupVisible(false);
-
 	}
 	
-	
-	
-
-//	@Override
-//	public void deleteSelected(Set<Contact> contacts) {
-//		ArrayList<Contact> tmp = new ArrayList<>();
-//		Iterator<Contact> iterator = contacts.iterator();
-//		while(iterator.hasNext()){
-//			Contact c = iterator.next();
-//			tmp.add(c);
-//			contacts.remove(c);
-//		}
-//		for(int i=0; i<tmp.size(); i++){
-//			if(tmp.get(i).equals(this.contacts.get(i))){
-//				this.contacts.remove(i);
-//			}
-//		}
-//	}
 
 }
