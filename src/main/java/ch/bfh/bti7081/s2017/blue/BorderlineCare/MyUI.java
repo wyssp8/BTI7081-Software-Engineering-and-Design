@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.navigator.Navigator;
+import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
@@ -61,6 +62,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
 public class MyUI extends UI {
 
 	private static final long serialVersionUID = 8756061847229359826L;
+	private static boolean startup = true;
 
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -126,7 +128,48 @@ public class MyUI extends UI {
         navigator.addView("LoginView", loginViewImpl);
         navigator.addView("HomeView", view);
         navigator.addView("SignUpView", signUpViewImpl);
-        navigator.navigateTo("LoginView");
+       // navigator.navigateTo("HomeView");
+        
+        boolean isLoggedIn = getSession().getAttribute("user") != null;       
+        
+        if(startup){
+        	//Initialize LoginView the first time(prevents the load of that view after a refresh)
+        	getNavigator().navigateTo("LoginView");	
+        	startup=false;
+        }
+        if(isLoggedIn&&!startup){
+        	//set "default" view to HomeView. Directs you to homeview if you are logged in and go to localhost:8080 
+        	getNavigator().navigateTo("HomeView");	
+        }
+        
+
+        //On every view change, check if logged in. If not, go back to loginview
+        getNavigator().addViewChangeListener(new ViewChangeListener() {
+            @Override
+            public boolean beforeViewChange(ViewChangeEvent event) {
+
+                // Check if a user has logged in
+                boolean isLoggedIn = getSession().getAttribute("user") != null;
+                boolean isLoginView = event.getNewView() instanceof LoginViewImpl;
+                boolean isSignUpView = event.getNewView() instanceof SignUpViewImpl;
+                
+                System.out.println("logged: "+isLoggedIn+" loginView: "+isLoginView+" signup: "+isSignUpView);
+                
+                if (!isLoggedIn&&!isSignUpView&&!isLoginView) {
+                    // Redirect to login view always if a user has not yet logged in
+                    getNavigator().navigateTo("LoginView");
+                    return false;
+                } else if (isLoggedIn && isLoginView) {
+                    // If someone tries to access to login view while logged in, then cancel
+                    return false;
+                }
+                return true;
+            }
+            @Override
+            public void afterViewChange(ViewChangeEvent event) {
+
+            }
+        });
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
