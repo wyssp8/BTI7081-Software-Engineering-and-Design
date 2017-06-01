@@ -1,11 +1,12 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view;
 
-import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.data.provider.DataProvider;
+import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.UserError;
@@ -17,6 +18,7 @@ import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.Column;
+import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
@@ -27,6 +29,7 @@ import com.vaadin.ui.PopupView.Content;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.grid.HeaderRow;
+import com.vaadin.ui.components.grid.MultiSelectionModel;
 import com.vaadin.ui.renderers.ButtonRenderer;
 import com.vaadin.ui.renderers.ImageRenderer;
 
@@ -38,15 +41,15 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 
 	private static final long serialVersionUID = -1924986860210433106L;
 	private Grid<Contact> grid;
-	private List<Contact> contacts;
 	private List<ContactButtonClickListener> contactButtonClickListeners = new ArrayList<>();
 	private PopupView newContactPopup, deleteContactPopup;
 	private VerticalLayout newContactPopupContent = new VerticalLayout();
 	private VerticalLayout deleteContactPopupContent = new VerticalLayout();
 	private VerticalLayout layout = new VerticalLayout();
-	private Button delete, save, cancel;
+	private HorizontalLayout buttonLayout = new HorizontalLayout();
+	private Button deleteP, save, cancel, deleteSelected, newContactButton;
 	private Label label;
-	private TextField tfName, tfPhoneNumber;
+	private TextField tfName, tfPhoneNumber, search;
 
 	public ContactViewImpl() {
 		grid = new Grid<>();
@@ -60,23 +63,37 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 		
 		HeaderRow header = grid.prependHeaderRow();
 		header.join(header.getCell("Name"), header.getCell("Phonenumber")).setText("My Contacts");
-		// add a new column to the grid with the function to delete the entire
-		// contact
-		// and therefore the entire column
-		Column<Contact, String> delete = grid.addColumn(contacts -> "delete",
-				new ButtonRenderer<Contact>(clickEvent -> {
-					for (ContactButtonClickListener listener : contactButtonClickListeners) {
+	
+		deleteSelected = new Button("deleteSelected");
+
+		
+		MultiSelectionModel<Contact> selectionModel = (MultiSelectionModel<Contact>) grid.setSelectionMode(SelectionMode.MULTI);
+		selectionModel.selectAll();
+		
+		selectionModel.addMultiSelectionListener(event -> {
+				Set<Contact> toDelete = event.getAllSelectedItems();
+				deleteSelected.addClickListener(clieckEvent -> {
+					for(ContactButtonClickListener l : contactButtonClickListeners){
 						deleteContactPopup = new PopupView(null, deleteContactPopupContent);
 						layout.addComponent(deleteContactPopup);
-						Contact toDelete = clickEvent.getItem();
-						listener.deleteButtonClick(deleteContactPopup, toDelete);
+						l.deleteButtonClick(deleteContactPopup, toDelete);			
 					}
-				}));
-		delete.setId("delete");
-		newContactPopup = new PopupView("+ new Contact", newContactPopupContent);
-		header.getCell("delete").setComponent(newContactPopup);
-		grid.getEditor().setEnabled(true);
-		layout.addComponent(grid);
+				});
+			
+				
+		});
+				
+		newContactPopup = new PopupView(null, newContactPopupContent);
+		newContactButton = new Button("new Contact", click -> {
+			newContactPopup.setPopupVisible(true);
+		});
+		
+		search = new TextField();
+		search.setValue("searchContact");
+
+
+		buttonLayout.addComponents(newContactButton, deleteSelected, search);
+		layout.addComponents(grid, newContactPopup, buttonLayout);
 		setCompositionRoot(layout);
 
 	}
@@ -87,21 +104,21 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 
 	public void initializeDeletePopup() {
 		label = new Label("Are your sure to delete this contact?");
-		delete = new Button("delete");
+		deleteP = new Button("delete");
 		cancel = new Button("cancel");
 		cancel.addClickListener(clickEvent -> {
 			for (ContactButtonClickListener listener : contactButtonClickListeners) {
 				listener.cancelButtonClick();
 			}
 		});
-		deleteContactPopupContent.addComponents(label, delete, cancel);
+		deleteContactPopupContent.addComponents(label, deleteP, cancel);
 	}
 
 	public void initNewContactPopup() {
 		tfName = new TextField("Name:");
 		tfName.setIcon(FontAwesome.USER);
 		tfName.setRequiredIndicatorVisible(true);
-		
+
 		tfPhoneNumber = new TextField("Phonenumber:");
 		tfPhoneNumber.setIcon(FontAwesome.PHONE);
 		tfPhoneNumber.setRequiredIndicatorVisible(true);
@@ -157,7 +174,7 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 	}
 
 	public Button getDeleteButton() {
-		return this.delete;
+		return this.deleteP;
 	}
 
 }
