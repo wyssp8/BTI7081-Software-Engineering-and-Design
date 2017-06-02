@@ -85,6 +85,7 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}
 
+
 	/*
 	 * creates a new ArrayList for avoid a ConcurrentModificationException
 	 * Iterates over the ArrayList of contacts and compares them with the contacts in the Set, if they are equal, it adds it to the new ArrayList
