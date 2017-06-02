@@ -25,7 +25,7 @@ public class SettingsViewPresenter {
 	private ArrayList<Contact> eContacts = new ArrayList<>();
 
 	public SettingsViewPresenter(SettingsViewModel settingsModel, SettingsViewImpl settingsView, ContactModel contacts,
-		LoginViewModel account, Navigator navigator) {
+		Navigator navigator) {
 		this.settingsView = settingsView;
 		this.settingsModel = settingsModel;
 		this.contacts = contacts;

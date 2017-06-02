@@ -11,11 +11,35 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.UI;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExerciseDashViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExercisesViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.SettingsViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.LoginViewButtonClickListener;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ExerciseViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SettingsViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login.LoginViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.DiaryDashViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.EmergencyViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.ExerciseDashViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
 
 /**
  * @author cpolo
@@ -28,6 +52,8 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	private Navigator navigator;
 	private boolean passwordMatched;
 	private boolean userMatched;
+	private String username;
+	private UI ui = UI.getCurrent();
 
 	public LoginViewPresenter(LoginViewModel loginViewModel, LoginViewImpl loginViewImpl, Navigator navigator) {
 		this.loginViewModel = loginViewModel;
@@ -38,10 +64,15 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 	public void loginButtonClick() {
 		if (validateLogin()) {
+			
+			//Store current user
+			username = loginViewModel.getLoginAccount().getEmail();
+			ui.getSession().setAttribute("user", username);
+			initializeViewsAfterLogin();
 			loginViewImpl.setLoginLabel("logged in");
 			navigator.navigateTo("HomeView");
 		} else
-			Notification.show("Failed login", "you suck", Notification.Type.WARNING_MESSAGE);
+			Notification.show("Login failed", "try again", Notification.Type.WARNING_MESSAGE);
 	}
 
 	@Override
@@ -52,15 +83,19 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 	@Override
 	public void bypassButtonClick() {
+		DBConnector.getDBConnector().setAccountEmail("wyssp8@gmail.com");
+		username = "bypass";
+		ui.getSession().setAttribute("user", username);
+		initializeViewsAfterLogin();
 		navigator.navigateTo("HomeView");
-
 	}
 
 	@Override
 	public boolean validateLogin() {
-
-		LoginAccount loginAccount = loginViewModel.getLoginAccount();
-
+			DBConnector.getDBConnector().setAccountEmail(loginViewImpl.getLoginName());
+			LoginAccount loginAccount = DBConnector.getDBConnector().getLoginAccount();
+			loginViewModel.setLoginAccount(loginAccount);
+			
 			try {
 				passwordMatched = validatePassword(loginViewImpl.getLoginPassword(), loginAccount.getPassword());
 			} catch (NoSuchAlgorithmException e) {
@@ -72,6 +107,8 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 			userMatched = validateUsername(loginAccount);
 			if (userMatched && passwordMatched) {
+				loginViewModel.setLoginAccountEmail(loginViewImpl.getLoginName());
+				DBConnector.getDBConnector().setAccountEmail(loginViewImpl.getLoginName());
 				return true;
 
 				//getSession().setAttribute("user",loginAccount.getFirstName());
@@ -117,4 +154,49 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 		}
 		return bytes;
 	}
+	
+	private void initializeViewsAfterLogin(){
+		//Main View
+    	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
+    	DiaryDashViewImpl diaryDashViewImpl = new DiaryDashViewImpl();
+        EmergencyViewImpl emergencyViewImpl = new EmergencyViewImpl();
+    	EmergencyViewModel emergencyViewModel = new EmergencyViewModel();
+    	EmergencyViewPresenter emergencyViewPresenter = new EmergencyViewPresenter(emergencyViewImpl,emergencyViewModel);
+    	MainViewImpl mainView = new MainViewImpl(exerciseDashViewImpl,diaryDashViewImpl,emergencyViewImpl);
+    	MainViewModel model = new MainViewModel();
+    	MainViewPresenter presenter = new MainViewPresenter(model, mainView);
+    	
+
+    	//Contact View
+    	ContactViewImpl contactViewImpl = new ContactViewImpl();
+    	ContactModel contactModel = new ContactModel();
+    	ContactViewPresenter contactViewPresenter = new ContactViewPresenter(contactModel, contactViewImpl);
+    	
+    	
+    	//Diary View
+    	DiaryViewModel diaryViewModel = new DiaryViewModel();
+    	DiaryViewImpl diaryViewImpl = new DiaryViewImpl();
+    	DiaryViewPresenter diaryViewPresenter = new DiaryViewPresenter(diaryViewModel, diaryViewImpl);
+    	
+
+    	//Settings View
+    	SettingsViewModel settingsModel = new SettingsViewModel();
+    	SettingsViewImpl settingsViewImpl = new SettingsViewImpl();   	
+    	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel, navigator);
+    	
+
+    	//Exercises View
+    	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
+    	ExercisesViewModel exercisesViewModel = new ExercisesViewModel();
+    	ExercisesViewPresenter exercisesViewPresenter = new ExercisesViewPresenter(exerciseViewImpl, exercisesViewModel);
+
+    	NavigationViewImpl view = new NavigationViewImpl(mainView,contactViewImpl,diaryViewImpl,exerciseViewImpl,settingsViewImpl);
+
+     
+    	ExerciseDashViewPresenter exerciseDashViewPresenter = new ExerciseDashViewPresenter(exerciseDashViewImpl, exercisesViewModel, view);
+    	
+    	navigator.addView("HomeView", view);
+        
+	}
+	
 }
