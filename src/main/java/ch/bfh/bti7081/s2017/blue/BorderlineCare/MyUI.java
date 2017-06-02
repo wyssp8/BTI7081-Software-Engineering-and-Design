@@ -1,9 +1,5 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare;
 
-import java.util.Set;
-
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
@@ -14,42 +10,13 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
-
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
-
-
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.SignUpViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExerciseDashViewPresenter;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExercisesViewPresenter;
-
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.login.LoginViewPresenter;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.SettingsViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.login.SignUpViewPresenter;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ExerciseViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login.LoginViewImpl;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SettingsViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login.SignUpViewImpl;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.DiaryDashViewImpl;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.EmergencyViewImpl;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.ExerciseDashViewImpl;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -73,12 +40,12 @@ public class MyUI extends UI {
     	//Login View
     	LoginViewModel loginViewModel = new LoginViewModel();
     	LoginViewImpl loginViewImpl = new LoginViewImpl();
-    	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
+    	new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
     	
     	//SignUp View
     	SignUpViewModel signUpViewModel = new SignUpViewModel();
     	SignUpViewImpl signUpViewImpl = new SignUpViewImpl();
-    	SignUpViewPresenter signUpViewPresenter = new SignUpViewPresenter(signUpViewModel,signUpViewImpl, navigator,loginViewModel);
+    	new SignUpViewPresenter(signUpViewModel,signUpViewImpl, navigator,loginViewModel);
     	
         navigator.addView("LoginView", loginViewImpl);
         navigator.addView("SignUpView", signUpViewImpl);

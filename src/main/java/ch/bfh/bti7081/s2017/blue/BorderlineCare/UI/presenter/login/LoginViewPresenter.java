@@ -83,14 +83,15 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 	@Override
 	public void bypassButtonClick() {
+		DBConnector.getDBConnector().setAccountEmail("wyssp8@gmail.com");
 		username = "bypass";
 		ui.getSession().setAttribute("user", username);
+		initializeViewsAfterLogin();
 		navigator.navigateTo("HomeView");
 	}
 
 	@Override
 	public boolean validateLogin() {
-			System.out.println(loginViewImpl.getLoginName() + " TEEEEEEEST");
 			DBConnector.getDBConnector().setAccountEmail(loginViewImpl.getLoginName());
 			LoginAccount loginAccount = DBConnector.getDBConnector().getLoginAccount();
 			loginViewModel.setLoginAccount(loginAccount);
