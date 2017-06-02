@@ -161,39 +161,39 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
     	DiaryDashViewImpl diaryDashViewImpl = new DiaryDashViewImpl();
         EmergencyViewImpl emergencyViewImpl = new EmergencyViewImpl();
     	EmergencyViewModel emergencyViewModel = new EmergencyViewModel();
-    	EmergencyViewPresenter emergencyViewPresenter = new EmergencyViewPresenter(emergencyViewImpl,emergencyViewModel);
+    	new EmergencyViewPresenter(emergencyViewImpl,emergencyViewModel);
     	MainViewImpl mainView = new MainViewImpl(exerciseDashViewImpl,diaryDashViewImpl,emergencyViewImpl);
     	MainViewModel model = new MainViewModel();
-    	MainViewPresenter presenter = new MainViewPresenter(model, mainView);
+    	new MainViewPresenter(model, mainView);
     	
 
     	//Contact View
     	ContactViewImpl contactViewImpl = new ContactViewImpl();
     	ContactModel contactModel = new ContactModel();
-    	ContactViewPresenter contactViewPresenter = new ContactViewPresenter(contactModel, contactViewImpl);
+    	new ContactViewPresenter(contactModel, contactViewImpl);
     	
     	
     	//Diary View
     	DiaryViewModel diaryViewModel = new DiaryViewModel();
     	DiaryViewImpl diaryViewImpl = new DiaryViewImpl();
-    	DiaryViewPresenter diaryViewPresenter = new DiaryViewPresenter(diaryViewModel, diaryViewImpl);
+    	new DiaryViewPresenter(diaryViewModel, diaryViewImpl);
     	
 
     	//Settings View
     	SettingsViewModel settingsModel = new SettingsViewModel();
     	SettingsViewImpl settingsViewImpl = new SettingsViewImpl();   	
-    	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel, navigator);
+    	new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel, navigator);
     	
 
     	//Exercises View
     	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
     	ExercisesViewModel exercisesViewModel = new ExercisesViewModel();
-    	ExercisesViewPresenter exercisesViewPresenter = new ExercisesViewPresenter(exerciseViewImpl, exercisesViewModel);
+    	new ExercisesViewPresenter(exerciseViewImpl, exercisesViewModel);
 
     	NavigationViewImpl view = new NavigationViewImpl(mainView,contactViewImpl,diaryViewImpl,exerciseViewImpl,settingsViewImpl);
 
      
-    	ExerciseDashViewPresenter exerciseDashViewPresenter = new ExerciseDashViewPresenter(exerciseDashViewImpl, exercisesViewModel, view);
+    	new ExerciseDashViewPresenter(exerciseDashViewImpl, exercisesViewModel, view);
     	
     	navigator.addView("HomeView", view);
         
