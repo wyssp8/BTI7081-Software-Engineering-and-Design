@@ -103,7 +103,7 @@ public class SettingsViewPresenter {
 			settingsView.geteContact2Menu().setEnabled(false);
 			settingsView.geteContact3Menu().setEnabled(false);
 
-			// set the chosen conatcts to the eContacts1,2,3 on the DB
+			// set the chosen values to the eContacts1,2,3
 //			 settingsModel.getDbConnector().getLoginAccount().eContact1 = settingsView.geteContact1Menu().getValue();
 //			 settingsModel.getDbConnector().getLoginAccount().eContact2 = settingsView.geteContact2Menu().getValue();
 //			 settingsModel.getDbConnector().getLoginAccount().eContact3 = settingsView.geteContact3Menu().getValue();
