@@ -155,7 +155,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 		return bytes;
 	}
 	
-	private void initializeViewsAfterLogin(){
+	public void initializeViewsAfterLogin(){
 		//Main View
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
     	DiaryDashViewImpl diaryDashViewImpl = new DiaryDashViewImpl();
