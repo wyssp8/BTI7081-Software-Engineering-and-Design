@@ -1,22 +1,55 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare;
 
+import java.util.Set;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.navigator.Navigator;
-import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
+
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
+
+
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.SignUpViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryDashViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExerciseDashViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExercisesViewPresenter;
+
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.login.LoginViewPresenter;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.MainViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.SettingsViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.login.SignUpViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ExerciseViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login.LoginViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SettingsViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login.SignUpViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.DiaryDashViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.EmergencyViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.ExerciseDashViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -29,70 +62,73 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login.SignUpViewImpl;
 public class MyUI extends UI {
 
 	private static final long serialVersionUID = 8756061847229359826L;
-	private static boolean startup = true;
-	Navigator navigator;
 
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
-		 this.navigator = new Navigator(this, this);
+		Navigator navigator = new Navigator(this, this);
 		
+		DBConnector dbConnector = DBConnector.getDBConnector();
+		dbConnector.setAccountEmail("wyssp8@bfh.ch");
+		//Als Beispiel wie der Loginaccount aufgerufen wird
+		LoginAccount loginAccount = dbConnector.getLoginAccount();
+		Set<Contact> contacts = loginAccount.getContacts();
+		loginAccount.setContacts(contacts);
+		dbConnector.writeDataToDB();
+		
+    	//Main View
+    	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
+    	DiaryDashViewImpl diaryDashViewImpl = new DiaryDashViewImpl();
+        EmergencyViewImpl emergencyViewImpl = new EmergencyViewImpl();
+    	EmergencyViewModel emergencyViewModel = new EmergencyViewModel();
+    	EmergencyViewPresenter emergencyViewPresenter = new EmergencyViewPresenter(emergencyViewImpl,emergencyViewModel);
+    	MainViewImpl mainView = new MainViewImpl(exerciseDashViewImpl,diaryDashViewImpl,emergencyViewImpl);
+    	MainViewModel model = new MainViewModel();
+    	MainViewPresenter presenter = new MainViewPresenter(model, mainView);
     	
+
+    	//Contact View
+    	ContactViewImpl contactViewImpl = new ContactViewImpl();
+    	ContactModel contactModel = new ContactModel();
+    	ContactViewPresenter contactViewPresenter = new ContactViewPresenter(contactModel, contactViewImpl);
+    	
+    	
+    	//Diary View
+    	DiaryViewModel diaryViewModel = new DiaryViewModel();
+    	DiaryViewImpl diaryViewImpl = new DiaryViewImpl();
+    	DiaryViewPresenter diaryViewPresenter = new DiaryViewPresenter(diaryViewModel, diaryViewImpl);
+    	
+
     	//Login View
     	LoginViewModel loginViewModel = new LoginViewModel();
     	LoginViewImpl loginViewImpl = new LoginViewImpl();
-    	new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
+    	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
     	
+    	//Settings View
+    	SettingsViewModel settingsModel = new SettingsViewModel();
+    	SettingsViewImpl settingsViewImpl = new SettingsViewImpl();   	
+    	SettingsViewPresenter settingsPresenter = new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel, loginViewModel , navigator  );
+    	
+
+    	//Exercises View
+    	ExerciseViewImpl exerciseViewImpl = new ExerciseViewImpl();
+    	ExercisesViewModel exercisesViewModel = new ExercisesViewModel();
+    	ExercisesViewPresenter exercisesViewPresenter = new ExercisesViewPresenter(exerciseViewImpl, exercisesViewModel);
+
+    	NavigationViewImpl view = new NavigationViewImpl(mainView,contactViewImpl,diaryViewImpl,exerciseViewImpl,settingsViewImpl);
+
     	//SignUp View
     	SignUpViewModel signUpViewModel = new SignUpViewModel();
     	SignUpViewImpl signUpViewImpl = new SignUpViewImpl();
-    	new SignUpViewPresenter(signUpViewModel,signUpViewImpl, navigator,loginViewModel);
+    	SignUpViewPresenter signUpViewPresenter = new SignUpViewPresenter(signUpViewModel,signUpViewImpl, navigator,loginViewModel);
+     
+    	ExerciseDashViewPresenter exerciseDashViewPresenter = new ExerciseDashViewPresenter(exerciseDashViewImpl, exercisesViewModel, view);
+    	DiaryDashViewPresenter diaryDashViewPresenter = new DiaryDashViewPresenter(diaryViewModel, diaryDashViewImpl, view);
     	
         navigator.addView("LoginView", loginViewImpl);
+        navigator.addView("HomeView", view);
         navigator.addView("SignUpView", signUpViewImpl);
-       // navigator.navigateTo("HomeView");
-        
-        boolean isLoggedIn = getSession().getAttribute("user") != null;       
-        
-        if(startup){
-        	//Initialize LoginView the first time(prevents the load of that view after a refresh)
-        	getNavigator().navigateTo("LoginView");	
-        	startup=false;
-        }
-        if(isLoggedIn&&!startup){
-        	getNavigator().navigateTo("HomeView");	
-        }
-        
-
-        //On every view change, check if logged in. If not, go back to loginview
-        getNavigator().addViewChangeListener(new ViewChangeListener() {
-            @Override
-            public boolean beforeViewChange(ViewChangeEvent event) {
-
-                // Check if a user has logged in
-                boolean isLoggedIn = getSession().getAttribute("user") != null;
-                boolean isLoginView = event.getNewView() instanceof LoginViewImpl;
-                boolean isSignUpView = event.getNewView() instanceof SignUpViewImpl;
-                
-                System.out.println("logged: "+isLoggedIn+" loginView: "+isLoginView+" signup: "+isSignUpView);
-                
-                if (!isLoggedIn&&!isSignUpView&&!isLoginView) {
-                    // Redirect to login view always if a user has not yet logged in
-                    getNavigator().navigateTo("LoginView");
-                    return false;
-                } else if (isLoggedIn && isLoginView) {
-                    // If someone tries to access to login view while logged in, then cancel
-                    return false;
-                }
-                return true;
-            }
-            @Override
-            public void afterViewChange(ViewChangeEvent event) {
-
-            }
-        });
+        navigator.navigateTo("LoginView");
     }
-	
-	
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
