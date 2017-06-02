@@ -5,7 +5,9 @@ import java.io.File;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.VaadinService;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TabSheet;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.server.FileResource;
 
@@ -34,7 +36,15 @@ public class NavigationViewImpl extends TabSheet implements View {
 
 	@Override
 	public void enter(ViewChangeEvent arg0) {
-		// TODO Auto-generated method stub
+		// Get the user name from the session
+		String username = getSession().getAttribute("user").toString();
+		
+		//Create new tab with username
+		VerticalLayout l1 = new VerticalLayout();
+	    addTab(l1,username);
+	    
+	    //Show login message
+		Notification.show("Logged in successully", "hey "+username, Notification.Type.HUMANIZED_MESSAGE);	
 		
 	}
 

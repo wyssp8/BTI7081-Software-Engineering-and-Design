@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.data.Binder;
+import com.vaadin.data.Binder.Binding;
 import com.vaadin.server.FileResource;
 import com.vaadin.server.Resource;
 import com.vaadin.server.VaadinService;
@@ -28,6 +30,7 @@ import com.vaadin.ui.components.grid.MultiSelectionModel;
 import com.vaadin.ui.renderers.ButtonRenderer;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -98,19 +101,24 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	
 		//Grid Table
 		grid = new Grid<>();
+		
+		TextField nameEditor = new TextField();
+		
 		grid.addColumn(DiaryEntry::getDate).setCaption("Date").setWidth(120);
 		grid.addColumn(DiaryEntry::getStatus).setCaption("Status").setWidth(100);
 		grid.addColumn(DiaryEntry::getTitle).setCaption("Title").setWidth(200);
-		grid.addColumn(DiaryEntry::getDiaryEntry).setCaption("Entry");
+		grid.addColumn(DiaryEntry::getDiaryEntry).setEditorComponent(nameEditor, DiaryEntry::setDiaryEntry).setCaption("Entry");
 		
+		grid.getEditor().setEnabled(true);
 		
 		grid.setWidth("1200");
+		grid.setSizeFull();
+		grid.setSelectionMode(SelectionMode.NONE);
 		//grid.addStyleName("v-grid-cell");
-		
-		
+
 		//Grid Multiselection
-		selectionModel = (MultiSelectionModel<DiaryEntry>) grid.setSelectionMode(SelectionMode.MULTI);
-		selectionModel.selectAll();
+		//selectionModel = (MultiSelectionModel<DiaryEntry>) grid.setSelectionMode(SelectionMode.MULTI);
+		//selectionModel.selectAll();
 		
 		//Grid Delete
 		grid.addColumn(DiaryEntry -> "delete",
@@ -135,8 +143,15 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 				String radioInput = getRadioGroup();
 				String titleInput = getTextField();
 				String diaryInput = getTextArea();
-				listener.addButtonClick(dateInput, radioInput, titleInput, diaryInput);
+				
+				try {
+					radioInput.isEmpty();
+					listener.addButtonClick(dateInput, radioInput, titleInput, diaryInput);
+					
+				} catch (Exception e) {
+					Notification.show("Please fill out all fields", Notification.TYPE_WARNING_MESSAGE);
 			}
+			}	
 		});
 	}
 	

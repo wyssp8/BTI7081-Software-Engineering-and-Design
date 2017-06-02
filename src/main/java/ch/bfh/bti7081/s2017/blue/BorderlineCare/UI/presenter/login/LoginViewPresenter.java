@@ -11,7 +11,9 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.UI;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.LoginViewButtonClickListener;
@@ -28,6 +30,8 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	private Navigator navigator;
 	private boolean passwordMatched;
 	private boolean userMatched;
+	private String username;
+	UI ui = UI.getCurrent();
 
 	public LoginViewPresenter(LoginViewModel loginViewModel, LoginViewImpl loginViewImpl, Navigator navigator) {
 		this.loginViewModel = loginViewModel;
@@ -38,10 +42,15 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 	public void loginButtonClick() {
 		if (validateLogin()) {
+			
+			//Store current user
+			username = loginViewModel.getLoginAccount().getEmail();
+			ui.getSession().setAttribute("user", username);
+			
 			loginViewImpl.setLoginLabel("logged in");
 			navigator.navigateTo("HomeView");
 		} else
-			Notification.show("Failed login", "you suck", Notification.Type.WARNING_MESSAGE);
+			Notification.show("Login failed", "try again", Notification.Type.WARNING_MESSAGE);
 	}
 
 	@Override
@@ -52,8 +61,9 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 	@Override
 	public void bypassButtonClick() {
+		username = "bypass";
+		ui.getSession().setAttribute("user", username);
 		navigator.navigateTo("HomeView");
-
 	}
 
 	@Override
@@ -72,6 +82,8 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 			userMatched = validateUsername(loginAccount);
 			if (userMatched && passwordMatched) {
+				loginViewModel.setLoginAccountEmail(loginViewImpl.getLoginName());
+				//DBConnector.getDBConnector().setAccountEmail(loginViewImpl.getLoginName());
 				return true;
 
 				//getSession().setAttribute("user",loginAccount.getFirstName());

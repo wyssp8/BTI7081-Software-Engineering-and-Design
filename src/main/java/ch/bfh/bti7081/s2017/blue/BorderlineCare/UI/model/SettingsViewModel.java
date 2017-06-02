@@ -1,85 +1,72 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model;
 
 import java.util.List;
+
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 /**
  * @author André
  *
  */
 public class SettingsViewModel {
 
-	// The list contacts will be imported from the contactModel
-	private List<Contact> contacts;
+	
+	private DBConnector dbConnector;
+	
+	
+	private Contact eContact1;
+	private Contact eContact2;
+	private Contact eContact3;
 
-	private String email;
-	private String firstName;
-	private String lastName;
-	private String street;
-	private String zipCode;
-	private String city;
-	private String password;
+	
+//Assim se puxa infromaçôes dos logins na datenbank.
+	public SettingsViewModel(){
+		dbConnector = DBConnector.getDBConnector();
 
-	public List<Contact> getContacts() {
-		return contacts;
+		//		dbConnector.getLoginAccount().getContacts();
 	}
 
-	public void setContacts(List<Contact> contacts) {
-		this.contacts = contacts;
+	
+
+	public Contact geteContact1() {
+		return eContact1;
 	}
 
-	public String getFirstName() {
-		return firstName;
+
+	public void seteContact1(Contact eContact1) {
+		this.eContact1 = eContact1;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+
+	public Contact geteContact2() {
+		return eContact2;
 	}
 
-	public String getLastName() {
-		return lastName;
+
+	public void seteContact2(Contact eContact2) {
+		this.eContact2 = eContact2;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+
+	public Contact geteContact3() {
+		return eContact3;
 	}
 
-	public String getStreet() {
-		return street;
+
+	public void seteContact3(Contact eContact3) {
+		this.eContact3 = eContact3;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
+
+	public DBConnector getDbConnector() {
+		return dbConnector;
 	}
 
-	public String getZipCode() {
-		return zipCode;
-	}
 
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	public void setDbConnector(DBConnector dbConnector) {
+		this.dbConnector = dbConnector;
 	}
+	
 
-	public String getCity() {
-		return city;
-	}
 
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String login) {
-		this.email = login;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 }

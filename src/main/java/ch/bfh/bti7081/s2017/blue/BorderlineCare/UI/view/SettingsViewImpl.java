@@ -12,9 +12,9 @@ import com.vaadin.ui.Layout;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 
 /**
  * @author André
@@ -27,12 +27,6 @@ public class SettingsViewImpl extends CustomComponent {
 
 	private VerticalLayout layout = new VerticalLayout();
 	Accordion accordion = new Accordion();
-
-	/**
-	 * this contact object will be saved to the Database if the user decide to
-	 * changes his contact settings
-	 */
-	private LoginAccount editedContact;
 
 	/**
 	 * the emergency contacts (lather will be used to save emergency contacts on
@@ -55,13 +49,58 @@ public class SettingsViewImpl extends CustomComponent {
 	private PasswordField passwordTextField = new PasswordField();
 
 	private Button btEContSave = new Button("Save");
-	private Button btESaveChanges = new Button("Change PAssword");
+	// private Button btESaveChanges = new Button("Change PAssword");
 	private Button btLogOut = new Button("LogOut");
 	private Button btEdit = new Button("Edit");
 
 	private ComboBox<Contact> eContact1Menu = new ComboBox<>();
 	private ComboBox<Contact> eContact2Menu = new ComboBox<>();
 	private ComboBox<Contact> eContact3Menu = new ComboBox<>();
+
+	/**
+	 * Will receive a dbConnector and save the chosen eContacst to the account
+	 * on the databank
+	 * 
+	 * @param dbConnector
+	 */
+	public void saveEcontactsOnDB(DBConnector dbConnector) {
+		// dbConnector.getLoginAccount().setEContact1(eContact1);
+		// dbConnector.getLoginAccount().setEContact2(eContact2);
+		// dbConnector.getLoginAccount().setEContact3(eContact3);
+
+	}
+
+	public TextField getFirstNameTextField() {
+		return firstNameTextField;
+	}
+
+	public void setFirstNameTextField(TextField firstNameTextField) {
+		this.firstNameTextField = firstNameTextField;
+	}
+
+	public Button getBtEContSave() {
+		return btEContSave;
+	}
+
+	public void setBtEContSave(Button btEContSave) {
+		this.btEContSave = btEContSave;
+	}
+
+	public Button getBtLogOut() {
+		return btLogOut;
+	}
+
+	public void setBtLogOut(Button btLogOut) {
+		this.btLogOut = btLogOut;
+	}
+
+	public Button getBtEdit() {
+		return btEdit;
+	}
+
+	public void setBtEdit(Button btEdit) {
+		this.btEdit = btEdit;
+	}
 
 	public Navigator getNavigator() {
 		return navigator;
@@ -79,11 +118,11 @@ public class SettingsViewImpl extends CustomComponent {
 		this.title = title;
 	}
 
-	public TextField loginTextField() {
+	public TextField getLoginTextField() {
 		return emailTextField;
 	}
 
-	public void loginTextField(TextField login) {
+	public void setLoginTextField(TextField login) {
 		this.emailTextField = login;
 	}
 
@@ -91,7 +130,7 @@ public class SettingsViewImpl extends CustomComponent {
 		return passwordTextField;
 	}
 
-	public void getPasswordTextField(PasswordField password) {
+	public void setPasswordTextField(PasswordField password) {
 		this.passwordTextField = password;
 	}
 
@@ -143,10 +182,6 @@ public class SettingsViewImpl extends CustomComponent {
 		this.cityTextField = cityTextField;
 	}
 
-	public void setPasswordTextField(PasswordField passwordTextField) {
-		this.passwordTextField = passwordTextField;
-	}
-
 	public Contact geteContact1() {
 		return eContact1;
 	}
@@ -196,13 +231,8 @@ public class SettingsViewImpl extends CustomComponent {
 	}
 
 	/**
-	 * save the emergency contacts
+	 * save the emergency contacts to the database
 	 */
-	public void saveEContacts() {
-		eContact1 = eContact1Menu.getValue();
-		eContact2 = eContact2Menu.getValue();
-		eContact3 = eContact3Menu.getValue();
-	}
 
 	public SettingsViewImpl() {
 
@@ -220,95 +250,45 @@ public class SettingsViewImpl extends CustomComponent {
 		/**
 		 * Create the first tab, specify caption when adding
 		 */
-		
+
 		Layout tab1 = new HorizontalLayout();
 		Layout loginSettingsFields = new VerticalLayout();
 		Layout loginSettingsLabels = new VerticalLayout();
 		Layout tab2 = new HorizontalLayout();
 		Layout eContactsField = new VerticalLayout();
 		Layout eContactsLabels = new VerticalLayout();
-		
-		
+
 		GridLayout loginSettings = new GridLayout(2, 7);
 		loginSettings.addStyleName("Login Settings");
-		
-		loginSettings.addComponents(
-				new Label("email"),emailTextField, 
-				new Label("password"),passwordTextField,
-				new Label("First name"),firstNameTextField,
-				new Label("Last name"),lastNameTextField,
-				new Label("Street"),streetTextField,
-				new Label("Zipcode"),zipCodeTextField,
-				new Label("City"),cityTextField,
-				btEdit, btLogOut);
-		
+
+		loginSettings.addComponents(new Label("email"), emailTextField, new Label("password"), passwordTextField,
+				new Label("First name"), firstNameTextField, new Label("Last name"), lastNameTextField,
+				new Label("Street"), streetTextField, new Label("Zipcode"), zipCodeTextField, new Label("City"),
+				cityTextField, btEdit, btLogOut);
+
 		loginSettings.setSpacing(true);
-		
+
 		GridLayout eContactSettings = new GridLayout(2, 3);
 		eContactSettings.addStyleName("Emergency Contatcs");
-		eContactSettings.addComponents(eContact1Menu,new Label("Emergency Contact 1"), eContact2Menu,new Label("Emergency Contact 2"), eContact3Menu,new Label("Emergency Contact 3"), btEContSave);
-		
+		eContactSettings.addComponents(eContact1Menu, new Label("Emergency Contact 1"), eContact2Menu,
+				new Label("Emergency Contact 2"), eContact3Menu, new Label("Emergency Contact 3"), btEContSave);
+
 		eContactSettings.setSpacing(true);
-		
-		tab1.addComponents(loginSettingsFields,loginSettingsLabels);
-		tab2.addComponents(eContactsField,eContactsLabels);
-		
-		
-		
+
+		tab1.addComponents(loginSettingsFields, loginSettingsLabels);
+		tab2.addComponents(eContactsField, eContactsLabels);
+
 		accordion.addTab(loginSettings, "Account Settings");
 		accordion.addTab(eContactSettings, "Emergency Contacts");
 
-		/**
-		 * Ok button to save new emergency contacts
+		setCompositionRoot(accordion);
+		
+		/** go back to login screen
+		 * 
 		 */
-		btEContSave.addClickListener(e -> {
-			saveEContacts();
-			eContact1Menu.setEnabled(false);
-			eContact2Menu.setEnabled(false);
-			eContact3Menu.setEnabled(false);
-
-		});
-
-		btESaveChanges.addClickListener(e -> {
-
-			layout.addComponents(new Label("Contacts saved"));
-
-		});
-
 		btLogOut.addClickListener(e -> {
 			navigator.navigateTo("LoginView");
 		});
-
-		btEdit.addClickListener(e -> {
-			emailTextField.setEnabled(true);
-			firstNameTextField.setEnabled(true);
-			lastNameTextField.setEnabled(true);
-			streetTextField.setEnabled(true);
-			zipCodeTextField.setEnabled(true);
-			cityTextField.setEnabled(true);
-			passwordTextField.setEnabled(true);
-
-			if (btEdit.getCaption().equals("Edit")) {
-				btEdit.setCaption("Save");
-			} else {
-				btEdit.setCaption("Edit");
-				emailTextField.setEnabled(false);
-				firstNameTextField.setEnabled(false);
-				lastNameTextField.setEnabled(false);
-				streetTextField.setEnabled(false);
-				zipCodeTextField.setEnabled(false);
-				cityTextField.setEnabled(false);
-				passwordTextField.setEnabled(false);
-
-//				editedContact = new LoginAccount(firstNameTextField.getValue(), lastNameTextField.getValue(),
-//				streetTextField.getValue(), zipCodeTextField.getValue(), cityTextField.getValue(),
-//				emailTextField.getValue(), passwordTextField.getValue(), passwordTextField.getValue());
-
-			}
-
-		});
-
-		setCompositionRoot(accordion);
 
 	}
 
