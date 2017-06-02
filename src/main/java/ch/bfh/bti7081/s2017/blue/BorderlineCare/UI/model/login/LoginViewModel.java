@@ -24,8 +24,6 @@ public class LoginViewModel {
 	private LoginAccount loginAccount;
 	
 	public LoginViewModel(){
-		DBConnector dbConnector = DBConnector.getDBConnector();
-		LoginAccount loginAccount = dbConnector.getLoginAccount();
 	}
 
 	//Laden der Accounttabelle der Datenbank
@@ -41,7 +39,6 @@ public class LoginViewModel {
 	
 	public void setLoginAccountEmail(String email) {
 		DBConnector.getDBConnector().setAccountEmail(email);
-		System.out.println(loginAccount.getEmail()+"\n"+loginAccount.getPassword()+"\n");
 	}
 	
 	
