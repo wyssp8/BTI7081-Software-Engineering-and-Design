@@ -47,6 +47,11 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
  */
 public class LoginViewPresenter extends CustomComponent implements LoginViewButtonClickListener, View {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1082791095382801193L;
+	
 	private LoginViewModel loginViewModel;
 	private LoginViewImpl loginViewImpl;
 	private Navigator navigator;
@@ -71,8 +76,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 			initializeViewsAfterLogin();
 			loginViewImpl.setLoginLabel("logged in");
 			navigator.navigateTo("HomeView");
-		} else
-			Notification.show("Login failed", "try again", Notification.Type.WARNING_MESSAGE);
+		} 
 	}
 
 	@Override
@@ -92,6 +96,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 	@Override
 	public boolean validateLogin() {
+		try{
 			DBConnector.getDBConnector().setAccountEmail(loginViewImpl.getLoginName());
 			LoginAccount loginAccount = DBConnector.getDBConnector().getLoginAccount();
 			loginViewModel.setLoginAccount(loginAccount);
@@ -110,9 +115,10 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 				loginViewModel.setLoginAccountEmail(loginViewImpl.getLoginName());
 				DBConnector.getDBConnector().setAccountEmail(loginViewImpl.getLoginName());
 				return true;
-
-				//getSession().setAttribute("user",loginAccount.getFirstName());
 			}
+		}catch(NullPointerException e){
+			Notification.show("Username or password wrong", "try again", Notification.Type.WARNING_MESSAGE);
+		}
 		return false;
 	}
 
