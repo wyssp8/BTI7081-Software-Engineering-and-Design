@@ -58,9 +58,12 @@ public class MyUI extends UI {
         	getNavigator().navigateTo("LoginView");	
         	startup=false;
         }
-        if(isLoggedIn&&!startup){
+        if(isLoggedIn&&startup){
         	loginViewPresenter.initializeViewsAfterLogin();
         	getNavigator().navigateTo("HomeView");	
+        } else{
+        	loginViewPresenter.initializeViewsAfterLogin();
+        	getNavigator().navigateTo("HomeView");
         }
         
 
@@ -92,7 +95,6 @@ public class MyUI extends UI {
             }
         });
     }
-	
 	
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
