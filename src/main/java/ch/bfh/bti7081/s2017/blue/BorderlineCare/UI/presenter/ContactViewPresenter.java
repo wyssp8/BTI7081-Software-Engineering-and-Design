@@ -1,8 +1,6 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import com.vaadin.ui.PopupView;
@@ -53,7 +51,6 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		});
 	}
 	
-
 	/*
 	 * 
 	 * 
@@ -85,7 +82,6 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}
 
-
 	/*
 	 @param the Set of contact selected on the Grid.
 	 *
@@ -102,9 +98,5 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		dbconnector.writeDataToDB();
 		contactViewImpl.initializeContacts(this.contacts);
 		contactViewImpl.getContactPopup().setPopupVisible(false);
-
 	}
-
-	
-
 }
