@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -57,6 +58,7 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	private DateField date;
 	private TextField textField;
 	private TextArea txtArea;
+	private String stringDate;
 	
 	private Grid<DiaryEntry> grid;
 	MultiSelectionModel<DiaryEntry> selectionModel;
@@ -139,7 +141,7 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	public void initAddDiaryEntry() {
 		buttonAdd.addClickListener(clickEvent -> {
 			for (DiaryButtonClickListener listener : diaryButtonListeners) {
-				LocalDate dateInput = getDateField();
+				String dateInput = getDateField();
 				String radioInput = getRadioGroup();
 				String titleInput = getTextField();
 				String diaryInput = getTextArea();
@@ -160,8 +162,10 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		buttonAdd.setCaption(name);
 	}
 	
-	public LocalDate getDateField() {
-		return date.getValue();
+	public String getDateField() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+		stringDate = date.getValue().format(formatter);
+		return stringDate;
 	}
 	
 	public String getRadioGroup() {
