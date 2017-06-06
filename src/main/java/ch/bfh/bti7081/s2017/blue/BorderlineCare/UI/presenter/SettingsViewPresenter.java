@@ -16,17 +16,19 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SettingsViewImpl;
  */
 public class SettingsViewPresenter {
 
+
+	
+	
 	private SettingsViewImpl settingsView;
 	private SettingsViewModel settingsModel;
 
 
 	public SettingsViewPresenter(SettingsViewModel settingsModel, SettingsViewImpl settingsView, ContactModel contacts,
-			LoginViewModel account, Navigator navigator) {
+			Navigator navigator) {
 
 		this.settingsView = settingsView;
 		this.settingsModel = settingsModel;
 
-		settingsView.setNavigator(navigator);   // so we can return to the loginScreen by pressing the logout button
 												 
 		loadContacts();
 		
@@ -108,6 +110,11 @@ public class SettingsViewPresenter {
 //			 settingsModel.getDbConnector().getLoginAccount().eContact2 = settingsView.geteContact2Menu().getValue();
 //			 settingsModel.getDbConnector().getLoginAccount().eContact3 = settingsView.geteContact3Menu().getValue();
 //			settingsModel.getDbConnector().REFRESH	
+			
+			
+			
+			
+			
 			}
 		});
 
@@ -129,5 +136,7 @@ public class SettingsViewPresenter {
 		settingsView.geteContact3Menu().setItemCaptionGenerator(Contact::getName);
 
 	}
+	
+	
 
 }

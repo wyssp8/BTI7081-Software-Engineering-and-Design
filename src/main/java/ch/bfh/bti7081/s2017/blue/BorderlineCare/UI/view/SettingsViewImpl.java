@@ -25,6 +25,7 @@ public class SettingsViewImpl extends CustomComponent {
 
 	private static final long serialVersionUID = 1L;
 
+	
 	private VerticalLayout layout = new VerticalLayout();
 	Accordion accordion = new Accordion();
 
@@ -287,7 +288,7 @@ public class SettingsViewImpl extends CustomComponent {
 		 * 
 		 */
 		btLogOut.addClickListener(e -> {
-			navigator.navigateTo("LoginView");
+			navigator.navigateTo("HomeView");
 		});
 
 	}

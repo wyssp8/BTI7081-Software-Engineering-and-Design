@@ -58,7 +58,7 @@ public class MyUI extends UI {
         	getNavigator().navigateTo("LoginView");	
         	startup=false;
         }
-        if(isLoggedIn&&!startup){
+        if(isLoggedIn&&startup){
         	getNavigator().navigateTo("HomeView");	
         }
         
