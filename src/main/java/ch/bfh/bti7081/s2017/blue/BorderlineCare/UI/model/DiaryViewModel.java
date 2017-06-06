@@ -7,7 +7,11 @@ import java.util.List;
 import com.vaadin.ui.Button;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
-
+/**
+ * 
+ * @author Martin
+ *
+ */
 public class DiaryViewModel {
 	
 	private List<DiaryEntry> diaryEntry;
@@ -23,5 +27,22 @@ public class DiaryViewModel {
 	
 	public DiaryEntry getLatestDiaryEntry(){
 		return diaryEntry.get(diaryEntry.size()-1);
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param dateInput
+	 * @param radioInput
+	 * @param titleInput
+	 * @param diaryInput
+	 * @return
+	 */
+	public boolean validateDiaryEntry(String dateInput, String radioInput, String titleInput, String diaryInput) {
+		if(dateInput.trim().equals("") || radioInput.trim().equals("") || titleInput.trim().equals("") || diaryInput.trim().equals("")){
+			return false;
+		}
+		return true;
+		
 	}
 }

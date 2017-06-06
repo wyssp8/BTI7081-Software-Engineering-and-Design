@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.data.Binder;
@@ -38,6 +40,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
@@ -48,11 +51,13 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.MainView;
 
 public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	
+
+	private static final long serialVersionUID = -6250389995528614659L;
+	private final static Logger logger = Logger.getLogger(DiaryViewModel.class.getName());
+
 	private List<DiaryButtonClickListener> diaryButtonListeners = new ArrayList<DiaryButtonClickListener>();
 	
 	private Button buttonAdd;
-	private Button buttonDelete;
-	
 	private RadioButtonGroup<String> smileyRadioGroup;
 	
 	private DateField date;
@@ -61,7 +66,7 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	private String stringDate;
 	
 	private Grid<DiaryEntry> grid;
-	MultiSelectionModel<DiaryEntry> selectionModel;
+	private MultiSelectionModel<DiaryEntry> selectionModel;
 	
 	
 	public DiaryViewImpl(){
@@ -79,7 +84,7 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		//Smiley RadioButton Group
 		FileResource smileyRadio = new FileResource(new File(basepath + "/WEB-INF/images/diary/smileys.JPG"));
 		smileyRadioGroup = new RadioButtonGroup<>();
-		smileyRadioGroup.setItems("Good", "Medium", "Bad");
+		smileyRadioGroup.setItems(DiaryStates.Good.toString(), "Medium", "Bad");
 		smileyRadioGroup.setIcon(smileyRadio);
 		smileyRadioGroup.setStyleName(ValoTheme.OPTIONGROUP_HORIZONTAL);
 		
@@ -132,30 +137,29 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 				}));
 		
 		vLayout.addComponent(grid);
-		
-		//setCompositionRoot(hLayout);
-		setCompositionRoot(vLayout);
-				
-	}
-	
-	public void initAddDiaryEntry() {
 		buttonAdd.addClickListener(clickEvent -> {
+			logger.log(Level.INFO, "Add Diary Entry click");
 			for (DiaryButtonClickListener listener : diaryButtonListeners) {
 				String dateInput = getDateField();
 				String radioInput = getRadioGroup();
 				String titleInput = getTextField();
 				String diaryInput = getTextArea();
 				
-				try {
-					radioInput.isEmpty();
 					listener.addButtonClick(dateInput, radioInput, titleInput, diaryInput);
 					
-				} catch (Exception e) {
-					Notification.show("Please fill out all fields", Notification.TYPE_WARNING_MESSAGE);
-			}
+				
 			}	
 		});
+		//setCompositionRoot(hLayout);
+		setCompositionRoot(vLayout);
+				
 	}
+	
+	public void initAddDiaryEntry() {
+		
+	}
+	
+
 	
 	
 	public void setName(String name) {

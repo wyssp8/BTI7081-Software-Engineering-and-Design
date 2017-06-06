@@ -35,19 +35,25 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 		
 		diaryViewImpl.initializeDiaryEntry(diaryEntry);
 		diaryViewImpl.addDiaryButtonClickListener(this);
-		diaryViewImpl.initAddDiaryEntry();
+		//diaryViewImpl.initAddDiaryEntry();
 }
 
 	public Set<DiaryEntry> getDiaryEntry() {
 		return this.diaryEntry;
 	}
 	
+	@Override
 	public void addButtonClick(String dateInput, String radioInput, String titleInput, String diaryInput) {
+		if(diaryViewModel.validateDiaryEntry(dateInput, radioInput, titleInput, diaryInput)){
+			dbconnector.getLoginAccount().getDiaryEntries().add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput, dbconnector.getLoginAccount()));
+			diaryEntry.add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput, dbconnector.getLoginAccount()));
+			dbconnector.writeDataToDB();
+			diaryViewImpl.initializeDiaryEntry(diaryEntry); //Inhalt wird ins Grid geschrieben
+		}
+		else{
+			//TODO: Show warning notification
+		}
 		
-		dbconnector.getLoginAccount().getDiaryEntries().add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput, dbconnector.getLoginAccount()));
-		diaryEntry.add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput, dbconnector.getLoginAccount()));
-		dbconnector.writeDataToDB();
-		diaryViewImpl.initializeDiaryEntry(diaryEntry); //Inhalt wird ins Grid geschrieben
 		
 	}
 
