@@ -57,13 +57,11 @@ public class MyUI extends UI {
         	//Initialize LoginView the first time(prevents the load of that view after a refresh)
         	getNavigator().navigateTo("LoginView");	
         	startup=false;
-        }
-        if(isLoggedIn&&startup){
+        } else if(isLoggedIn){
         	loginViewPresenter.initializeViewsAfterLogin();
         	getNavigator().navigateTo("HomeView");	
         } else{
-        	loginViewPresenter.initializeViewsAfterLogin();
-        	getNavigator().navigateTo("HomeView");
+        	getNavigator().navigateTo("LoginView");
         }
         
 

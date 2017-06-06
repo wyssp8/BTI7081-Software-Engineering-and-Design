@@ -28,7 +28,7 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		this.contactModel = model;
 		this.contactViewImpl = view;
 		dbconnector = DBConnector.getDBConnector();
-		contacts = contactModel.getContacts();
+		contacts = dbconnector.getLoginAccount().getContacts();
 		contactViewImpl.initializeContacts(contacts);
 		contactViewImpl.addContactButtonClickListeneer(this);
 		contactViewImpl.initializeDeletePopup();
