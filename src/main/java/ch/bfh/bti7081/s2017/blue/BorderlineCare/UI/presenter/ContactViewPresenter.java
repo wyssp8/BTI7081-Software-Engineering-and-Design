@@ -92,14 +92,6 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	 */
 	@Override
 	public void deleteSelected(Set<Contact> contacts) {
-		// for(Contact contact : contacts){
-		// for(Contact c : this.contacts){
-		// if(contact.getId() == c.getId()){
-		// deleteContact(c);
-		// }
-		// }
-		// }
-
 		Iterator<Contact> iterator = contacts.iterator();
 		while (iterator.hasNext()) {
 			Contact c = iterator.next();
@@ -107,6 +99,7 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 				deleteContact(c);
 			}
 		}
+		dbconnector.writeDataToDB();
 		contactViewImpl.initializeContacts(this.contacts);
 		contactViewImpl.getContactPopup().setPopupVisible(false);
 
