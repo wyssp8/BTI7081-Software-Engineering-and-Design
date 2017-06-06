@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.vaadin.server.Page;
 import com.vaadin.ui.PopupView;
@@ -21,22 +22,23 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 
 	private DiaryViewModel diaryViewModel;
 	private DiaryViewImpl diaryViewImpl;
-	private List<DiaryEntry> diaryEntry;
+	private Set<DiaryEntry> diaryEntry;
 
 	private DBConnector dbconnector;
 
 	public DiaryViewPresenter(DiaryViewModel model, DiaryViewImpl view){
 		this.diaryViewModel = model;
 		this.diaryViewImpl = view;
-		diaryEntry = diaryViewModel.getDiaryEntry();
-
 		dbconnector = DBConnector.getDBConnector();
-		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry());
+		diaryEntry = dbconnector.getLoginAccount().getDiaryEntries();
+
+		
+		diaryViewImpl.initializeDiaryEntry(diaryEntry);
 		diaryViewImpl.addDiaryButtonClickListener(this);
 		diaryViewImpl.initAddDiaryEntry();
 }
 
-	public List<DiaryEntry> getDiaryEntry() {
+	public Set<DiaryEntry> getDiaryEntry() {
 		return this.diaryEntry;
 	}
 	
@@ -45,7 +47,7 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 		dbconnector.getLoginAccount().getDiaryEntries().add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput, dbconnector.getLoginAccount()));
 		diaryEntry.add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput, dbconnector.getLoginAccount()));
 		dbconnector.writeDataToDB();
-		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry()); //Inhalt wird ins Grid geschrieben
+		diaryViewImpl.initializeDiaryEntry(diaryEntry); //Inhalt wird ins Grid geschrieben
 		
 	}
 
@@ -54,6 +56,6 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 		
 		diaryEntry.remove(toDelete);
 		//dbconnector.writeDataToDB();
-		diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry());
+		//diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry());
 	}
 }

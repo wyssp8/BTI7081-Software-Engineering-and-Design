@@ -185,7 +185,7 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	}
 	
 
-	public void initializeDiaryEntry(List<DiaryEntry> diaryEntry){
+	public void initializeDiaryEntry(Set<DiaryEntry> diaryEntry){
 		grid.setItems(diaryEntry);
 	}
 
