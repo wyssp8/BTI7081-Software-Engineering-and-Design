@@ -34,7 +34,7 @@ public class LoginViewModel {
 	//Speicher auf Accounttabelle der Datenbank
 	public void setLoginAccount(LoginAccount loginAccount) {
 		this.loginAccount = loginAccount;
-		System.out.println(loginAccount.getEmail()+"\n"+loginAccount.getPassword()+"\n");
+		//System.out.println(loginAccount.getEmail()+"\n"+loginAccount.getPassword()+"\n");
 	}
 	
 	public void setLoginAccountEmail(String email) {

@@ -42,14 +42,12 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.ExerciseDashVie
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
 
 /**
+ * 
  * @author cpolo
  *
  */
 public class LoginViewPresenter extends CustomComponent implements LoginViewButtonClickListener, View {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1082791095382801193L;
 	
 	private LoginViewModel loginViewModel;
