@@ -1,24 +1,33 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vaadin.ui.Button;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
 /**
  * 
- * @author Martin
+ * This Class provides methods to the diary view.
+ * 
+ * @author Kieliger
  *
  */
 public class DiaryViewModel {
 	
 	private List<DiaryEntry> diaryEntry;
-	private DiaryViewImpl diaryViewImpl;
+	
+	
 	
 	public DiaryViewModel(){
-		diaryEntry = new ArrayList<>();		
+		diaryEntry = new ArrayList<>();
+		
+		DBConnector dbConnector = DBConnector.getDBConnector();
+		LoginAccount loginAccount = dbConnector.getLoginAccount();
+		
+		for (DiaryEntry diaryEntries : loginAccount.getDiaryEntries()) {
+			diaryEntry.add(diaryEntries);
+		}
 	}
 	
 	public List<DiaryEntry> getDiaryEntry(){
@@ -39,10 +48,9 @@ public class DiaryViewModel {
 	 * @return
 	 */
 	public boolean validateDiaryEntry(String dateInput, String radioInput, String titleInput, String diaryInput) {
-		if(dateInput.trim().equals("") || radioInput.trim().equals("") || titleInput.trim().equals("") || diaryInput.trim().equals("")){
+		if(dateInput.trim().equals("") || radioInput == null || titleInput.trim().equals("") || diaryInput.trim().equals("")){
 			return false;
 		}
 		return true;
-		
 	}
 }

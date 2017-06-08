@@ -1,9 +1,5 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +8,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
+
+/**
+ * 
+ * Define the diary entries
+ * 
+ * @author Kieliger
+ *
+ */
 
 @Entity
 public class DiaryEntry {

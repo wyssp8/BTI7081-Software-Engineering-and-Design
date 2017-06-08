@@ -13,7 +13,8 @@ public class DiaryViewModelTest {
 		assertFalse(model.validateDiaryEntry("   ", "  ", " ", "   "));
 		assertTrue(model.validateDiaryEntry("test", "test", "test", "test"));
 		assertFalse(model.validateDiaryEntry("a", "b", "c", ""));
-		
+		assertFalse(model.validateDiaryEntry("", "b", "c", "d"));
+		assertFalse(model.validateDiaryEntry("a", "", "c", "d"));
+		assertFalse(model.validateDiaryEntry("a", "b", "", "d"));
 	}
-
 }

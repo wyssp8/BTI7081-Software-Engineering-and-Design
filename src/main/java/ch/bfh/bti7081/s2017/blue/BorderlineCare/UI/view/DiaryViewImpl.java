@@ -9,45 +9,33 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.vaadin.annotations.Theme;
-import com.vaadin.data.Binder;
-import com.vaadin.data.Binder.Binding;
 import com.vaadin.server.FileResource;
-import com.vaadin.server.Resource;
 import com.vaadin.server.VaadinService;
-import com.vaadin.shared.data.sort.SortDirection;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.Grid.Column;
 import com.vaadin.ui.Grid.SelectionMode;
-import com.vaadin.ui.Image;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.PopupView;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.grid.MultiSelectionModel;
-import com.vaadin.ui.renderers.ButtonRenderer;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.themes.ValoTheme;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactButtonClickListener;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.DiaryButtonClickListener;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.EmergencyButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.DiaryView;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.MainView;
+
+/**
+ * 
+ * Implement the diary View
+ * 
+ * @author Kieliger
+ *
+ */
 
 public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	
@@ -55,12 +43,11 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	private static final long serialVersionUID = -6250389995528614659L;
 	private final static Logger logger = Logger.getLogger(DiaryViewModel.class.getName());
 
-	private List<DiaryButtonClickListener> diaryButtonListeners = new ArrayList<DiaryButtonClickListener>();
+	private List<DiaryButtonClickListener> diaryButtonListeners = new ArrayList<>();
 	
-	private Button buttonAdd;
+	private Button buttonAdd, buttonDelete;
 	private RadioButtonGroup<String> smileyRadioGroup;
-	
-	private DateField date;
+	private DateField dateField;
 	private TextField textField;
 	private TextArea txtArea;
 	private String stringDate;
@@ -68,107 +55,117 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	private Grid<DiaryEntry> grid;
 	private MultiSelectionModel<DiaryEntry> selectionModel;
 	
+	private VerticalLayout vLayout;
+	private HorizontalLayout buttonLayout;
+	
+	private String title, entry, exampleText, add, deleteSelect, date, status, gridWidth, textAreaWidth, fileResource, logInfo, dateTimeFormat;
 	
 	public DiaryViewImpl(){
 	
-		VerticalLayout vLayout = new VerticalLayout();
-		//HorizontalLayout hLayout = new HorizontalLayout();
+		title = "Title";
+		entry = "Diary entry";
+		exampleText = "What have you done today\n" + "How did you feel today?";
+		add = "Add";
+		deleteSelect = "Delete Selected";
+		date = "Date";
+		status = "Status";
+		gridWidth = "1200";
+		textAreaWidth = "50%";
+		fileResource = "/WEB-INF/images/diary/smileys.JPG";
+		logInfo = "Add Diary Entry click";
+		dateTimeFormat = "yyyy-MM-dd";
 		
+		vLayout = new VerticalLayout();
+		buttonLayout = new HorizontalLayout();
+
 		String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
 	
 		// Create a DateField
-		date = new DateField();
-		vLayout.addComponent(date);
-		date.setValue(LocalDate.now());
+		dateField = new DateField();
+		dateField.setValue(LocalDate.now());
 		
 		//Smiley RadioButton Group
-		FileResource smileyRadio = new FileResource(new File(basepath + "/WEB-INF/images/diary/smileys.JPG"));
+		FileResource smileyRadio = new FileResource(new File(basepath + fileResource));
 		smileyRadioGroup = new RadioButtonGroup<>();
-		smileyRadioGroup.setItems(DiaryStates.Good.toString(), "Medium", "Bad");
+		smileyRadioGroup.setItems(DiaryStates.Good.toString(), DiaryStates.Medium.toString(), DiaryStates.Bad.toString());
 		smileyRadioGroup.setIcon(smileyRadio);
 		smileyRadioGroup.setStyleName(ValoTheme.OPTIONGROUP_HORIZONTAL);
 		
-		vLayout.addComponent(smileyRadioGroup);
-		
 		
 		//Title Textfield
-		textField = new TextField("Title");
-		vLayout.addComponent(textField);
+		textField = new TextField(title);
+		
 		
 		// Create a text area
-		txtArea = new TextArea("Diary entry");
-		txtArea.setWidth("50%");
-		txtArea.setValue("What have you done today\n" + "How did you feel today?");
-		vLayout.addComponent(txtArea);
+		txtArea = new TextArea(entry);
+		txtArea.setWidth(textAreaWidth);
+		txtArea.setValue(exampleText);
 		
 		
 		//Button Add
-		buttonAdd = new Button("Add");
-		vLayout.addComponent(buttonAdd);
-	
-		//Grid Table
-		grid = new Grid<>();
+		buttonAdd = new Button(add);
 		
-		TextField nameEditor = new TextField();
-		
-		grid.addColumn(DiaryEntry::getDate).setCaption("Date").setWidth(120);
-		grid.addColumn(DiaryEntry::getStatus).setCaption("Status").setWidth(100);
-		grid.addColumn(DiaryEntry::getTitle).setCaption("Title").setWidth(200);
-		grid.addColumn(DiaryEntry::getDiaryEntry).setEditorComponent(nameEditor, DiaryEntry::setDiaryEntry).setCaption("Entry");
-		
-		grid.getEditor().setEnabled(true);
-		
-		grid.setWidth("1200");
-		grid.setSizeFull();
-		grid.setSelectionMode(SelectionMode.NONE);
-		//grid.addStyleName("v-grid-cell");
-
-		//Grid Multiselection
-		//selectionModel = (MultiSelectionModel<DiaryEntry>) grid.setSelectionMode(SelectionMode.MULTI);
-		//selectionModel.selectAll();
-		
-		//Grid Delete
-		grid.addColumn(DiaryEntry -> "delete",
-				new ButtonRenderer<DiaryEntry>(clickEvent -> {
-					for (DiaryButtonClickListener listener : diaryButtonListeners) {
-						DiaryEntry toDelete = clickEvent.getItem();
-						listener.deleteButtonClick(toDelete);
-					}
-				}));
-		
-		vLayout.addComponent(grid);
 		buttonAdd.addClickListener(clickEvent -> {
-			logger.log(Level.INFO, "Add Diary Entry click");
+			logger.log(Level.INFO, logInfo);
 			for (DiaryButtonClickListener listener : diaryButtonListeners) {
 				String dateInput = getDateField();
 				String radioInput = getRadioGroup();
 				String titleInput = getTextField();
 				String diaryInput = getTextArea();
 				
-					listener.addButtonClick(dateInput, radioInput, titleInput, diaryInput);
-					
-				
+				listener.addButtonClick(dateInput, radioInput, titleInput, diaryInput);
 			}	
 		});
-		//setCompositionRoot(hLayout);
-		setCompositionRoot(vLayout);
-				
+		
+		//Button Delete
+		buttonDelete = new Button(deleteSelect);
+	
+	
+		//Grid Table
+		grid = new Grid<>();
+		
+		TextField nameEditor = new TextField();
+		
+		grid.addColumn(DiaryEntry::getDate).setCaption(date).setWidth(120);
+		grid.addColumn(DiaryEntry::getStatus).setCaption(status).setWidth(100);
+		grid.addColumn(DiaryEntry::getTitle).setCaption(title).setWidth(200);
+		grid.addColumn(DiaryEntry::getDiaryEntry).setEditorComponent(nameEditor, DiaryEntry::setDiaryEntry).setCaption(entry);
+		
+		//grid.getEditor().setEnabled(true); Schreibt änderungen nicht in DB
+		
+		grid.setWidth(gridWidth);
+		grid.setSizeFull();
+		grid.setSelectionMode(SelectionMode.NONE);
+
+		//Grid Multiselection
+		selectionModel = (MultiSelectionModel<DiaryEntry>) grid.setSelectionMode(SelectionMode.MULTI);
+		selectionModel.selectAll();
+		
+		//Delete Multiselection
+		selectionModel.addMultiSelectionListener(event -> {
+			Set<DiaryEntry> toDelete = event.getAllSelectedItems();
+			buttonDelete.addClickListener(clieckEvent -> {
+				for (DiaryButtonClickListener listener : diaryButtonListeners) {
+					listener.deleteSelected(toDelete);
+				}
+			});
+		});
+
+	
+		buttonLayout.addComponents(buttonAdd, buttonDelete);
+		vLayout.addComponents(dateField, smileyRadioGroup, textField, txtArea, buttonLayout, grid);
+		setCompositionRoot(vLayout);	
 	}
 	
-	public void initAddDiaryEntry() {
+	@Override
+	public void addDiaryButtonClickListener(DiaryButtonClickListener clickListener) {
+		diaryButtonListeners.add(clickListener);
 		
 	}
 	
-
-	
-	
-	public void setName(String name) {
-		buttonAdd.setCaption(name);
-	}
-	
 	public String getDateField() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-		stringDate = date.getValue().format(formatter);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimeFormat);
+		stringDate = dateField.getValue().format(formatter);
 		return stringDate;
 	}
 	
@@ -192,12 +189,8 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	public void initializeDiaryEntry(Set<DiaryEntry> diaryEntry){
 		grid.setItems(diaryEntry);
 	}
-
-	@Override
-	public void addDiaryButtonClickListener(DiaryButtonClickListener clickListener) {
-		diaryButtonListeners.add(clickListener);
-		
-	}
 	
-
+	public Button getDeleteButton() {
+		return this.buttonDelete;
+	}
 }

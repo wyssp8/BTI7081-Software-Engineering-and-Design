@@ -1,21 +1,25 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Iterator;
 import java.util.Set;
 
-import com.vaadin.server.Page;
-import com.vaadin.ui.PopupView;
+import com.vaadin.ui.Notification;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.ButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.DiaryButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
+
+/**
+ * 
+ * This presenter handles clicking the Add and Delete Button in the View.
+ * 
+ * @author Kieliger
+ *
+ */
 
 public class DiaryViewPresenter implements DiaryButtonClickListener {
 	
@@ -23,7 +27,6 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 	private DiaryViewModel diaryViewModel;
 	private DiaryViewImpl diaryViewImpl;
 	private Set<DiaryEntry> diaryEntry;
-
 	private DBConnector dbconnector;
 
 	public DiaryViewPresenter(DiaryViewModel model, DiaryViewImpl view){
@@ -32,36 +35,51 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 		dbconnector = DBConnector.getDBConnector();
 		diaryEntry = dbconnector.getLoginAccount().getDiaryEntries();
 
-		
-		diaryViewImpl.initializeDiaryEntry(diaryEntry);
+		diaryViewImpl.initializeDiaryEntry(diaryEntry); //Lädt die Einträge von der DB ins Grid
 		diaryViewImpl.addDiaryButtonClickListener(this);
-		//diaryViewImpl.initAddDiaryEntry();
+		
 }
 
 	public Set<DiaryEntry> getDiaryEntry() {
 		return this.diaryEntry;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void addButtonClick(String dateInput, String radioInput, String titleInput, String diaryInput) {
 		if(diaryViewModel.validateDiaryEntry(dateInput, radioInput, titleInput, diaryInput)){
+			
 			dbconnector.getLoginAccount().getDiaryEntries().add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput, dbconnector.getLoginAccount()));
 			diaryEntry.add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput, dbconnector.getLoginAccount()));
 			dbconnector.writeDataToDB();
-			diaryViewImpl.initializeDiaryEntry(diaryEntry); //Inhalt wird ins Grid geschrieben
+			diaryViewImpl.initializeDiaryEntry(this.diaryEntry); //Inhalt wird ins Grid geschrieben
 		}
-		else{
-			//TODO: Show warning notification
-		}
-		
-		
+		else {
+			Notification.show("Please fill out all field", Notification.TYPE_WARNING_MESSAGE);
+		}		
 	}
 
+	
+	
 	@Override
-	public void deleteButtonClick(DiaryEntry toDelete) {
+	public void deleteDiaryEntry(DiaryEntry toRemove) {
+		this.diaryEntry.remove(toRemove);
+	}
+	
+	@Override
+	public void deleteSelected(Set<DiaryEntry> diaryEntry) {
+		Iterator<DiaryEntry> iterator = diaryEntry.iterator();
+		while (iterator.hasNext()) {
+			DiaryEntry c = iterator.next();
+			if (this.diaryEntry.contains(c)) {
+				deleteDiaryEntry(c);
+			}
+		}
 		
-		diaryEntry.remove(toDelete);
+		diaryViewImpl.getDeleteButton().addClickListener(clickEvent -> {
+			deleteSelected(diaryEntry);		
+		});
 		//dbconnector.writeDataToDB();
-		//diaryViewImpl.initializeDiaryEntry(diaryViewModel.getDiaryEntry());
+		//diaryViewImpl.initializeDiaryEntry(this.diaryEntry);
 	}
 }
