@@ -60,8 +60,6 @@ public class MyUI extends UI {
         } else if(isLoggedIn){
         	loginViewPresenter.initializeViewsAfterLogin();
         	getNavigator().navigateTo("HomeView");	
-        } else{
-        	getNavigator().navigateTo("LoginView");
         }
         
 
