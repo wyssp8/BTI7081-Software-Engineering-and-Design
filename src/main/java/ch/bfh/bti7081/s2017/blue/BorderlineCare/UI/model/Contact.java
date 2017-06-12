@@ -7,10 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.vaadin.event.Action.Container;
+import com.vaadin.event.Action.Handler;
+
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 
 @Entity
-public class Contact {
+public class Contact{
 
 	@Id
 	@GeneratedValue
@@ -101,4 +104,5 @@ public class Contact {
 	public void setLoginAccount(LoginAccount loginAccount) {
 		this.loginAccount = loginAccount;
 	}
+
 }

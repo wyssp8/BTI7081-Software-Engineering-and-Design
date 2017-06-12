@@ -165,7 +165,6 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
     	DiaryDashViewImpl diaryDashViewImpl = new DiaryDashViewImpl();
         EmergencyViewImpl emergencyViewImpl = new EmergencyViewImpl();
     	EmergencyViewModel emergencyViewModel = new EmergencyViewModel();
-    	new EmergencyViewPresenter(emergencyViewImpl,emergencyViewModel);
     	MainViewImpl mainView = new MainViewImpl(exerciseDashViewImpl,diaryDashViewImpl,emergencyViewImpl);
     	MainViewModel model = new MainViewModel();
     	new MainViewPresenter(model, mainView);
@@ -175,6 +174,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
     	ContactViewImpl contactViewImpl = new ContactViewImpl();
     	ContactModel contactModel = new ContactModel();
     	new ContactViewPresenter(contactModel, contactViewImpl);
+    	
     	
     	
     	//Diary View
@@ -188,6 +188,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
     	SettingsViewModel settingsModel = new SettingsViewModel();
     	
     	new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel, navigator);
+    	new EmergencyViewPresenter(emergencyViewImpl,settingsModel);
     	
 
     	//Exercises View

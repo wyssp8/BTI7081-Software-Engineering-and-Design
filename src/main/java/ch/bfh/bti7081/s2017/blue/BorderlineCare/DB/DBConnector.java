@@ -3,6 +3,8 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.DB;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 
 public class DBConnector {
@@ -30,6 +32,13 @@ public class DBConnector {
 	public void writeDataToDB() {
 		em.getTransaction().begin();
 		em.persist(this.getLoginAccount());
+		em.getTransaction().commit();
+		em.clear();
+	}
+	
+	public void deleteDataFromDB(Contact toDelete){
+		em.getTransaction().begin();
+		em.remove(toDelete);
 		em.getTransaction().commit();
 		em.clear();
 	}

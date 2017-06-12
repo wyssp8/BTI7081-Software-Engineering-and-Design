@@ -1,6 +1,9 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 /**
  * @author André
@@ -8,6 +11,8 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
  */
 public class SettingsViewModel {
 
+	
+	private final static Logger logger = Logger.getLogger(ContactModel.class.getName());
 	
 	private DBConnector dbConnector;
 	
@@ -67,6 +72,26 @@ public class SettingsViewModel {
 		this.dbConnector = dbConnector;
 	}
 	
+	public String getCallLink() throws Exception {
+		if(geteContact1() == null){
+			throw new Exception("No emergency contact defined");
+		}
+		String phoneNumber = Integer.toString(geteContact1().getPhoneNumber());
+		String fullLink = "tel:" + phoneNumber;
+		logger.log(Level.INFO, "Link to open: " + fullLink);
+		return fullLink;
+	}
+
+	public String getMessageLink() throws Exception {
+		if(geteContact1() == null){
+			throw new Exception("No emergency contact defined");
+		}
+		String phoneNumber = Integer.toString(geteContact1().getPhoneNumber());
+		String body = "I need help.";
+		String fullLink = "sms://" + phoneNumber + "?body=" + body; 
+		logger.log(Level.INFO, "Link to open: " + fullLink);
+		return fullLink;
+	}
 
 
 
