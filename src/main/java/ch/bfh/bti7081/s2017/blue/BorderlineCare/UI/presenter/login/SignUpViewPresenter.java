@@ -86,7 +86,7 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 		}
 		
 					
-		//to do: clear all textfields
+		//TODO: clear all textfields
 		navigator.navigateTo("LoginView");
 	}
 
