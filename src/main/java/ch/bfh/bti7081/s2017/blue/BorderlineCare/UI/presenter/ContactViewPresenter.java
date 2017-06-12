@@ -2,8 +2,8 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import com.vaadin.ui.PopupView;
@@ -29,8 +29,12 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		this.contactModel = model;
 		this.contactViewImpl = view;
 		dbconnector = DBConnector.getDBConnector();
+
 		this.contacts = dbconnector.getLoginAccount().getContacts();
 		initializeContacts(this.contacts);
+
+		contacts = dbconnector.getLoginAccount().getContacts();
+
 		contactViewImpl.addContactButtonClickListeneer(this);
 		contactViewImpl.initializeDeletePopup();
 		contactViewImpl.initNewContactPopup();
@@ -50,10 +54,9 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		popup = contactViewImpl.getDeleteContactPopup();
 		popup.setPopupVisible(true);
 		contactViewImpl.getDeleteButton().addClickListener(clickEvent -> {
-			deleteSelected(toDelete);		
+			deleteSelected(toDelete);
 		});
 	}
-	
 
 	/*
 	 * 
@@ -63,7 +66,7 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	public void deleteContact(Contact toRemove) {
 		this.contacts.remove(toRemove);
 	}
-	
+
 	@Override
 	public void deleteContacts(Set<Contact> contacts) {
 		this.contacts.removeAll(contacts);
@@ -89,9 +92,8 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}
 
-
 	/*
-	 @param the Set of contact selected on the Grid.
+	 * @param the Set of contact selected on the Grid.
 	 *
 	 */
 	@Override
@@ -104,7 +106,7 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		for (Contact contact : toDelete) {
 			System.out.println("-> " + contact.getName());
 		}
-		
+
 		Set<Contact> tmp = new HashSet<>();
 		for (Contact contact : toDelete) {
 			for (Contact c : this.contacts) {
@@ -113,6 +115,7 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 				}
 			}
 		}
+
 		System.out.println("Contacts in tmp");
 		for (Contact contact : tmp) {
 			System.out.println("-> " + contact.getName());
@@ -120,15 +123,14 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		deleteContacts(tmp);
 
 		initializeContacts(this.contacts);
+
+		dbconnector.writeDataToDB();
+
 		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}
-	
-	public void initializeContacts(Set<Contact> contacts){
+
+	public void initializeContacts(Set<Contact> contacts) {
 		contactViewImpl.getGrid().setItems(this.contacts);
 	}
-
-
-
-	
 
 }

@@ -1,9 +1,8 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.login;
 
 
-import java.io.UnsupportedEncodingException;
+
 import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -25,6 +24,10 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login.SignUpViewImpl;
 
 public class SignUpViewPresenter extends CustomComponent implements SignUpViewButtonClickListener,View {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2288314058697414321L;
 	private SignUpViewModel signUpViewModel;
 	private SignUpViewImpl signUpViewImpl;
 	private LoginViewModel loginViewModel;
@@ -83,7 +86,7 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 		}
 		
 					
-		//to do: clear all textfields
+		//TODO: clear all textfields
 		navigator.navigateTo("LoginView");
 	}
 
