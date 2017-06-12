@@ -1,7 +1,6 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -31,7 +30,6 @@ public class LoginAccount {
 	private Set<Contact> contacts;
 	@OneToMany(mappedBy = "loginAccount")
 	private Set<DiaryEntry> diaryEntries;
-	//private String passwordConfirmation;
 	
 	public LoginAccount(){
 	}
@@ -46,7 +44,6 @@ public class LoginAccount {
 		this.city = city;
 		this.email = email;
 		this.password = password;
-		//LoginViewModel loginViewModel = new LoginViewModel();
 	}
 
 	public String getFirstName() {

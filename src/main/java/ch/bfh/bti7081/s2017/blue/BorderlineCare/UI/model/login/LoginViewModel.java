@@ -1,26 +1,16 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 
 /**
  * @author cpolo
+ * The model for the LoginView. In here are all interactions between the database and
+ * the borderlineCare app regarding the login account
  *
  */
 public class LoginViewModel {
-	
-//	private String firstName;
-//	private String lastName;
-//	private String street;
-//	private String zipCode;
-//	private String city;
-//	private String email;
-//	private String password;
-//	private String passwordConfirmation;
+
 	private DBConnector dbConnector; 
-	
 	private LoginAccount loginAccount;
 	
 	public LoginViewModel(){
@@ -28,27 +18,19 @@ public class LoginViewModel {
 
 	//Laden der Accounttabelle der Datenbank
 	public LoginAccount getLoginAccount() {
-		return this.loginAccount;
+		return DBConnector.getDBConnector().getLoginAccount();
 	}
 	
 	//Speicher auf Accounttabelle der Datenbank
 	public void setLoginAccount(LoginAccount loginAccount) {
 		this.loginAccount = loginAccount;
-		//System.out.println(loginAccount.getEmail()+"\n"+loginAccount.getPassword()+"\n");
 	}
 	
 	public void setLoginAccountEmail(String email) {
 		DBConnector.getDBConnector().setAccountEmail(email);
 	}
 	
-	
-
-	
-
-
-	
-
-	
-	
-	
+	public void addNewLoginAccount(LoginAccount loginAccount){
+		DBConnector.getDBConnector().addNewLoginAccountToDB(loginAccount);
+	}
 }
