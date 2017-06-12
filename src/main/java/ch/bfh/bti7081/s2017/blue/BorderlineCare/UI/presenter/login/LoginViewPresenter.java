@@ -134,7 +134,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 		return false;
 	}
 
-	// validate secure password for login
+	// validate secure password for login -->model
 	private static boolean validatePassword(String originalPassword, String storedPassword)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		String[] parts = storedPassword.split(":");
