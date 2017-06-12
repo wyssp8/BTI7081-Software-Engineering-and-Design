@@ -1,6 +1,7 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import com.vaadin.navigator.View;
@@ -14,7 +15,6 @@ import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.LoginViewButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.SignUpViewButtonClickListener;
-
 public class SignUpViewImpl extends CustomComponent implements View {
 	
 	//View Name
@@ -34,7 +34,6 @@ public class SignUpViewImpl extends CustomComponent implements View {
 	private TextField email;
 	private PasswordField password;
 	private PasswordField passwordConfirmation;
-	
 	public SignUpViewImpl(){
 		
 		VerticalLayout vLayout = new VerticalLayout();
@@ -116,13 +115,11 @@ public class SignUpViewImpl extends CustomComponent implements View {
 	public void addListener(SignUpViewButtonClickListener signUpClickListener) {
 		listeners.add(signUpClickListener);
 	}
-
 	@Override
 	public void enter(ViewChangeEvent event) {
 		firstName.focus();
 		
 	}
-
 
 	public String getFirstName() {
 		return firstName.getValue();

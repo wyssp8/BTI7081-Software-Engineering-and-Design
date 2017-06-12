@@ -1,13 +1,12 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces;
 
-import java.time.LocalDate;
+import java.util.Set;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 
 public interface DiaryButtonClickListener {
 	
-	public void addButtonClick(LocalDate dateInput, String radioInput, String titleInput, String diaryInput);
-	public void deleteButtonClick(DiaryEntry toDelete);
-
+	public void addButtonClick(String dateInput, String radioInput, String titleInput, String diaryInput);
+	public void deleteDiaryEntry(DiaryEntry toDelete);
+	public void deleteSelected(Set<DiaryEntry> diaryEntry);
 }

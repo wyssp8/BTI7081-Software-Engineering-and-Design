@@ -1,10 +1,13 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
-import javax.persistence.EntityManager;
+import java.time.LocalDate;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.DailyExercise;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.Exercise;
@@ -104,6 +107,13 @@ public class ExercisesViewPresenter implements ExerciseClickListener {
 	public void exerciseDone() {
 		currentDailyExercise.setState(new ExcerciseDone());
 		initExerciseDaily();
+		DiaryEntry diaryFromExercise = new DiaryEntry();
+		
+		diaryFromExercise.setStatus("good");
+		diaryFromExercise.setTitle(currentDailyExercise.getTitle());
+		diaryFromExercise.setDiaryEntry(currentDailyExercise.getDescription() + " !Exercise Done!");
+		DBConnector.getDBConnector().getLoginAccount().getDiaryEntries().add(diaryFromExercise);
+		DBConnector.getDBConnector().writeDataToDB();
 	}
 
 	@Override
