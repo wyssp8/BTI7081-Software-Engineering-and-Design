@@ -1,6 +1,7 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -28,8 +29,8 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		this.contactModel = model;
 		this.contactViewImpl = view;
 		dbconnector = DBConnector.getDBConnector();
-		contacts = contactModel.getContacts();
-		contactViewImpl.initializeContacts(contacts);
+		this.contacts = dbconnector.getLoginAccount().getContacts();
+		initializeContacts(this.contacts);
 		contactViewImpl.addContactButtonClickListeneer(this);
 		contactViewImpl.initializeDeletePopup();
 		contactViewImpl.initNewContactPopup();
@@ -61,10 +62,14 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	@Override
 	public void deleteContact(Contact toRemove) {
 		this.contacts.remove(toRemove);
-//		contactViewImpl.initializeContacts(this.contacts);
-//		contactViewImpl.getContactPopup().setPopupVisible(false);
-		//dbconnector.writeDataToDB();
-		
+	}
+	
+	@Override
+	public void deleteContacts(Set<Contact> contacts) {
+		this.contacts.removeAll(contacts);
+		for (Contact contact : contacts) {
+			dbconnector.deleteDataFromDB(contact);
+		}
 	}
 
 	/*
@@ -73,10 +78,9 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	 */
 	@Override
 	public void saveButtonClick(String stringInput, int integerInput) {
-		dbconnector.getLoginAccount().getContacts().add(new Contact(stringInput, integerInput, dbconnector.getLoginAccount()));
-		contacts.add(new Contact(stringInput, integerInput, dbconnector.getLoginAccount()));
+		this.contacts.add(new Contact(stringInput, integerInput, dbconnector.getLoginAccount()));
 		dbconnector.writeDataToDB();
-		contactViewImpl.initializeContacts(this.contacts);
+		initializeContacts(this.contacts);
 		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}
 
@@ -91,19 +95,39 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	 *
 	 */
 	@Override
-	public void deleteSelected(Set<Contact> contacts) {
-		Iterator<Contact> iterator = contacts.iterator();
-		while (iterator.hasNext()) {
-			Contact c = iterator.next();
-			if (this.contacts.contains(c)) {
-				deleteContact(c);
+	public void deleteSelected(Set<Contact> toDelete) {
+		System.out.println("Contacts in DB: ");
+		for (Contact contact : this.contacts) {
+			System.out.println("-> " + contact.getName());
+		}
+		System.out.println("Contacts selected in toDelete: ");
+		for (Contact contact : toDelete) {
+			System.out.println("-> " + contact.getName());
+		}
+		
+		Set<Contact> tmp = new HashSet<>();
+		for (Contact contact : toDelete) {
+			for (Contact c : this.contacts) {
+				if (contact.getId() == c.getId()) {
+					tmp.add(c);
+				}
 			}
 		}
-		dbconnector.writeDataToDB();
-		contactViewImpl.initializeContacts(this.contacts);
-		contactViewImpl.getContactPopup().setPopupVisible(false);
+		System.out.println("Contacts in tmp");
+		for (Contact contact : tmp) {
+			System.out.println("-> " + contact.getName());
+		}
+		deleteContacts(tmp);
 
+		initializeContacts(this.contacts);
+		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}
+	
+	public void initializeContacts(Set<Contact> contacts){
+		contactViewImpl.getGrid().setItems(this.contacts);
+	}
+
+
 
 	
 
