@@ -18,7 +18,6 @@ import com.vaadin.ui.CustomComponent;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.SignUpViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.SignUpViewButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login.SignUpViewImpl;
 
@@ -28,15 +27,14 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 	 * 
 	 */
 	private static final long serialVersionUID = 2288314058697414321L;
-	private SignUpViewModel signUpViewModel;
 	private SignUpViewImpl signUpViewImpl;
 	private LoginViewModel loginViewModel;
 	
 	private Navigator navigator;
 	private String generatedSecuredPasswordHash;
 	
-	public SignUpViewPresenter(SignUpViewModel signUpViewModel, SignUpViewImpl signUpViewImpl, Navigator navigator,LoginViewModel loginViewModel) {
-		this.signUpViewModel = signUpViewModel;
+	public SignUpViewPresenter(SignUpViewImpl signUpViewImpl, Navigator navigator,LoginViewModel loginViewModel) {
+		//this.signUpViewModel = signUpViewModel;
 		this.signUpViewImpl = signUpViewImpl;
 		this.loginViewModel = loginViewModel;
 		this.navigator = navigator;
@@ -86,7 +84,7 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 		}
 		
 					
-		//TODO: clear all textfields
+		//to do: clear all textfields
 		navigator.navigateTo("LoginView");
 	}
 

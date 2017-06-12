@@ -11,7 +11,6 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.SignUpViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.login.LoginViewPresenter;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.login.SignUpViewPresenter;
@@ -43,9 +42,9 @@ public class MyUI extends UI {
     	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
     	
     	//SignUp View
-    	SignUpViewModel signUpViewModel = new SignUpViewModel();
+    	//SignUpViewModel signUpViewModel = new SignUpViewModel();
     	SignUpViewImpl signUpViewImpl = new SignUpViewImpl();
-    	new SignUpViewPresenter(signUpViewModel,signUpViewImpl, navigator,loginViewModel);
+    	new SignUpViewPresenter(signUpViewImpl, navigator,loginViewModel);
     	
         navigator.addView("LoginView", loginViewImpl);
         navigator.addView("SignUpView", signUpViewImpl);

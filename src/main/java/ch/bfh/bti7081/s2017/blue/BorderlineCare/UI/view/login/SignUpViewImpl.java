@@ -1,9 +1,13 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
+import com.vaadin.data.Binder;
+import com.vaadin.data.Validator;
+import com.vaadin.data.converter.StringToIntegerConverter;
+import com.vaadin.data.validator.EmailValidator;
+import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Alignment;
@@ -13,8 +17,10 @@ import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.LoginViewButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.SignUpViewButtonClickListener;
+
 public class SignUpViewImpl extends CustomComponent implements View {
 	
 	//View Name
@@ -34,6 +40,8 @@ public class SignUpViewImpl extends CustomComponent implements View {
 	private TextField email;
 	private PasswordField password;
 	private PasswordField passwordConfirmation;
+	private Binder binder = new Binder<>();
+	
 	public SignUpViewImpl(){
 		
 		VerticalLayout vLayout = new VerticalLayout();
@@ -56,35 +64,57 @@ public class SignUpViewImpl extends CustomComponent implements View {
 		// Textfields
 		firstName = new TextField();
 		firstName.setCaption("First Name");
-		//firstName.setWidth("30%");
+		
+		new Binder<LoginAccount>().forField(firstName)
+	    .withValidator(str -> str.length() == 4, "Must be 4 chars")
+	    .bind(LoginAccount::getFirstName,null);
 		
 		lastName = new TextField();
 		lastName.setCaption("Last Name");
-		//lastName.setWidth("30%");
+		new Binder<LoginAccount>().forField(lastName)
+	    .withValidator(str -> str.length() == 4, "Must be 4 chars")
+	    .bind(LoginAccount::getFirstName,null);
 		
 		street = new TextField();
 		street.setCaption("Street");
-		//street.setWidth("30%");
+		
+		new Binder<LoginAccount>().forField(street)
+	    .withValidator(str -> str.length() == 4, "Must be 4 chars")
+	    .bind(LoginAccount::getFirstName,null);
 		
 		zipCode = new TextField();
 		zipCode.setCaption("Zip Code");
-		//zipCode.setWidth("30%");
+		
+		new Binder<LoginAccount>().forField(zipCode)
+	    .withValidator(str -> str.length() == 4, "Must be 4 numbers")
+	    .bind(LoginAccount::getZipCode,null);
 		
 		city = new TextField();
 		city.setCaption("City");
-		//city.setWidth("30%");
+		
+		new Binder<LoginAccount>().forField(city)
+	    	.withValidator(str -> str.length() == 4, "Must be 4 chars")
+	    	.bind(LoginAccount::getFirstName,null);
 		
 		email = new TextField();
 		email.setCaption("Email Address");
-		//email.setWidth("30%");
+		
+		new Binder<LoginAccount>().forField(email)
+			.withValidator(new EmailValidator("This doesn't look like a valid email address"))
+			.bind(LoginAccount::getEmail, LoginAccount::setEmail);
 		
 		password = new PasswordField();
 		password.setCaption("Password");
-		//password.setWidth("30%");
+		
+		new Binder<LoginAccount>().forField(password)
+	    .withValidator(str -> str.length() == 4, "Must be 4 chars")
+	    .bind(LoginAccount::getFirstName,null);
 		
 		passwordConfirmation = new PasswordField();
 		passwordConfirmation.setCaption("Confirm your password");
-		//passwordConfirmation.setWidth("30%");
+		new Binder<LoginAccount>().forField(passwordConfirmation)
+	    .withValidator(str -> str.length() == 4, "Must be 4 chars")
+	    .bind(LoginAccount::getFirstName,null);
 		
 		
 		//add all components
@@ -105,8 +135,7 @@ public class SignUpViewImpl extends CustomComponent implements View {
 		vLayout.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
 		vLayout.setComponentAlignment(passwordConfirmation, Alignment.MIDDLE_CENTER);
 		vLayout.addComponent(buttonCreateAcc);
-		vLayout.addComponent(buttonCancel);
-		
+		vLayout.addComponent(buttonCancel);	
 
 		
 		
@@ -115,11 +144,13 @@ public class SignUpViewImpl extends CustomComponent implements View {
 	public void addListener(SignUpViewButtonClickListener signUpClickListener) {
 		listeners.add(signUpClickListener);
 	}
+
 	@Override
 	public void enter(ViewChangeEvent event) {
 		firstName.focus();
 		
 	}
+
 
 	public String getFirstName() {
 		return firstName.getValue();
