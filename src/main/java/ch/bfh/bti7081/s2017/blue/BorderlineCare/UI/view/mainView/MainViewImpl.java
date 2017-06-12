@@ -13,8 +13,10 @@ import com.vaadin.ui.VerticalLayout;
 public class MainViewImpl extends CustomComponent {
 	
 	private static final long serialVersionUID = -5619296784263138892L;
+	private EmergencyViewImpl emergencyViewImpl;
 
 	public MainViewImpl(ExerciseDashViewImpl exerciseDashViewImpl, DiaryDashViewImpl diaryDashViewImpl,EmergencyViewImpl emergencyViewImpl){
+		this.emergencyViewImpl = emergencyViewImpl;
 		HorizontalLayout layout = new HorizontalLayout();
 		VerticalLayout layoutDashView = new VerticalLayout();
 		layoutDashView.addComponent(diaryDashViewImpl);
@@ -23,6 +25,11 @@ public class MainViewImpl extends CustomComponent {
         layout.addComponent(emergencyViewImpl);
         layout.setSizeFull();
         setCompositionRoot(layout);
+	}
+
+	public void resetView() {
+		emergencyViewImpl.resetView();
+		
 	}
 	
 }

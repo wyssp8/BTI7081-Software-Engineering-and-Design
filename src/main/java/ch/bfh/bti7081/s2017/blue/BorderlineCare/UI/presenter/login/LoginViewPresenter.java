@@ -188,7 +188,6 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
     	SettingsViewModel settingsModel = new SettingsViewModel();
     	
     	new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel, navigator);
-    	new EmergencyViewPresenter(emergencyViewImpl,settingsModel);
     	
 
     	//Exercises View
@@ -200,6 +199,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
      
     	new ExerciseDashViewPresenter(exerciseDashViewImpl, exercisesViewModel, view);
+    	new EmergencyViewPresenter(emergencyViewImpl,settingsModel,view);
     	
     	navigator.addView("HomeView", view);
         
