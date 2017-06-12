@@ -118,8 +118,16 @@ public class SettingsViewImpl extends CustomComponent implements SettingsView {
 				listener.EContactEditButtonClick(btEContEdit);
 			}
 		});
+		
+		
+		btLogOut.addClickListener(e -> {
+			for (SettingsClickListener listener : listeners) {
+				listener.logOutButtonClick();
+			}
+		});
 
-		setUserInfofieldsState(false);
+
+		setUserInfoFieldsState(false);
 		setContactMenusState(false);
 
 		setCompositionRoot(accordion);
@@ -301,7 +309,7 @@ public class SettingsViewImpl extends CustomComponent implements SettingsView {
 	 * 
 	 * @param b
 	 */
-	public void setUserInfofieldsState(boolean b) {
+	public void setUserInfoFieldsState(boolean b) {
 
 		getEmailTextField().setEnabled(b);
 		getFirstNameTextField().setEnabled(b);

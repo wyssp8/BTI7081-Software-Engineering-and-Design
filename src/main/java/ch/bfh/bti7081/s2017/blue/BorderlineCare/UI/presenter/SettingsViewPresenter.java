@@ -75,30 +75,23 @@ public class SettingsViewPresenter implements SettingsClickListener {
 
 			if (btn.getCaption().equals("Edit")) {
 				btn.setCaption("Save");
-				settingsView.setUserInfofieldsState(true);
+				settingsView.setUserInfoFieldsState(true);
 
 			} else {
 				btn.setCaption("Edit");
-				settingsView.setUserInfofieldsState(false);
-				// save changes to the databank
-
-				// settingsModel.getDbConnector().getLoginAccount().setEmail(getEmailTextField().getValue());
-				// settingsModel.getDbConnector().getLoginAccount().setFirstName(getFirstNAmeTextField().getValue());
-				// settingsModel.getDbConnector().getLoginAccount().setLastName(getLastNameTextField().getValue());
-				// settingsModel.getDbConnector().getLoginAccount().setEmail(getEmailTextField().getValue());
-				// settingsModel.getDbConnector().getLoginAccount().setStreet(getStreetTextField().getValue());
-				// settingsModel.getDbConnector().getLoginAccount().setZipCode(getZipCodeTextField().getValue());
-				// settingsModel.getDbConnector().getLoginAccount().setCity(getCityTextField().getValue());
-				// settingsModel.getDbConnector().getLoginAccount().setPassword(getPasswordTextField().getValue());
-				//
-				// SAVE THE CHOSEN VALUES
-				// settingsModel.getDbConnector().getLoginAccount().eContact1 =
-				// settingsView.geteContact1Menu().getValue();
-				// settingsModel.getDbConnector().getLoginAccount().eContact2 =
-				// settingsView.geteContact2Menu().getValue();
-				// settingsModel.getDbConnector().getLoginAccount().eContact3 =
-				// settingsView.geteContact3Menu().getValue();
-				// settingsModel.getDbConnector().REFRESH
+				settingsModel.saveUserSettignsToDB(
+						settingsView.getEmailTextField().getValue(),
+						settingsView.getFirstNameTextField().getValue(),
+						settingsView.getLastNameTextField().getValue(),
+						settingsView.getStreetTextField().getValue(), 
+						settingsView.getZipCodeTextField().getValue(),
+						settingsView.getCityTextField().getValue(), 
+						settingsView.getPasswordTextField().getValue()
+						,settingsView.geteContact1Menu().getValue(),
+						settingsView.geteContact2Menu().getValue(), 
+						settingsView.geteContact3Menu().getValue()
+						);						
+				settingsView.setUserInfoFieldsState(false);
 			}
 	}
 
@@ -126,6 +119,7 @@ public class SettingsViewPresenter implements SettingsClickListener {
 	 * 
 	 * @param btn
 	 */
+	
 	public void logOutButtonClick() {
 		ui.getSession().setAttribute("user", null);
 		navigator.navigateTo("LoginView");

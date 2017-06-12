@@ -4,7 +4,10 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.vaadin.ui.TextField;
+
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 /**
  * @author André
  *
@@ -21,12 +24,15 @@ public class SettingsViewModel {
 	private Contact eContact2;
 	private Contact eContact3;
 	
+	private LoginAccount user; 
+	
 	
 
 	
 //Assim se puxa infromaçôes dos logins na datenbank.
 	public SettingsViewModel(){
 		dbConnector = DBConnector.getDBConnector();
+		user = dbConnector.getLoginAccount();
 
 		//		dbConnector.getLoginAccount().getContacts();
 	}
@@ -94,5 +100,34 @@ public class SettingsViewModel {
 	}
 
 
+/**
+ * save all the edited user settings in the Datenbank 
+ */
+	public void saveUserSettignsToDB(
+			String email, 
+			String fName, 
+			String lName, 
+			String street,
+			String zipCode, 
+			String city, 
+			String password, 
+			Contact contact1, 
+			Contact contact2, 
+			Contact contact3 ) {
+
+		 user.setEmail(email);
+		 user.setFirstName(fName);
+		 user.setLastName(lName);
+		 user.setStreet(street);
+		 user.setZipCode(zipCode);
+		 user.setCity(city);
+		 user.setPassword(password);
+//		 user.setEContact1 = contact1;
+//		 user.setEContact2 = contact2;
+//		 user.setEContact3 = contact3;
+		 
+//		 getDbConnector().REFRESH
+		
+	}
 
 }
