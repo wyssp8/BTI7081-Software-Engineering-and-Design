@@ -7,6 +7,7 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TabSheet;
+import com.vaadin.ui.TabSheet.SelectedTabChangeListener;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.server.FileResource;
@@ -14,18 +15,22 @@ import com.vaadin.server.FileResource;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.ExerciseDashViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.MainViewImpl;
 
-public class NavigationViewImpl extends TabSheet implements View {
+public class NavigationViewImpl extends TabSheet implements View, SelectedTabChangeListener {
 	
+	private static final long serialVersionUID = 837827108695759377L;
 	//Name of the View1
 	public static final String NAME = "HomeView";
 	private String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
 	private ExerciseViewImpl exerciseviewImpl;
 	private DiaryViewImpl diaryViewImpl;
+	private SettingsViewImpl settingsViewImpl;
+	private MainViewImpl mainViewImpl;
 	
 	public NavigationViewImpl(MainViewImpl mainView, ContactViewImpl contactsViewImpl, DiaryViewImpl diaryViewImpl, ExerciseViewImpl exerciseViewImpl,SettingsViewImpl settingsView) {
-
+		this.mainViewImpl = mainView;
 		this.exerciseviewImpl = exerciseViewImpl;
 		this.diaryViewImpl = diaryViewImpl;
+		this.settingsViewImpl = settingsView;
 		addTab(mainView,"Home", new FileResource(new File(basepath + "/WEB-INF/images/icons/home.png")));
 		addTab(contactsViewImpl,"Contacts", new FileResource(new File(basepath + "/WEB-INF/images/icons/contacts.png")));
 		addTab(diaryViewImpl,"Diary", new FileResource(new File(basepath + "/WEB-INF/images/icons/diary.png")));
@@ -34,6 +39,7 @@ public class NavigationViewImpl extends TabSheet implements View {
 		setHeight(100.0f, Unit.PERCENTAGE);
         addStyleName(ValoTheme.TABSHEET_FRAMED);
         addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
+        this.addSelectedTabChangeListener(this);
 	}
 
 	@Override
@@ -56,6 +62,17 @@ public class NavigationViewImpl extends TabSheet implements View {
 
 	public void selectDiaryTab() {
 		setSelectedTab(diaryViewImpl);
+	}
+	
+	public void selectSettingsTab() {
+		setSelectedTab(settingsViewImpl);
+	}
+
+	@Override
+	public void selectedTabChange(SelectedTabChangeEvent event) {
+		if(getSelectedTab().equals(mainViewImpl)){
+			mainViewImpl.resetView();
+		}
 	}
 
 

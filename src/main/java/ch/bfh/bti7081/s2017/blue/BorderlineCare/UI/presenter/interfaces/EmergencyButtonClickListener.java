@@ -10,4 +10,5 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces;
 public interface EmergencyButtonClickListener {
 	public void callButtonClick();
 	public void messageButtonClick();
+	public void goToSettingsClick();
 }
