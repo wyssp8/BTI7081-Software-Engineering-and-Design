@@ -7,7 +7,7 @@ public interface SettingsClickListener {
 	
 	public void AccEditButtonClick(Button btn);
 	public void EContactEditButtonClick(Button btn);
-	public void logOutButtonClick(Button btn);
+	public void logOutButtonClick();
 	
 	
 }

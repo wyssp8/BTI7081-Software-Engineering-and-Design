@@ -1,4 +1,5 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
+
 import com.vaadin.data.Binder;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.data.validator.StringLengthValidator;
@@ -19,30 +20,27 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SettingsViewImpl;
  *
  */
 public class SettingsViewPresenter implements SettingsClickListener {
-	
+
 	private SettingsViewImpl settingsView;
 	private SettingsViewModel settingsModel;
 	private Navigator navigator;
 	private UI ui = UI.getCurrent();
 
-	public SettingsViewPresenter(SettingsViewModel settingsModel, SettingsViewImpl settingsViewImp, ContactModel contacts,
-			Navigator navigator) {
+	public SettingsViewPresenter(SettingsViewModel settingsModel, SettingsViewImpl settingsViewImp,
+			ContactModel contacts, Navigator navigator) {
 
 		this.settingsView = settingsViewImp;
 		this.settingsModel = settingsModel;
 		this.navigator = navigator;
-		
-		initTextFields(settingsView);
 
-		AccEditButtonClick(settingsView.getBtAccEdit());
-		EContactEditButtonClick(settingsView.getBtEContEdit());
-		logOutButtonClick(settingsView.getBtLogOut());
+		initTextFields(settingsView);
 
 		loadContacts(settingsView.geteContact1Menu());
 		loadContacts(settingsView.geteContact2Menu());
 		loadContacts(settingsView.geteContact3Menu());
-		
-		
+
+		settingsView.addClickListener(this);
+
 	}
 
 	/**
@@ -68,41 +66,20 @@ public class SettingsViewPresenter implements SettingsClickListener {
 
 	}
 
-	@Override
-	// public void AccEditButtonClick(Button btn){
-	// // tentar mudar esse if ara algo diferente de uma string
-	// if (settingsView.getBtAccEdit().getCaption().equals("Edit")) {
-	// settingsView.getBtAccEdit().setCaption("Save");
-	//
-	// } else {
-	// settingsView.getBtAccEdit().setCaption("Edit");
-	// // disable fields
-	// settingsView.setUserInfofieldsState(false);
-
-	// // }
-	// }
-
 	/**
 	 * Add function to the Button Account Edit
 	 * 
 	 * @param btn
 	 */
 	public void AccEditButtonClick(Button btn) {
-		btn.addClickListener(e -> {
 
 			if (btn.getCaption().equals("Edit")) {
 				btn.setCaption("Save");
 				settingsView.setUserInfofieldsState(true);
-				
 
 			} else {
 				btn.setCaption("Edit");
 				settingsView.setUserInfofieldsState(false);
-		
-			
-				
-				
-				
 				// save changes to the databank
 
 				// settingsModel.getDbConnector().getLoginAccount().setEmail(getEmailTextField().getValue());
@@ -121,11 +98,8 @@ public class SettingsViewPresenter implements SettingsClickListener {
 				// settingsView.geteContact2Menu().getValue();
 				// settingsModel.getDbConnector().getLoginAccount().eContact3 =
 				// settingsView.geteContact3Menu().getValue();
-
 				// settingsModel.getDbConnector().REFRESH
-
 			}
-		});
 	}
 
 	/**
@@ -135,18 +109,16 @@ public class SettingsViewPresenter implements SettingsClickListener {
 	 */
 	@Override
 	public void EContactEditButtonClick(Button btn) {
-		btn.addClickListener(e -> {
-			if (btn.getCaption().equals("Edit")) {
-				btn.setCaption("Save");
-				settingsView.setContactMenusState(true);
+		if (btn.getCaption().equals("Edit")) {
+			btn.setCaption("Save");
+			settingsView.setContactMenusState(true);
 
-			} else {
-				btn.setCaption("Edit");
-				settingsView.setContactMenusState(false);
+		} else {
+			btn.setCaption("Edit");
+			settingsView.setContactMenusState(false);
 
-			}
+		}
 
-		});
 	}
 
 	/**
@@ -154,16 +126,10 @@ public class SettingsViewPresenter implements SettingsClickListener {
 	 * 
 	 * @param btn
 	 */
-	public void logOutButtonClick(Button btn) {
-		btn.addClickListener(e -> {
-			ui.getSession().setAttribute("user", null);
-			navigator.navigateTo("LoginView");
-			
-		});
+	public void logOutButtonClick() {
+		ui.getSession().setAttribute("user", null);
+		navigator.navigateTo("LoginView");
 
 	}
-	
-	
-	
 
 }

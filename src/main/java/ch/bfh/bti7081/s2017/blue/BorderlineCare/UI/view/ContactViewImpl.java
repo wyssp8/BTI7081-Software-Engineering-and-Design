@@ -1,10 +1,13 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view;
 
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.data.BeanValidationBinder;
 import com.vaadin.data.provider.DataProvider;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.server.FontAwesome;
@@ -68,15 +71,27 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 
 		HeaderRow header = grid.prependHeaderRow();
 		header.join(header.getCell("Name"), header.getCell("Phonenumber")).setText("My Contacts");
-
 		deleteSelected = new Button("deleteSelected");
 
 		MultiSelectionModel<Contact> selectionModel = (MultiSelectionModel<Contact>) grid
 				.setSelectionMode(SelectionMode.MULTI);
-		
+		selectionModel.selectAll();
 
 		selectionModel.addMultiSelectionListener(event -> {
-			Set<Contact> toDelete = event.getAllSelectedItems();
+			//Set<Contact> toDelete = event.getAllSelectedItems();
+			Set<Contact> toDelete = new HashSet<>();
+			for (Contact itemId : grid.getSelectedItems()) {
+				toDelete.add(itemId);
+				
+				
+			}
+		
+			
+			
+			
+			for (Contact contact : toDelete) {
+				System.out.println("----------" + contact.getName());
+			}
 			deleteSelected.addClickListener(clieckEvent -> {
 				for (ContactButtonClickListener listener : contactButtonClickListeners) {
 					deleteContactPopup = new PopupView(null, deleteContactPopupContent);
@@ -101,9 +116,6 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 
 	}
 
-	public void initializeContacts(Set<Contact> contacts) {
-		grid.setItems(contacts);
-	}
 
 	public void initializeDeletePopup() {
 		label = new Label("Are your sure that you want to delete these contacts?");
@@ -185,6 +197,9 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 	
 	public VerticalLayout getDeletePopupContent(){
 		return this.deleteContactPopupContent;
+	}
+	public Grid getGrid(){
+		return this.grid;
 	}
 
 }

@@ -13,5 +13,6 @@ public interface ContactButtonClickListener {
 	public void cancelButtonClick();
 	public void deleteContact(Contact toRemove);
 	public void deleteSelected(Set<Contact> contacts);
+	public void deleteContacts(Set<Contact> contacts);
 
 }
