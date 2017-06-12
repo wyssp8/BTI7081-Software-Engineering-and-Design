@@ -6,6 +6,7 @@ import java.util.List;
 import com.vaadin.data.Binder;
 import com.vaadin.data.Validator;
 import com.vaadin.data.converter.StringToIntegerConverter;
+import com.vaadin.data.util.BeanUtil;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.navigator.View;
@@ -22,11 +23,11 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.LoginVie
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.SignUpViewButtonClickListener;
 
 public class SignUpViewImpl extends CustomComponent implements View {
-	
-	//View Name
+
+	// View Name
 	public static final String NAME = "SignUpView";
-	
-	//Components
+
+	// Components
 	private List<SignUpViewButtonClickListener> listeners = new ArrayList<SignUpViewButtonClickListener>();
 
 	private Button buttonCreateAcc;
@@ -40,84 +41,81 @@ public class SignUpViewImpl extends CustomComponent implements View {
 	private TextField email;
 	private PasswordField password;
 	private PasswordField passwordConfirmation;
-	private Binder binder = new Binder<>();
+	Binder<LoginAccount> binder = new Binder<>();
 	
-	public SignUpViewImpl(){
-		
+	public SignUpViewImpl() {
+
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.setSizeFull();
 		setCompositionRoot(vLayout);
-		
+
+		// Create Account button
 		buttonCreateAcc = new Button("Create");
-		buttonCreateAcc.addClickListener(e ->{
-			for(SignUpViewButtonClickListener listener : listeners){
+		buttonCreateAcc.setEnabled(false);
+		buttonCreateAcc.addClickListener(e -> {
+			for (SignUpViewButtonClickListener listener : listeners) {
 				listener.createAccButtonClick();
 			}
 		});
+
+		// Cancel button
 		buttonCancel = new Button("Cancel");
-		buttonCancel.addClickListener(e ->{
-			for(SignUpViewButtonClickListener listener : listeners){
+		buttonCancel.addClickListener(e -> {
+			for (SignUpViewButtonClickListener listener : listeners) {
 				listener.cancelButtonClick();
 			}
 		});
-		
+
 		// Textfields
 		firstName = new TextField();
 		firstName.setCaption("First Name");
-		
-		new Binder<LoginAccount>().forField(firstName)
-	    .withValidator(str -> str.length() == 4, "Must be 4 chars")
-	    .bind(LoginAccount::getFirstName,null);
-		
+
+		binder.forField(firstName)
+				.withValidator(new StringLengthValidator("Must be between 2 and 20 characters long", 2, 20))
+				.bind(LoginAccount::getFirstName, LoginAccount::setFirstName);
+
 		lastName = new TextField();
 		lastName.setCaption("Last Name");
-		new Binder<LoginAccount>().forField(lastName)
-	    .withValidator(str -> str.length() == 4, "Must be 4 chars")
-	    .bind(LoginAccount::getFirstName,null);
-		
+		binder.forField(lastName)
+				.withValidator(new StringLengthValidator("Must be between 2 and 20 characters long", 2, 20))
+				.bind(LoginAccount::getLastName, LoginAccount::setLastName);
+
 		street = new TextField();
 		street.setCaption("Street");
-		
-		new Binder<LoginAccount>().forField(street)
-	    .withValidator(str -> str.length() == 4, "Must be 4 chars")
-	    .bind(LoginAccount::getFirstName,null);
-		
+		binder.forField(street)
+				.withValidator(new StringLengthValidator("Must be between 2 and 20 characters long", 2, 20))
+				.bind(LoginAccount::getStreet, LoginAccount::setStreet);
+
 		zipCode = new TextField();
 		zipCode.setCaption("Zip Code");
-		
-		new Binder<LoginAccount>().forField(zipCode)
-	    .withValidator(str -> str.length() == 4, "Must be 4 numbers")
-	    .bind(LoginAccount::getZipCode,null);
-		
+		binder.forField(zipCode)
+				.withValidator(new StringLengthValidator("Must be between 2 and 20 characters long", 2, 20))
+				.bind(LoginAccount::getZipCode, LoginAccount::setZipCode);
+
 		city = new TextField();
 		city.setCaption("City");
-		
-		new Binder<LoginAccount>().forField(city)
-	    	.withValidator(str -> str.length() == 4, "Must be 4 chars")
-	    	.bind(LoginAccount::getFirstName,null);
-		
+		binder.forField(city)
+				.withValidator(new StringLengthValidator("Must be between 2 and 20 characters long", 2, 20))
+				.bind(LoginAccount::getCity, LoginAccount::setCity);
+
 		email = new TextField();
 		email.setCaption("Email Address");
-		
-		new Binder<LoginAccount>().forField(email)
-			.withValidator(new EmailValidator("This doesn't look like a valid email address"))
-			.bind(LoginAccount::getEmail, LoginAccount::setEmail);
-		
+		binder.forField(email).withValidator(new EmailValidator("This is not a valid email address"))
+				.bind(LoginAccount::getEmail, LoginAccount::setEmail);
+
 		password = new PasswordField();
 		password.setCaption("Password");
-		
-		new Binder<LoginAccount>().forField(password)
-	    .withValidator(str -> str.length() == 4, "Must be 4 chars")
-	    .bind(LoginAccount::getFirstName,null);
-		
+		binder.forField(password).withValidator(str -> str.length() >= 7, "Must be at least 7 chars")
+				.bind(LoginAccount::getPassword, LoginAccount::setPassword);
+
 		passwordConfirmation = new PasswordField();
 		passwordConfirmation.setCaption("Confirm your password");
-		new Binder<LoginAccount>().forField(passwordConfirmation)
-	    .withValidator(str -> str.length() == 4, "Must be 4 chars")
-	    .bind(LoginAccount::getFirstName,null);
-		
-		
-		//add all components
+		binder.forField(passwordConfirmation)
+				.withValidator(str -> str.equals(password.getValue()), "Passwords don't match")
+				.bind(LoginAccount::getLastName, LoginAccount::setLastName);
+
+
+		// add all components
 		vLayout.addComponent(firstName);
 		vLayout.addComponent(lastName);
 		vLayout.addComponent(street);
@@ -135,12 +133,17 @@ public class SignUpViewImpl extends CustomComponent implements View {
 		vLayout.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
 		vLayout.setComponentAlignment(passwordConfirmation, Alignment.MIDDLE_CENTER);
 		vLayout.addComponent(buttonCreateAcc);
-		vLayout.addComponent(buttonCancel);	
+		vLayout.addComponent(buttonCancel);
 
-		
-		
+		binder.addStatusChangeListener(event -> {
+			if (binder.isValid()) {
+				buttonCreateAcc.setEnabled(true);
+			} else {
+				buttonCreateAcc.setEnabled(false);
+			}
+		});
 	}
-	
+
 	public void addListener(SignUpViewButtonClickListener signUpClickListener) {
 		listeners.add(signUpClickListener);
 	}
@@ -148,9 +151,8 @@ public class SignUpViewImpl extends CustomComponent implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		firstName.focus();
-		
-	}
 
+	}
 
 	public String getFirstName() {
 		return firstName.getValue();
