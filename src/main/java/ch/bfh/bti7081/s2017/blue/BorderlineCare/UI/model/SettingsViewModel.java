@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model;
 
-import java.util.List;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 /**
@@ -12,10 +11,12 @@ public class SettingsViewModel {
 	
 	private DBConnector dbConnector;
 	
-	
+	// fazer esses contatdos em uma lista com uma numero fixo que pode-se mudar mais tarde.
 	private Contact eContact1;
 	private Contact eContact2;
 	private Contact eContact3;
+	
+	
 
 	
 //Assim se puxa infromaçôes dos logins na datenbank.

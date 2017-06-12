@@ -73,18 +73,18 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 
 		MultiSelectionModel<Contact> selectionModel = (MultiSelectionModel<Contact>) grid
 				.setSelectionMode(SelectionMode.MULTI);
-		selectionModel.selectAll();
+		
 
 		selectionModel.addMultiSelectionListener(event -> {
 			Set<Contact> toDelete = event.getAllSelectedItems();
 			deleteSelected.addClickListener(clieckEvent -> {
-				for (ContactButtonClickListener l : contactButtonClickListeners) {
+				for (ContactButtonClickListener listener : contactButtonClickListeners) {
 					deleteContactPopup = new PopupView(null, deleteContactPopupContent);
 					layout.addComponent(deleteContactPopup);
-					l.deleteButtonClick(deleteContactPopup, toDelete);
+					deleteContactPopupContent.setParent(null);
+					listener.deleteButtonClick(deleteContactPopup, toDelete);
 				}
 			});
-
 		});
 
 		newContactPopup = new PopupView(null, newContactPopupContent);
@@ -101,7 +101,7 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 
 	}
 
-	public void initializeContacts(List<Contact> contacts) {
+	public void initializeContacts(Set<Contact> contacts) {
 		grid.setItems(contacts);
 	}
 
@@ -178,6 +178,13 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 
 	public Button getDeleteButton() {
 		return this.deleteP;
+	}
+	public Button getDeleteSelected(){
+		return this.deleteSelected;
+	}
+	
+	public VerticalLayout getDeletePopupContent(){
+		return this.deleteContactPopupContent;
 	}
 
 }

@@ -30,7 +30,7 @@ public class MyUI extends UI {
 
 	private static final long serialVersionUID = 8756061847229359826L;
 	private static boolean startup = true;
-	Navigator navigator;
+	private Navigator navigator;
 
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -40,7 +40,7 @@ public class MyUI extends UI {
     	//Login View
     	LoginViewModel loginViewModel = new LoginViewModel();
     	LoginViewImpl loginViewImpl = new LoginViewImpl();
-    	new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
+    	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
     	
     	//SignUp View
     	SignUpViewModel signUpViewModel = new SignUpViewModel();
@@ -91,7 +91,6 @@ public class MyUI extends UI {
             }
         });
     }
-	
 	
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

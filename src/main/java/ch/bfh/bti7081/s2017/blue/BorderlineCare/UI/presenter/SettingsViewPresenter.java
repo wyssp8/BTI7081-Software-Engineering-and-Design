@@ -1,141 +1,168 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
-
-import java.util.ArrayList;
-
+import com.vaadin.data.Binder;
+import com.vaadin.data.validator.EmailValidator;
+import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.navigator.Navigator;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.SettingsClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SettingsViewImpl;
 
 /**
  * @author André
  *
  */
-public class SettingsViewPresenter {
-
-
-	
+public class SettingsViewPresenter implements SettingsClickListener {
 	
 	private SettingsViewImpl settingsView;
 	private SettingsViewModel settingsModel;
+	private Navigator navigator;
+	private UI ui = UI.getCurrent();
 
-
-	public SettingsViewPresenter(SettingsViewModel settingsModel, SettingsViewImpl settingsView, ContactModel contacts,
+	public SettingsViewPresenter(SettingsViewModel settingsModel, SettingsViewImpl settingsViewImp, ContactModel contacts,
 			Navigator navigator) {
 
-		this.settingsView = settingsView;
+		this.settingsView = settingsViewImp;
 		this.settingsModel = settingsModel;
-
-												 
-		loadContacts();
+		this.navigator = navigator;
 		
-		/**
-		 * initialize settings text fields with LoginAccount information
-		 */									
-		settingsView.getLoginTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getEmail());
-		settingsView.getPasswordTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getPassword());
-		settingsView.getFirstNAmeTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getFirstName());
-		settingsView.getLastNameTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getLastName());
-		settingsView.getStreetTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getStreet());
-		settingsView.getCityTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getCity());
-		settingsView.getZipCodeTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getZipCode());
+		initTextFields(settingsView);
 
-		/**
-		 * edit and save change on the account settings 
-		 * 
-		 */
-		settingsView.getBtEdit().addClickListener(e ->
+		AccEditButtonClick(settingsView.getBtAccEdit());
+		EContactEditButtonClick(settingsView.getBtEContEdit());
+		logOutButtonClick(settingsView.getBtLogOut());
 
-		{
-			settingsView.getEmailTextField().setEnabled(true);
-			settingsView.getFirstNameTextField().setEnabled(true);
-			settingsView.getLastNameTextField().setEnabled(true);
-			settingsView.getStreetTextField().setEnabled(true);
-			settingsView.getZipCodeTextField().setEnabled(true);
-			settingsView.getCityTextField().setEnabled(true);
-			settingsView.getPasswordTextField().setEnabled(true);
+		loadContacts(settingsView.geteContact1Menu());
+		loadContacts(settingsView.geteContact2Menu());
+		loadContacts(settingsView.geteContact3Menu());
+		
+		
+	}
 
-			if (settingsView.getBtEdit().getCaption().equals("Edit")) {
-				settingsView.getBtEdit().setCaption("Save");
-			} else {
-				settingsView.getBtEdit().setCaption("Edit");
+	/**
+	 * load contatcs on the dropdown menu Emergency contacs
+	 */
+	public void loadContacts(ComboBox<Contact> cb) {
+		cb.setItems(settingsModel.getDbConnector().getLoginAccount().getContacts());
+		cb.setItemCaptionGenerator(Contact::getName);
+	}
 
-				// disable fields
-				settingsView.getEmailTextField().setEnabled(false);
-				settingsView.getFirstNameTextField().setEnabled(false);
-				settingsView.getLastNameTextField().setEnabled(false);
-				settingsView.getStreetTextField().setEnabled(false);
-				settingsView.getZipCodeTextField().setEnabled(false);
-				settingsView.getCityTextField().setEnabled(false);
-				settingsView.getPasswordTextField().setEnabled(false);
+	/**
+	 * initialize settings text fields with LoginAccount information
+	 */
+	public void initTextFields(SettingsViewImpl View) {
+
+		View.getEmailTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getEmail());
+		View.getPasswordTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getPassword());
+		View.getFirstNameTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getFirstName());
+		View.getLastNameTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getLastName());
+		View.getStreetTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getStreet());
+		View.getCityTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getCity());
+		View.getZipCodeTextField().setValue(settingsModel.getDbConnector().getLoginAccount().getZipCode());
+
+	}
+
+	@Override
+	// public void AccEditButtonClick(Button btn){
+	// // tentar mudar esse if ara algo diferente de uma string
+	// if (settingsView.getBtAccEdit().getCaption().equals("Edit")) {
+	// settingsView.getBtAccEdit().setCaption("Save");
+	//
+	// } else {
+	// settingsView.getBtAccEdit().setCaption("Edit");
+	// // disable fields
+	// settingsView.setUserInfofieldsState(false);
+
+	// // }
+	// }
+
+	/**
+	 * Add function to the Button Account Edit
+	 * 
+	 * @param btn
+	 */
+	public void AccEditButtonClick(Button btn) {
+		btn.addClickListener(e -> {
+
+			if (btn.getCaption().equals("Edit")) {
+				btn.setCaption("Save");
+				settingsView.setUserInfofieldsState(true);
 				
-//				save changes to the databank
-				settingsModel.getDbConnector().getLoginAccount().setEmail(settingsView.getEmailTextField().getValue());
-				settingsModel.getDbConnector().getLoginAccount().setFirstName(settingsView.getFirstNAmeTextField().getValue());
-				settingsModel.getDbConnector().getLoginAccount().setLastName(settingsView.getLastNameTextField().getValue());
-				settingsModel.getDbConnector().getLoginAccount().setEmail(settingsView.getEmailTextField().getValue());
-				settingsModel.getDbConnector().getLoginAccount().setStreet(settingsView.getStreetTextField().getValue());
-				settingsModel.getDbConnector().getLoginAccount().setZipCode(settingsView.getZipCodeTextField().getValue());
-				settingsModel.getDbConnector().getLoginAccount().setCity(settingsView.getCityTextField().getValue());
-				settingsModel.getDbConnector().getLoginAccount().setPassword(settingsView.getPasswordTextField().getValue());
-			}
-
-		});
-
-		/**
-		 * Ok button to save new emergency contacts
-		 */
-		settingsView.getBtEContSave().addClickListener(e -> {
-			
-			
-			if (settingsView.getBtEContSave().getCaption().equals("Edit")) {
-				settingsView.getBtEdit().setCaption("Save");
-
-				settingsView.geteContact1Menu().setEnabled(true);
-				settingsView.geteContact2Menu().setEnabled(true);
-				settingsView.geteContact3Menu().setEnabled(true);
 
 			} else {
-				settingsView.getBtEdit().setCaption("Edit");
+				btn.setCaption("Edit");
+				settingsView.setUserInfofieldsState(false);
+		
+			
+				
+				
+				
+				// save changes to the databank
 
-			settingsView.geteContact1Menu().setEnabled(false);
-			settingsView.geteContact2Menu().setEnabled(false);
-			settingsView.geteContact3Menu().setEnabled(false);
+				// settingsModel.getDbConnector().getLoginAccount().setEmail(getEmailTextField().getValue());
+				// settingsModel.getDbConnector().getLoginAccount().setFirstName(getFirstNAmeTextField().getValue());
+				// settingsModel.getDbConnector().getLoginAccount().setLastName(getLastNameTextField().getValue());
+				// settingsModel.getDbConnector().getLoginAccount().setEmail(getEmailTextField().getValue());
+				// settingsModel.getDbConnector().getLoginAccount().setStreet(getStreetTextField().getValue());
+				// settingsModel.getDbConnector().getLoginAccount().setZipCode(getZipCodeTextField().getValue());
+				// settingsModel.getDbConnector().getLoginAccount().setCity(getCityTextField().getValue());
+				// settingsModel.getDbConnector().getLoginAccount().setPassword(getPasswordTextField().getValue());
+				//
+				// SAVE THE CHOSEN VALUES
+				// settingsModel.getDbConnector().getLoginAccount().eContact1 =
+				// settingsView.geteContact1Menu().getValue();
+				// settingsModel.getDbConnector().getLoginAccount().eContact2 =
+				// settingsView.geteContact2Menu().getValue();
+				// settingsModel.getDbConnector().getLoginAccount().eContact3 =
+				// settingsView.geteContact3Menu().getValue();
 
-			// set the chosen values to the eContacts1,2,3
-//			 settingsModel.getDbConnector().getLoginAccount().eContact1 = settingsView.geteContact1Menu().getValue();
-//			 settingsModel.getDbConnector().getLoginAccount().eContact2 = settingsView.geteContact2Menu().getValue();
-//			 settingsModel.getDbConnector().getLoginAccount().eContact3 = settingsView.geteContact3Menu().getValue();
-//			settingsModel.getDbConnector().REFRESH	
-			
-			
-			
-			
-			
+				// settingsModel.getDbConnector().REFRESH
+
 			}
 		});
-
-
 	}
 
-		/**
-		 * load contatcs on the dropdown menu Emergency contacs
-		 */
-	public void loadContacts() {
+	/**
+	 * Add function to the Button Econtacts Edit
+	 * 
+	 * @param btn
+	 */
+	@Override
+	public void EContactEditButtonClick(Button btn) {
+		btn.addClickListener(e -> {
+			if (btn.getCaption().equals("Edit")) {
+				btn.setCaption("Save");
+				settingsView.setContactMenusState(true);
 
-		settingsView.geteContact1Menu().setItems(settingsModel.getDbConnector().getLoginAccount().getContacts());
-		settingsView.geteContact2Menu().setItems(settingsModel.getDbConnector().getLoginAccount().getContacts());
-		settingsView.geteContact3Menu().setItems(settingsModel.getDbConnector().getLoginAccount().getContacts());
+			} else {
+				btn.setCaption("Edit");
+				settingsView.setContactMenusState(false);
 
-		// Use the name property for item captions
-		settingsView.geteContact1Menu().setItemCaptionGenerator(Contact::getName);
-		settingsView.geteContact2Menu().setItemCaptionGenerator(Contact::getName);
-		settingsView.geteContact3Menu().setItemCaptionGenerator(Contact::getName);
+			}
+
+		});
+	}
+
+	/**
+	 * Add function to the Button Logout
+	 * 
+	 * @param btn
+	 */
+	public void logOutButtonClick(Button btn) {
+		btn.addClickListener(e -> {
+			ui.getSession().setAttribute("user", null);
+			navigator.navigateTo("LoginView");
+			
+		});
 
 	}
+	
 	
 	
 

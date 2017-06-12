@@ -155,7 +155,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 		return bytes;
 	}
 	
-	private void initializeViewsAfterLogin(){
+	public void initializeViewsAfterLogin(){
 		//Main View
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
     	DiaryDashViewImpl diaryDashViewImpl = new DiaryDashViewImpl();
@@ -180,8 +180,9 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
     	
 
     	//Settings View
-    	SettingsViewModel settingsModel = new SettingsViewModel();
     	SettingsViewImpl settingsViewImpl = new SettingsViewImpl();   	
+    	SettingsViewModel settingsModel = new SettingsViewModel();
+    	
     	new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel, navigator);
     	
 
