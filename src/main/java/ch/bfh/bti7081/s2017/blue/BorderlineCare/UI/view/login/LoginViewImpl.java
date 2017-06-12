@@ -14,13 +14,17 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.LoginViewButtonClickListener;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.login.LoginViewPresenter;
 
 /**
  * @author cpolo
  *
  */
 public class LoginViewImpl extends CustomComponent implements View {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -993511150384312326L;
+
 	// Name of the View
 	public static final String NAME = "LoginView";
 

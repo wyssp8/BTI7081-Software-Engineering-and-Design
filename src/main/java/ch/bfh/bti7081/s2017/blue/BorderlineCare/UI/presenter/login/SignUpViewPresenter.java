@@ -34,7 +34,6 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 	private String generatedSecuredPasswordHash;
 	
 	public SignUpViewPresenter(SignUpViewImpl signUpViewImpl, Navigator navigator,LoginViewModel loginViewModel) {
-		//this.signUpViewModel = signUpViewModel;
 		this.signUpViewImpl = signUpViewImpl;
 		this.loginViewModel = loginViewModel;
 		this.navigator = navigator;
@@ -43,21 +42,11 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 
 	@Override
 	public void enter(ViewChangeEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void createAccButtonClick() {
-		//First Name						
-		//Last Name	
-		//Street
-		//Zip Code
-		//City
-		//Email
-		//Password
-		//Password Confirmation
-		
 		try {
 			generatedSecuredPasswordHash = generateStorngPasswordHash(signUpViewImpl.getPassword());
 		} catch (NoSuchAlgorithmException e) {
@@ -67,7 +56,7 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 		}
         System.out.println(generatedSecuredPasswordHash);
 		
-        LoginAccount loginaccount = new LoginAccount(
+        LoginAccount loginAccount = new LoginAccount(
 				signUpViewImpl.getFirstName(),
 				signUpViewImpl.getLastName(),
 				signUpViewImpl.getStreet(),
@@ -76,9 +65,10 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 				signUpViewImpl.getEmail(),
 				generatedSecuredPasswordHash);
         
-		loginViewModel.setLoginAccount(loginaccount);
+		//loginViewModel.setLoginAccount(loginAccount);
 		try {
-			DBConnector.getDBConnector().addNewLoginAccountToDB(loginaccount);
+			loginViewModel.addNewLoginAccount(loginAccount);
+			
 		} catch (Exception e) {
 			System.err.println("EMail-Adresse bereits registriert");
 		}

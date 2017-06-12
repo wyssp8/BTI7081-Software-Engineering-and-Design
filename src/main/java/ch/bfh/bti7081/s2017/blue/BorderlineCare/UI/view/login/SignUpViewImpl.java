@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.data.Binder;
-import com.vaadin.data.Validator;
-import com.vaadin.data.converter.StringToIntegerConverter;
-import com.vaadin.data.util.BeanUtil;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.navigator.View;
@@ -19,10 +16,14 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.LoginViewButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.SignUpViewButtonClickListener;
 
 public class SignUpViewImpl extends CustomComponent implements View {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1426865475605876943L;
 
 	// View Name
 	public static final String NAME = "SignUpView";
@@ -69,7 +70,6 @@ public class SignUpViewImpl extends CustomComponent implements View {
 		// Textfields
 		firstName = new TextField();
 		firstName.setCaption("First Name");
-
 		binder.forField(firstName)
 				.withValidator(new StringLengthValidator("Must be between 2 and 20 characters long", 2, 20))
 				.bind(LoginAccount::getFirstName, LoginAccount::setFirstName);
@@ -135,6 +135,7 @@ public class SignUpViewImpl extends CustomComponent implements View {
 		vLayout.addComponent(buttonCreateAcc);
 		vLayout.addComponent(buttonCancel);
 
+		//Check if all fields are valid everytime something gets changed
 		binder.addStatusChangeListener(event -> {
 			if (binder.isValid()) {
 				buttonCreateAcc.setEnabled(true);

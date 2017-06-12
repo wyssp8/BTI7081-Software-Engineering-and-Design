@@ -72,7 +72,6 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 			username = loginViewModel.getLoginAccount().getEmail();
 			ui.getSession().setAttribute("user", username);
 			initializeViewsAfterLogin();
-			loginViewImpl.setLoginLabel("logged in");
 			navigator.navigateTo("HomeView");
 		} 
 	}
@@ -86,7 +85,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	@Override
 	public void bypassButtonClick() {
 		DBConnector.getDBConnector().setAccountEmail("wyssp8@gmail.com");
-		username = "bypass";
+		username = "wyssp8@gmail.com";
 		ui.getSession().setAttribute("user", username);
 		initializeViewsAfterLogin();
 		navigator.navigateTo("HomeView");
@@ -95,10 +94,8 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	@Override
 	public boolean validateLogin() {
 		try{
-			DBConnector.getDBConnector().setAccountEmail(loginViewImpl.getLoginName());
-			LoginAccount loginAccount = DBConnector.getDBConnector().getLoginAccount();
-			loginViewModel.setLoginAccount(loginAccount);
-			
+			loginViewModel.setLoginAccountEmail(loginViewImpl.getLoginName());
+			LoginAccount loginAccount = loginViewModel.getLoginAccount();		
 			try {
 				passwordMatched = validatePassword(loginViewImpl.getLoginPassword(), loginAccount.getPassword());
 			} catch (NoSuchAlgorithmException e) {
@@ -110,8 +107,6 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 			userMatched = validateUsername(loginAccount);
 			if (userMatched && passwordMatched) {
-				loginViewModel.setLoginAccountEmail(loginViewImpl.getLoginName());
-				DBConnector.getDBConnector().setAccountEmail(loginViewImpl.getLoginName());
 				return true;
 			}
 		}catch(NullPointerException e){
