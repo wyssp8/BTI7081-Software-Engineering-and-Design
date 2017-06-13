@@ -35,7 +35,6 @@ public class LoginViewImpl extends CustomComponent implements View {
 	private List<LoginViewButtonClickListener> listeners = new ArrayList<LoginViewButtonClickListener>();
 	private Button buttonLogin;
 	private Button buttonSignUp;
-	private Button buttonBypass;
 	private TextField loginName;
 	private PasswordField loginPassword;
 
@@ -85,13 +84,6 @@ public class LoginViewImpl extends CustomComponent implements View {
 			}
 		});
 		
-		//To be removed in final version
-		buttonBypass = new Button("Bypass Login");
-		buttonBypass.addClickListener(e -> {
-			for (LoginViewButtonClickListener listener : listeners) {
-				listener.bypassButtonClick();
-			}
-		});
 
 		// Add all components
 		content.addComponent(loginName);
@@ -99,7 +91,6 @@ public class LoginViewImpl extends CustomComponent implements View {
 		content.addComponent(hLayout);
 		hLayout.addComponent(buttonLogin);
 		hLayout.addComponent(buttonSignUp);
-		content.addComponent(buttonBypass);
 		
 		content.setSizeUndefined(); // Shrink to fit
 		content.setMargin(true);

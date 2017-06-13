@@ -15,31 +15,37 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
  */
 public class DiaryViewModel {
 	
-	private List<DiaryEntry> diaryEntry;
-	
-	
+	private List<DiaryEntry> diaryEntries;
 	
 	public DiaryViewModel(){
-		diaryEntry = new ArrayList<>();
+		diaryEntries = new ArrayList<>();
 		
 		DBConnector dbConnector = DBConnector.getDBConnector();
 		LoginAccount loginAccount = dbConnector.getLoginAccount();
 		
-		for (DiaryEntry diaryEntries : loginAccount.getDiaryEntries()) {
-			diaryEntry.add(diaryEntries);
+		for (DiaryEntry diaryEntry : loginAccount.getDiaryEntries()) {
+			diaryEntries.add(diaryEntry);
 		}
 	}
 	
-	public List<DiaryEntry> getDiaryEntry(){
-		return this.diaryEntry;
+	public List<DiaryEntry> getDiaryEntries(){
+		return this.diaryEntries;
 	}
 	
-	public DiaryEntry getLatestDiaryEntry(){
-		return diaryEntry.get(diaryEntry.size()-1);
+	/**
+	 * Get the newest diary Entry
+	 * @return
+	 * @throws Exception No diary Entry available
+	 */
+	public DiaryEntry getLatestDiaryEntry() throws Exception{
+		if(diaryEntries.isEmpty()){
+			throw new Exception("No diary entry");
+		}
+		return diaryEntries.get(diaryEntries.size()-1);
 	}
 
 	/**
-	 * 
+	 * Validate Diary entry input
 	 * 
 	 * @param dateInput
 	 * @param radioInput

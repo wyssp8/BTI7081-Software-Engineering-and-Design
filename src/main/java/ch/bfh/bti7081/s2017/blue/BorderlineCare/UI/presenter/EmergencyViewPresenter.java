@@ -2,8 +2,6 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
 import com.vaadin.server.Page;
 
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.EmergencyButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;

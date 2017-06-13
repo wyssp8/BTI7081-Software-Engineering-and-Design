@@ -35,7 +35,7 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 		dbconnector = DBConnector.getDBConnector();
 		diaryEntry = dbconnector.getLoginAccount().getDiaryEntries();
 
-		diaryViewImpl.initializeDiaryEntry(diaryEntry); //Lädt die Einträge von der DB ins Grid
+		diaryViewImpl.initializeDiaryEntryGrid(diaryEntry); //Lädt die Einträge von der DB ins Grid
 		diaryViewImpl.addDiaryButtonClickListener(this);
 		
 }
@@ -48,11 +48,9 @@ public class DiaryViewPresenter implements DiaryButtonClickListener {
 	@Override
 	public void addButtonClick(String dateInput, String radioInput, String titleInput, String diaryInput) {
 		if(diaryViewModel.validateDiaryEntry(dateInput, radioInput, titleInput, diaryInput)){
-			
-			dbconnector.getLoginAccount().getDiaryEntries().add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput, dbconnector.getLoginAccount()));
 			diaryEntry.add(new DiaryEntry(dateInput, radioInput, titleInput, diaryInput, dbconnector.getLoginAccount()));
 			dbconnector.writeDataToDB();
-			diaryViewImpl.initializeDiaryEntry(this.diaryEntry); //Inhalt wird ins Grid geschrieben
+			diaryViewImpl.initializeDiaryEntryGrid(this.diaryEntry); //Inhalt wird ins Grid geschrieben
 		}
 		else {
 			Notification.show("Please fill out all field", Notification.TYPE_WARNING_MESSAGE);

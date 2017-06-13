@@ -3,12 +3,15 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.CalmDownExercise;
 /**
  * Login Account object
@@ -28,12 +31,15 @@ public class LoginAccount {
 	private String city;
 	private String password;
 	
-	@OneToMany(mappedBy = "loginAccount")
+	@OneToMany(mappedBy = "loginAccount", cascade=CascadeType.PERSIST)
 	private Set<CalmDownExercise> calmDownExercises;
-	@OneToMany(mappedBy = "loginAccount")
+	@OneToMany(mappedBy = "loginAccount", cascade=CascadeType.PERSIST)
 	private Set<Contact> contacts;
-	@OneToMany(mappedBy = "loginAccount")
+	@OneToMany(mappedBy = "loginAccount", cascade=CascadeType.PERSIST)
 	private Set<DiaryEntry> diaryEntries;
+	
+	@OneToOne(mappedBy = "loginAccount", cascade=CascadeType.PERSIST)
+	private SettingsViewModel settingsViewModel;
 	
 	public LoginAccount(){
 	}
@@ -130,4 +136,12 @@ public class LoginAccount {
 		this.diaryEntries = diaryEntries;
 	}
 
+	public SettingsViewModel getSettingsViewModel() {
+		return settingsViewModel;
+	}
+
+	public void setSettingsViewModel(SettingsViewModel settingsViewModel) {
+		this.settingsViewModel = settingsViewModel;
+	}
+	
 }

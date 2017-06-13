@@ -106,7 +106,7 @@ public class SettingsViewPresenter implements SettingsClickListener {
 
 		} else {
 			btn.setCaption("Edit");
-			settingsModel.seteContact1(settingsView.geteContact1());
+			settingsModel.setContact(settingsView.geteContact1());
 			settingsModel.saveUserSettignsToDB(settingsView.getEmailTextField().getValue(),
 					settingsView.getFirstNameTextField().getValue(), settingsView.getLastNameTextField().getValue(),
 					settingsView.getStreetTextField().getValue(), settingsView.getZipCodeTextField().getValue(),

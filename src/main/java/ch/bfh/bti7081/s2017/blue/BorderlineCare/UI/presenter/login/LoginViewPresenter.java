@@ -13,16 +13,17 @@ import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.Util;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryDashViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExerciseDashViewPresenter;
@@ -58,6 +59,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	private boolean userMatched;
 	private String username;
 	private UI ui = UI.getCurrent();
+	private Util util = new Util();
 
 	public LoginViewPresenter(LoginViewModel loginViewModel, LoginViewImpl loginViewImpl, Navigator navigator) {
 		this.loginViewModel = loginViewModel;
@@ -88,22 +90,12 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	}
 
 	@Override
-	public void bypassButtonClick() {
-		DBConnector.getDBConnector().setAccountEmail("wyssp8@gmail.com");
-		username = "wyssp8@gmail.com";
-		ui.getSession().setAttribute("user", username);
-		initializeViewsAfterLogin();
-		navigator.navigateTo("HomeView");
-	}
-
-
-	@Override
 	public boolean validateLogin() {
 		try{
 			loginViewModel.setLoginAccountEmail(loginViewImpl.getLoginName());
 			LoginAccount loginAccount = loginViewModel.getLoginAccount();		
 			try {
-				passwordMatched = validatePassword(loginViewImpl.getLoginPassword(), loginAccount.getPassword());
+				passwordMatched = util.validatePassword(loginViewImpl.getLoginPassword(), loginAccount.getPassword());
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			} catch (InvalidKeySpecException e) {
@@ -111,7 +103,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 			}
 			System.out.println(passwordMatched);
 
-			userMatched = validateUsername(loginAccount);
+			userMatched = util.validateUsername(loginAccount,loginViewImpl.getLoginName());
 			if (userMatched && passwordMatched) {
 				return true;
 			}
@@ -124,48 +116,12 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 	@Override
 	public void enter(ViewChangeEvent event) {
 	}
-
-	// validate username
-	private boolean validateUsername(LoginAccount loginAccount) {
-		if (loginViewImpl.getLoginName().equals(loginAccount.getEmail())) {
-			return true;
-		}
-		return false;
-	}
-
-	// validate secure password for login -->model/util class
-	private static boolean validatePassword(String originalPassword, String storedPassword)
-			throws NoSuchAlgorithmException, InvalidKeySpecException {
-		String[] parts = storedPassword.split(":");
-		int iterations = Integer.parseInt(parts[0]);
-		byte[] salt = fromHex(parts[1]);
-		byte[] hash = fromHex(parts[2]);
-
-		PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(), salt, iterations, hash.length * 8);
-		SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-		byte[] testHash = skf.generateSecret(spec).getEncoded();
-
-		int diff = hash.length ^ testHash.length;
-		for (int i = 0; i < hash.length && i < testHash.length; i++) {
-			diff |= hash[i] ^ testHash[i];
-		}
-		return diff == 0;
-	}
-
-	private static byte[] fromHex(String hex) throws NoSuchAlgorithmException {
-		byte[] bytes = new byte[hex.length() / 2];
-		for (int i = 0; i < bytes.length; i++) {
-			bytes[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
-		}
-		return bytes;
-	}
 	
 	public void initializeViewsAfterLogin(){
 		//Main View
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
     	DiaryDashViewImpl diaryDashViewImpl = new DiaryDashViewImpl();
         EmergencyViewImpl emergencyViewImpl = new EmergencyViewImpl();
-    	EmergencyViewModel emergencyViewModel = new EmergencyViewModel();
     	MainViewImpl mainView = new MainViewImpl(exerciseDashViewImpl,diaryDashViewImpl,emergencyViewImpl);
     	MainViewModel model = new MainViewModel();
     	new MainViewPresenter(model, mainView);
@@ -201,6 +157,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
      
     	new ExerciseDashViewPresenter(exerciseDashViewImpl, exercisesViewModel, view);
     	new EmergencyViewPresenter(emergencyViewImpl,settingsModel,view);
+    	new DiaryDashViewPresenter(diaryViewModel, diaryDashViewImpl, view);
     	
     	navigator.addView("HomeView", view);
         
