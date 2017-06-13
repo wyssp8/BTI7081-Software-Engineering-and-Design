@@ -32,7 +32,7 @@ public class DiaryViewModelTest {
 	@Test
 	public void testGetLatestDiaryEntry(){
 		DiaryViewModel model = new DiaryViewModel();
-		model.getDiaryEntry().clear();
+		model.getDiaryEntries().clear();
 		boolean gotException = false;
 		try {
 			model.getLatestDiaryEntry();
@@ -41,7 +41,7 @@ public class DiaryViewModelTest {
 		}
 		assertTrue(gotException);
 		DiaryEntry diaryEntry = new DiaryEntry("01.01.2017", "Good", "Title", "Entry", new LoginAccount());
-		model.getDiaryEntry().add(diaryEntry);
+		model.getDiaryEntries().add(diaryEntry);
 		try {
 			assertEquals(model.getLatestDiaryEntry(), diaryEntry);
 		} catch (Exception e) {
