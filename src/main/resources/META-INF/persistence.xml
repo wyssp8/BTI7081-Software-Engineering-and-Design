@@ -6,6 +6,7 @@
         <class>ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry</class>
         <class>ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.CalmDownExercise</class>
         <class>ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount</class>
+        <class>ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/borderlinecare?useTimezone=true&amp;serverTimezone=UTC"/>
