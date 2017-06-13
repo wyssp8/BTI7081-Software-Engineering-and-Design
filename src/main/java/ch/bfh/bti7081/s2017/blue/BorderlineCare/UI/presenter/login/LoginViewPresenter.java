@@ -17,7 +17,6 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.Util;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
-import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.EmergencyViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ExercisesViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.MainViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
@@ -133,7 +132,6 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
     	ExerciseDashViewImpl exerciseDashViewImpl = new ExerciseDashViewImpl();
     	DiaryDashViewImpl diaryDashViewImpl = new DiaryDashViewImpl();
         EmergencyViewImpl emergencyViewImpl = new EmergencyViewImpl();
-    	EmergencyViewModel emergencyViewModel = new EmergencyViewModel();
     	MainViewImpl mainView = new MainViewImpl(exerciseDashViewImpl,diaryDashViewImpl,emergencyViewImpl);
     	MainViewModel model = new MainViewModel();
     	new MainViewPresenter(model, mainView);
