@@ -23,6 +23,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.SettingsViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginViewModel;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactViewPresenter;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryDashViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.EmergencyViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ExerciseDashViewPresenter;
@@ -201,6 +202,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
      
     	new ExerciseDashViewPresenter(exerciseDashViewImpl, exercisesViewModel, view);
     	new EmergencyViewPresenter(emergencyViewImpl,settingsModel,view);
+    	new DiaryDashViewPresenter(diaryViewModel, diaryDashViewImpl, view);
     	
     	navigator.addView("HomeView", view);
         

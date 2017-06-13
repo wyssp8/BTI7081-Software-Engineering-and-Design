@@ -34,7 +34,10 @@ public class DiaryViewModel {
 		return this.diaryEntry;
 	}
 	
-	public DiaryEntry getLatestDiaryEntry(){
+	public DiaryEntry getLatestDiaryEntry() throws Exception{
+		if(diaryEntry.isEmpty()){
+			throw new Exception("No diary entry");
+		}
 		return diaryEntry.get(diaryEntry.size()-1);
 	}
 
