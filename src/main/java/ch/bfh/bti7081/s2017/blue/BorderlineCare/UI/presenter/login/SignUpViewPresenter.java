@@ -14,6 +14,7 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 
@@ -66,15 +67,15 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 				signUpViewImpl.getCity(),
 				signUpViewImpl.getEmail(),
 				generatedSecuredPasswordHash);
-        
-		//loginViewModel.setLoginAccount(loginAccount);
 		try {
-			loginViewModel.addNewLoginAccount(loginAccount);
+			loginViewModel.setLoginAccount(loginAccount);
+			navigator.navigateTo("LoginView");
 			
 		} catch (Exception e) {
-			System.err.println("EMail-Adresse bereits registriert");
+			Notification.show("EMail-Adresse bereits registriert", "try again", Notification.Type.WARNING_MESSAGE);
+			
 		}
-		navigator.navigateTo("LoginView");
+		
 	}
 
 	@Override
