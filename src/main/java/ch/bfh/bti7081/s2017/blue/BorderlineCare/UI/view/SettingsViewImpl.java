@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.vaadin.data.Binder;
 import com.vaadin.data.validator.EmailValidator;
+import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
@@ -19,6 +20,7 @@ import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.SettingsClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.SettingsView;
 
@@ -30,7 +32,7 @@ public class SettingsViewImpl extends CustomComponent implements SettingsView {
 
 	private static final long serialVersionUID = 1L;
 
-	private Binder<String> binder;
+	private Binder<SettingsViewImpl> binder;
 
 	private Accordion accordion = new Accordion();
 
@@ -110,7 +112,7 @@ public class SettingsViewImpl extends CustomComponent implements SettingsView {
 
 			for (SettingsClickListener listener : listeners) {
 				listener.AccEditButtonClick(btAccEdit);
-				}
+			}
 		});
 
 		btEContEdit.addClickListener(e -> {
@@ -118,14 +120,12 @@ public class SettingsViewImpl extends CustomComponent implements SettingsView {
 				listener.EContactEditButtonClick(btEContEdit);
 			}
 		});
-		
-		
+
 		btLogOut.addClickListener(e -> {
 			for (SettingsClickListener listener : listeners) {
 				listener.logOutButtonClick();
 			}
 		});
-
 
 		setUserInfoFieldsState(false);
 		setContactMenusState(false);
@@ -133,7 +133,6 @@ public class SettingsViewImpl extends CustomComponent implements SettingsView {
 		setCompositionRoot(accordion);
 	}
 
-	// colocar aqui o botão de edição de account.
 
 	/**
 	 * Will receive a dbConnector and save the chosen eContacst to the account
@@ -143,9 +142,7 @@ public class SettingsViewImpl extends CustomComponent implements SettingsView {
 	 */
 	public void saveEcontactsOnDB(DBConnector dbConnector) {
 
-		// dbConnector.getLoginAccount().setEContact1(eContact1);
-		// dbConnector.getLoginAccount().setEContact2(eContact2);
-		// dbConnector.getLoginAccount().setEContact3(eContact3);
+//		 dbConnector.getLoginAccount().setEContact1(eContact1);
 
 	}
 
@@ -277,22 +274,6 @@ public class SettingsViewImpl extends CustomComponent implements SettingsView {
 		this.eContact1Menu = eContact1Menu;
 	}
 
-	public ComboBox<Contact> geteContact2Menu() {
-		return eContact2Menu;
-	}
-
-	public void seteContact2Menu(ComboBox<Contact> eContact2Menu) {
-		this.eContact2Menu = eContact2Menu;
-	}
-
-	public ComboBox<Contact> geteContact3Menu() {
-		return eContact3Menu;
-	}
-
-	public void seteContact3Menu(ComboBox<Contact> eContact3Menu) {
-		this.eContact3Menu = eContact3Menu;
-	}
-
 	/**
 	 * Enable and disable edition ContactMenu
 	 * 
@@ -339,16 +320,7 @@ public class SettingsViewImpl extends CustomComponent implements SettingsView {
 	 * Add the contact components to the layout
 	 */
 	public void addContactSettings() {
-		eContactSettings.addComponents(eContact1Menu, new Label("Emergency Contact 1"), eContact2Menu,
-				new Label("Emergency Contact 2"), eContact3Menu, new Label("Emergency Contact 3"), btEContEdit);
-	}
-
-	/**
-	 * Validate the information input on the text field
-	 */
-	public void validateEmail(TextField tf) {
-		binder.forField(tf).withValidator(new EmailValidator("This doesn't look like a valid email address"));
-
+		eContactSettings.addComponents(eContact1Menu, new Label("Emergency Contact"), btEContEdit);
 	}
 
 }
