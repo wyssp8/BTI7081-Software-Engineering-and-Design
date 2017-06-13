@@ -11,11 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
-
-import com.vaadin.ui.TextField;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
@@ -108,7 +105,7 @@ public class SettingsViewModel implements Serializable{
 			String city, 
 			String password, 
 			Contact contact ) {
-
+		 loginAccount = dbConnector.getLoginAccount();
 		 loginAccount.setEmail(email);
 		 loginAccount.setFirstName(fName);
 		 loginAccount.setLastName(lName);
@@ -117,10 +114,7 @@ public class SettingsViewModel implements Serializable{
 		 loginAccount.setCity(city);
 		 loginAccount.setPassword(password);
 		 setContact(contact);
-		
-		
-		dbConnector.writeDataToDB();
-
+		 dbConnector.writeDataToDB();
 	}
 
 
