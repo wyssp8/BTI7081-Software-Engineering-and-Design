@@ -112,7 +112,7 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 				String radioInput = getRadioGroup();
 				String titleInput = getTextField();
 				String diaryInput = getTextArea();
-				
+				logger.log(Level.INFO,"call addButtonClick");
 				listener.addButtonClick(dateInput, radioInput, titleInput, diaryInput);
 			}	
 		});
@@ -186,7 +186,7 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	}
 	
 
-	public void initializeDiaryEntry(Set<DiaryEntry> diaryEntry){
+	public void initializeDiaryEntryGrid(Set<DiaryEntry> diaryEntry){
 		grid.setItems(diaryEntry);
 	}
 	
