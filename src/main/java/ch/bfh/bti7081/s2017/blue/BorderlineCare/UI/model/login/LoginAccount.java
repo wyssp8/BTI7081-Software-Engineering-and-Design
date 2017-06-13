@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -28,11 +29,11 @@ public class LoginAccount {
 	private String city;
 	private String password;
 	
-	@OneToMany(mappedBy = "loginAccount")
+	@OneToMany(mappedBy = "loginAccount", cascade=CascadeType.PERSIST)
 	private Set<CalmDownExercise> calmDownExercises;
-	@OneToMany(mappedBy = "loginAccount")
+	@OneToMany(mappedBy = "loginAccount", cascade=CascadeType.PERSIST)
 	private Set<Contact> contacts;
-	@OneToMany(mappedBy = "loginAccount")
+	@OneToMany(mappedBy = "loginAccount", cascade=CascadeType.PERSIST)
 	private Set<DiaryEntry> diaryEntries;
 	
 	public LoginAccount(){
