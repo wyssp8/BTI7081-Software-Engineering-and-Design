@@ -33,8 +33,6 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		this.contacts = dbconnector.getLoginAccount().getContacts();
 		initializeContacts(this.contacts);
 
-		contacts = dbconnector.getLoginAccount().getContacts();
-
 		contactViewImpl.addContactButtonClickListeneer(this);
 		contactViewImpl.initializeDeletePopup();
 		contactViewImpl.initNewContactPopup();
