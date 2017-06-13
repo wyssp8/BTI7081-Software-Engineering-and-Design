@@ -10,9 +10,6 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
  */
 public class LoginViewModel {
 
-	private DBConnector dbConnector; 
-	private LoginAccount loginAccount;
-	
 	public LoginViewModel(){
 	}
 
@@ -23,14 +20,11 @@ public class LoginViewModel {
 	
 	//Speicher auf Accounttabelle der Datenbank
 	public void setLoginAccount(LoginAccount loginAccount) {
-		this.loginAccount = loginAccount;
+		DBConnector.getDBConnector().addNewLoginAccountToDB(loginAccount);
 	}
 	
 	public void setLoginAccountEmail(String email) {
 		DBConnector.getDBConnector().setAccountEmail(email);
 	}
 	
-	public void addNewLoginAccount(LoginAccount loginAccount){
-		DBConnector.getDBConnector().addNewLoginAccountToDB(loginAccount);
-	}
 }
