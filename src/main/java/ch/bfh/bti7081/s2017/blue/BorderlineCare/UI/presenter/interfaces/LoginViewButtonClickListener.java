@@ -1,8 +1,11 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-
+/**
+ * Interface for the LoginView for the login and signup button
+ * and to validate the entered login credentials
+ * @author cpolo
+ *
+ */
 public interface LoginViewButtonClickListener {
 	public void loginButtonClick();
 	public void signUpButtonClick();

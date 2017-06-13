@@ -8,7 +8,10 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -35,13 +38,25 @@ public class LoginViewImpl extends CustomComponent implements View {
 	private Button buttonBypass;
 	private TextField loginName;
 	private PasswordField loginPassword;
-	private Label loginLabel;
 
 	public LoginViewImpl() {
+
 
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.setSizeFull();
 		setCompositionRoot(vLayout);
+		
+		Panel panel = new Panel("Login");
+		panel.setSizeUndefined();
+		panel.addStyleName("loginPanel");
+		vLayout.addComponent(panel);
+		
+		FormLayout content = new FormLayout();
+		content.addStyleName("loginPanel");
+		
+		HorizontalLayout hLayout = new HorizontalLayout();
+		
+		
 
 		// Textfields
 		loginName = new TextField();
@@ -52,14 +67,9 @@ public class LoginViewImpl extends CustomComponent implements View {
 
 		// Labels
 		loginPassword = new PasswordField();
-		loginPassword.setCaption("Password");
+		loginPassword.setCaption("Password");	
 		
-		//Labels
-		loginLabel = new Label();
-		loginLabel.setCaption("not logged in");
-		
-		
-		// Buttons
+		// Button Login
 		buttonLogin = new Button("Login");
 		buttonLogin.addClickListener(e -> {
 			for (LoginViewButtonClickListener listener : listeners) {
@@ -67,13 +77,15 @@ public class LoginViewImpl extends CustomComponent implements View {
 			}
 		});
 
+		// Button SignUp
 		buttonSignUp = new Button("Sign Up");
 		buttonSignUp.addClickListener(e -> {
 			for (LoginViewButtonClickListener listener : listeners) {
 				listener.signUpButtonClick();
 			}
 		});
-
+		
+		//To be removed in final version
 		buttonBypass = new Button("Bypass Login");
 		buttonBypass.addClickListener(e -> {
 			for (LoginViewButtonClickListener listener : listeners) {
@@ -82,19 +94,16 @@ public class LoginViewImpl extends CustomComponent implements View {
 		});
 
 		// Add all components
-		vLayout.addComponent(loginName);
-		vLayout.addComponent(loginPassword);
-		vLayout.addComponent(buttonLogin);
-		vLayout.addComponent(buttonSignUp);
-		vLayout.addComponent(buttonBypass);
-		vLayout.addComponent(loginLabel);
-		vLayout.setComponentAlignment(buttonLogin, Alignment.MIDDLE_CENTER);
-		vLayout.setComponentAlignment(buttonSignUp, Alignment.MIDDLE_CENTER);
-		vLayout.setComponentAlignment(buttonBypass, Alignment.MIDDLE_CENTER);
-		vLayout.setComponentAlignment(loginName, Alignment.MIDDLE_CENTER);
-		vLayout.setComponentAlignment(loginPassword, Alignment.MIDDLE_CENTER);
-
-
+		content.addComponent(loginName);
+		content.addComponent(loginPassword);
+		content.addComponent(hLayout);
+		hLayout.addComponent(buttonLogin);
+		hLayout.addComponent(buttonSignUp);
+		content.addComponent(buttonBypass);
+		
+		content.setSizeUndefined(); // Shrink to fit
+		content.setMargin(true);
+		panel.setContent(content);
 	}
 
 	public void addListener(LoginViewButtonClickListener loginClickListener) {
@@ -107,10 +116,6 @@ public class LoginViewImpl extends CustomComponent implements View {
 
 	public String getLoginPassword() {
 		return loginPassword.getValue();
-	}
-
-	public void setLoginLabel(String loginLabel) {
-		this.loginLabel.setCaption(loginLabel);
 	}
 
 	@Override

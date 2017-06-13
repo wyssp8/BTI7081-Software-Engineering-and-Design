@@ -39,21 +39,13 @@ public class MyUI extends UI {
     	//Login View
     	LoginViewModel loginViewModel = new LoginViewModel();
     	LoginViewImpl loginViewImpl = new LoginViewImpl();
-    	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl, navigator);
-    	
-    	//SignUp View
-    	//SignUpViewModel signUpViewModel = new SignUpViewModel();
-    	SignUpViewImpl signUpViewImpl = new SignUpViewImpl();
-    	new SignUpViewPresenter(signUpViewImpl, navigator,loginViewModel);
-    	
+    	LoginViewPresenter loginViewPresenter = new LoginViewPresenter(loginViewModel, loginViewImpl, navigator); 	
         navigator.addView("LoginView", loginViewImpl);
-        navigator.addView("SignUpView", signUpViewImpl);
-       // navigator.navigateTo("HomeView");
         
         boolean isLoggedIn = getSession().getAttribute("user") != null;       
         
         if(startup){
-        	//Initialize LoginView the first time(prevents the load of that view after a refresh)
+        	//Initialize LoginView the first time(prevents the loading of that view after a refresh)
         	getNavigator().navigateTo("LoginView");	
         	startup=false;
         } else if(isLoggedIn){
@@ -86,7 +78,6 @@ public class MyUI extends UI {
             }
             @Override
             public void afterViewChange(ViewChangeEvent event) {
-
             }
         });
     }

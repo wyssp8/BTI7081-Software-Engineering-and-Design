@@ -1,8 +1,10 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-
+/**
+ * Interface for the SignUpView adding the methods for the 2 buttons needed
+ * @author cpolo
+ * 
+ */
 public interface SignUpViewButtonClickListener {
 
 	public void createAccButtonClick();

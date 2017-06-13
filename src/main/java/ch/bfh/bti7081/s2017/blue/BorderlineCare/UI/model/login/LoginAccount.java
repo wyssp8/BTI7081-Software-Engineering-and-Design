@@ -10,7 +10,11 @@ import javax.persistence.OneToMany;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.CalmDownExercise;
-
+/**
+ * Login Account object
+ * @author cpolo
+ *
+ */
 @Entity
 public class LoginAccount {
 	

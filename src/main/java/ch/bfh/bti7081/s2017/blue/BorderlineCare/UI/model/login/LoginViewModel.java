@@ -3,9 +3,9 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 
 /**
- * @author cpolo
  * The model for the LoginView. In here are all interactions between the database and
  * the borderlineCare app regarding the login account
+ * @author cpolo
  *
  */
 public class LoginViewModel {

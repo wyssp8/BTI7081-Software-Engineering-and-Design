@@ -11,6 +11,9 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -49,6 +52,17 @@ public class SignUpViewImpl extends CustomComponent implements View {
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.setSizeFull();
 		setCompositionRoot(vLayout);
+		
+		Panel panel = new Panel("Sign Up");
+		panel.setSizeUndefined();
+		panel.addStyleName("signUpPanel");
+		vLayout.addComponent(panel);
+		
+		FormLayout content = new FormLayout();
+		content.addStyleName("signUpPanel");
+		
+		HorizontalLayout hLayout = new HorizontalLayout();
+		
 
 		// Create Account button
 		buttonCreateAcc = new Button("Create");
@@ -116,26 +130,23 @@ public class SignUpViewImpl extends CustomComponent implements View {
 
 
 		// add all components
-		vLayout.addComponent(firstName);
-		vLayout.addComponent(lastName);
-		vLayout.addComponent(street);
-		vLayout.addComponent(zipCode);
-		vLayout.addComponent(city);
-		vLayout.addComponent(email);
-		vLayout.addComponent(password);
-		vLayout.addComponent(passwordConfirmation);
-		vLayout.setComponentAlignment(firstName, Alignment.MIDDLE_CENTER);
-		vLayout.setComponentAlignment(lastName, Alignment.MIDDLE_CENTER);
-		vLayout.setComponentAlignment(street, Alignment.MIDDLE_CENTER);
-		vLayout.setComponentAlignment(zipCode, Alignment.MIDDLE_CENTER);
-		vLayout.setComponentAlignment(city, Alignment.MIDDLE_CENTER);
-		vLayout.setComponentAlignment(email, Alignment.MIDDLE_CENTER);
-		vLayout.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
-		vLayout.setComponentAlignment(passwordConfirmation, Alignment.MIDDLE_CENTER);
-		vLayout.addComponent(buttonCreateAcc);
-		vLayout.addComponent(buttonCancel);
+		content.addComponent(firstName);
+		content.addComponent(lastName);
+		content.addComponent(street);
+		content.addComponent(zipCode);
+		content.addComponent(city);
+		content.addComponent(email);
+		content.addComponent(password);
+		content.addComponent(passwordConfirmation);
+		content.addComponent(hLayout);		
+		hLayout.addComponent(buttonCreateAcc);
+		hLayout.addComponent(buttonCancel);
+		
+		content.setSizeUndefined(); // Shrink to fit
+		content.setMargin(true);
+		panel.setContent(content);
 
-		//Check if all fields are valid everytime something gets changed
+		//Check if all fields are valid everytime one field gets changed
 		binder.addStatusChangeListener(event -> {
 			if (binder.isValid()) {
 				buttonCreateAcc.setEnabled(true);
@@ -144,7 +155,7 @@ public class SignUpViewImpl extends CustomComponent implements View {
 			}
 		});
 	}
-
+	
 	public void addListener(SignUpViewButtonClickListener signUpClickListener) {
 		listeners.add(signUpClickListener);
 	}
@@ -190,4 +201,6 @@ public class SignUpViewImpl extends CustomComponent implements View {
 	public String getPasswordConfirmation() {
 		return passwordConfirmation.getValue();
 	}
+	
+
 }

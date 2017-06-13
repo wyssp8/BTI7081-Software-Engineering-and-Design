@@ -36,6 +36,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ExerciseViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SettingsViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login.LoginViewImpl;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login.SignUpViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.DiaryDashViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.EmergencyViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.ExerciseDashViewImpl;
@@ -78,7 +79,11 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
 	@Override
 	public void signUpButtonClick() {
-		loginViewImpl.setLoginLabel("signed up");
+		
+    	//Initialize SignUp View
+    	SignUpViewImpl signUpViewImpl = new SignUpViewImpl();
+    	new SignUpViewPresenter(signUpViewImpl, navigator,loginViewModel);
+    	navigator.addView("SignUpView", signUpViewImpl);
 		navigator.navigateTo("SignUpView");
 	}
 
@@ -90,6 +95,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 		initializeViewsAfterLogin();
 		navigator.navigateTo("HomeView");
 	}
+
 
 	@Override
 	public boolean validateLogin() {
@@ -127,7 +133,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 		return false;
 	}
 
-	// validate secure password for login -->model
+	// validate secure password for login -->model/util class
 	private static boolean validatePassword(String originalPassword, String storedPassword)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		String[] parts = storedPassword.split(":");

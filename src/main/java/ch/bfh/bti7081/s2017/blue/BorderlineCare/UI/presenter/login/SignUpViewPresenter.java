@@ -14,6 +14,8 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.PasswordField;
+import com.vaadin.ui.TextField;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
@@ -23,9 +25,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.login.SignUpViewImpl;
 
 public class SignUpViewPresenter extends CustomComponent implements SignUpViewButtonClickListener,View {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2288314058697414321L;
 	private SignUpViewImpl signUpViewImpl;
 	private LoginViewModel loginViewModel;
@@ -72,16 +72,12 @@ public class SignUpViewPresenter extends CustomComponent implements SignUpViewBu
 		} catch (Exception e) {
 			System.err.println("EMail-Adresse bereits registriert");
 		}
-		
-					
-		//to do: clear all textfields
 		navigator.navigateTo("LoginView");
 	}
 
 	@Override
 	public void cancelButtonClick() {
-		navigator.navigateTo("LoginView");
-		
+		navigator.navigateTo("LoginView");	
 	}
 	
 	
