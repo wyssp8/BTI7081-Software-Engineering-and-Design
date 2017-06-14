@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
-
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 
@@ -35,7 +34,6 @@ public class SettingsViewModel implements Serializable{
 	@Transient
 	private DBConnector dbConnector;
 	
-	// fazer esses contatdos em uma lista com uma numero fixo que pode-se mudar mais tarde.
 	@Id
 	@GeneratedValue
 	private int id;
@@ -120,6 +118,7 @@ public class SettingsViewModel implements Serializable{
 		 loginAccount.setPassword(password);
 		 loginAccount.getSettingsViewModel().setContact(contact);
 		 dbConnector.writeDataToDB();
+		
 	}
 
 }
