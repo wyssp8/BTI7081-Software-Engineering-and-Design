@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +34,7 @@ public class SettingsViewModel implements Serializable{
 	@Transient
 	private DBConnector dbConnector;
 	
+	// fazer esses contatdos em uma lista com uma numero fixo que pode-se mudar mais tarde.
 	@Id
 	@GeneratedValue
 	private int id;
@@ -102,14 +104,14 @@ public class SettingsViewModel implements Serializable{
 			String city, 
 			String password, 
 			Contact contact ) {
-
-		 dbConnector.getLoginAccount().setEmail(email);
-		 dbConnector.getLoginAccount().setFirstName(fName);
-		 dbConnector.getLoginAccount().setLastName(lName);
-		 dbConnector.getLoginAccount().setStreet(street);
-		 dbConnector.getLoginAccount().setZipCode(zipCode);
-		 dbConnector.getLoginAccount().setCity(city);
-		 dbConnector.getLoginAccount().setPassword(password);
+		 loginAccount = dbConnector.getLoginAccount();
+		 loginAccount.setEmail(email);
+		 loginAccount.setFirstName(fName);
+		 loginAccount.setLastName(lName);
+		 loginAccount.setStreet(street);
+		 loginAccount.setZipCode(zipCode);
+		 loginAccount.setCity(city);
+		 loginAccount.setPassword(password);
 		 setContact(contact);
 		
 		
