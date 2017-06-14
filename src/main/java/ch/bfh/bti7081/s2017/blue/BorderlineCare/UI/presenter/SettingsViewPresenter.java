@@ -114,7 +114,6 @@ public class SettingsViewPresenter implements SettingsClickListener {
 					settingsView.geteContact1Menu().getValue());
 			settingsView.setContactMenusState(false);
 			
-
 		}
 
 	}

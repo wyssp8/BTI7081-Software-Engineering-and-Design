@@ -34,7 +34,6 @@ public class SettingsViewModel implements Serializable{
 	@Transient
 	private DBConnector dbConnector;
 	
-	// fazer esses contatdos em uma lista com uma numero fixo que pode-se mudar mais tarde.
 	@Id
 	@GeneratedValue
 	private int id;
@@ -96,23 +95,23 @@ public class SettingsViewModel implements Serializable{
  * save all the edited user settings in the Datenbank 
  */
 	public void saveUserSettignsToDB(
-			String email, 
-			String fName, 
-			String lName, 
-			String street,
-			String zipCode, 
-			String city, 
-			String password, 
-			Contact contact ) {
-		 loginAccount = dbConnector.getLoginAccount();
-		 loginAccount.setEmail(email);
-		 loginAccount.setFirstName(fName);
-		 loginAccount.setLastName(lName);
-		 loginAccount.setStreet(street);
-		 loginAccount.setZipCode(zipCode);
-		 loginAccount.setCity(city);
-		 loginAccount.setPassword(password);
-		 setContact(contact);
+		String email, 
+		String fName, 
+		String lName, 
+		String street,
+		String zipCode, 
+		String city, 
+		String password, 
+		Contact contact ) {
+		loginAccount = dbConnector.getLoginAccount();
+		loginAccount.setEmail(email);
+		loginAccount.setFirstName(fName);
+		loginAccount.setLastName(lName);
+		loginAccount.setStreet(street);
+		loginAccount.setZipCode(zipCode);
+		loginAccount.setCity(city);
+		loginAccount.setPassword(password);
+		setContact(contact);
 		
 		
 		dbConnector.writeDataToDB();
