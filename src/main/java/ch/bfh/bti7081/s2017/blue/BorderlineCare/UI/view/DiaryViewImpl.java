@@ -26,6 +26,8 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryViewModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.DiaryViewPresenter;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.DiaryButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.DiaryView;
 
@@ -59,6 +61,8 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	private HorizontalLayout buttonLayout;
 	
 	private String title, entry, exampleText, add, deleteSelect, date, status, gridWidth, textAreaWidth, fileResource, logInfo, dateTimeFormat;
+	
+	private DiaryViewPresenter diaryViewPresenter;
 	
 	public DiaryViewImpl(){
 	
@@ -112,8 +116,9 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 				String radioInput = getRadioGroup();
 				String titleInput = getTextField();
 				String diaryInput = getTextArea();
+				
 				logger.log(Level.INFO,"call addButtonClick");
-				listener.addButtonClick(dateInput, radioInput, titleInput, diaryInput);
+				listener.addButtonClick(dateInput, radioInput, titleInput, diaryInput);	
 			}	
 		});
 		
@@ -185,12 +190,12 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		return selectionModel;
 	}
 	
-
-	public void initializeDiaryEntryGrid(Set<DiaryEntry> diaryEntry){
-		grid.setItems(diaryEntry);
-	}
-	
 	public Button getDeleteButton() {
 		return this.buttonDelete;
+	}
+
+	
+	public Grid getGrid(){
+		return this.grid;
 	}
 }
