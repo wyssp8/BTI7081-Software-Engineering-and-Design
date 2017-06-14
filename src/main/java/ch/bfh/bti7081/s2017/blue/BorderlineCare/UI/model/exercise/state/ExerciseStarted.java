@@ -1,5 +1,10 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.state;
-
+/**
+ * Exercise has been started state.
+ * 
+ * @author frutiger
+ *
+ */
 public class ExerciseStarted implements State {
 
 	@Override

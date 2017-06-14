@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
-import java.util.List;
 import java.util.Set;
 
 import com.vaadin.ui.PopupView;

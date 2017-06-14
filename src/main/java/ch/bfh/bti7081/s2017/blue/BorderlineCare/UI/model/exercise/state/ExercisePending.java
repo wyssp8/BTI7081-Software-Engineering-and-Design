@@ -1,5 +1,9 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.state;
-
+/**
+ * Exercise has not been started yet.
+ * @author frutiger
+ *
+ */
 public class ExercisePending implements State {
 
 	@Override

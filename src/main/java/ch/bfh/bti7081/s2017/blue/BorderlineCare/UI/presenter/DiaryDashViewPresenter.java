@@ -17,7 +17,12 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.DiaryBut
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.DiaryViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.NavigationViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.mainView.DiaryDashViewImpl;
-
+/**
+ * Links the diary Model with the diary view in the dashboard.
+ * 
+ * @author frutiger
+ *
+ */
 public class DiaryDashViewPresenter implements ButtonClickListener {
 
 	private final static Logger logger = Logger.getLogger(DiaryDashViewPresenter.class.getName());

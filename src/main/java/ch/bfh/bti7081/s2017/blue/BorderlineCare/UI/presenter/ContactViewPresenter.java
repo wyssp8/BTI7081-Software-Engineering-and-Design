@@ -1,9 +1,7 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
-import java.util.Iterator;
 import java.util.Set;
 
 import com.vaadin.ui.PopupView;
@@ -113,8 +111,6 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 				}
 			}
 		}
-
-		System.out.println("Contacts in tmp");
 		for (Contact contact : tmp) {
 			System.out.println("-> " + contact.getName());
 		}
