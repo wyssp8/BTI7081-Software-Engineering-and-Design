@@ -50,9 +50,13 @@ public class SettingsViewModel implements Serializable{
 	private LoginAccount loginAccount; 
 	
 	public SettingsViewModel(){
-		dbConnector = DBConnector.getDBConnector();
 	}
 	
+	public SettingsViewModel(LoginAccount loginAccount){
+		dbConnector = DBConnector.getDBConnector();
+		this.loginAccount = loginAccount;
+		loginAccount.setSettingsViewModel(this);
+	}
 
 	public Contact getContact() {
 		return contact;
@@ -105,7 +109,8 @@ public class SettingsViewModel implements Serializable{
 			String city, 
 			String password, 
 			Contact contact ) {
-		 loginAccount = dbConnector.getLoginAccount();
+		 
+		 System.out.println(loginAccount.getEmail());
 		 loginAccount.setEmail(email);
 		 loginAccount.setFirstName(fName);
 		 loginAccount.setLastName(lName);
@@ -113,10 +118,8 @@ public class SettingsViewModel implements Serializable{
 		 loginAccount.setZipCode(zipCode);
 		 loginAccount.setCity(city);
 		 loginAccount.setPassword(password);
-		 setContact(contact);
+		 loginAccount.getSettingsViewModel().setContact(contact);
 		 dbConnector.writeDataToDB();
 	}
-
-
 
 }
