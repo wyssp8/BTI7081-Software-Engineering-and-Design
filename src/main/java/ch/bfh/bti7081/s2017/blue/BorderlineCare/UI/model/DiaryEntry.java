@@ -85,9 +85,7 @@ public class DiaryEntry {
 		this.id = id;
 	}
 	
-
 	public void setLoginAccount(LoginAccount loginAccount) {
 		this.loginAccount = loginAccount;
 	}
-
 }
