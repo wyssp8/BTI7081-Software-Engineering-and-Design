@@ -138,7 +138,7 @@ public class LoginViewPresenter extends CustomComponent implements LoginViewButt
 
     	//Settings View
     	SettingsViewImpl settingsViewImpl = new SettingsViewImpl();   	
-    	SettingsViewModel settingsModel = new SettingsViewModel();
+    	SettingsViewModel settingsModel = new SettingsViewModel(DBConnector.getDBConnector().getLoginAccount());
     	
     	new SettingsViewPresenter (settingsModel , settingsViewImpl,  contactModel, navigator);
     	

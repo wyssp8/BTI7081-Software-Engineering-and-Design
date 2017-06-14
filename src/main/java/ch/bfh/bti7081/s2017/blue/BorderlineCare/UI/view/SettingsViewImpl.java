@@ -32,8 +32,6 @@ public class SettingsViewImpl extends CustomComponent implements SettingsView {
 
 	private static final long serialVersionUID = 1L;
 
-	private Binder<SettingsViewImpl> binder;
-
 	private Accordion accordion = new Accordion();
 
 	private List<SettingsClickListener> listeners = new ArrayList<>();
@@ -78,8 +76,6 @@ public class SettingsViewImpl extends CustomComponent implements SettingsView {
 		btAccEdit = new Button("Edit");
 
 		btLogOut = new Button("LogOut");
-
-		binder = new Binder<>();
 
 		eContact1Menu = new ComboBox<>();
 		eContact2Menu = new ComboBox<>();
@@ -134,17 +130,7 @@ public class SettingsViewImpl extends CustomComponent implements SettingsView {
 	}
 
 
-	/**
-	 * Will receive a dbConnector and save the chosen eContacst to the account
-	 * on the databank
-	 * 
-	 * @param dbConnector
-	 */
-	public void saveEcontactsOnDB(DBConnector dbConnector) {
 
-//		 dbConnector.getLoginAccount().setEContact1(eContact1);
-
-	}
 
 	public List<SettingsClickListener> getListeners() {
 		return listeners;

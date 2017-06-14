@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
-
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 
@@ -35,7 +34,6 @@ public class SettingsViewModel implements Serializable{
 	@Transient
 	private DBConnector dbConnector;
 	
-	// fazer esses contatdos em uma lista com uma numero fixo que pode-se mudar mais tarde.
 	@Id
 	@GeneratedValue
 	private int id;
@@ -50,9 +48,13 @@ public class SettingsViewModel implements Serializable{
 	private LoginAccount loginAccount; 
 	
 	public SettingsViewModel(){
-		dbConnector = DBConnector.getDBConnector();
 	}
 	
+	public SettingsViewModel(LoginAccount loginAccount){
+		dbConnector = DBConnector.getDBConnector();
+		this.loginAccount = loginAccount;
+		loginAccount.setSettingsViewModel(this);
+	}
 
 	public Contact getContact() {
 		return contact;
@@ -105,7 +107,8 @@ public class SettingsViewModel implements Serializable{
 			String city, 
 			String password, 
 			Contact contact ) {
-		 loginAccount = dbConnector.getLoginAccount();
+		 
+		 System.out.println(loginAccount.getEmail());
 		 loginAccount.setEmail(email);
 		 loginAccount.setFirstName(fName);
 		 loginAccount.setLastName(lName);
@@ -113,10 +116,9 @@ public class SettingsViewModel implements Serializable{
 		 loginAccount.setZipCode(zipCode);
 		 loginAccount.setCity(city);
 		 loginAccount.setPassword(password);
-		 setContact(contact);
+		 loginAccount.getSettingsViewModel().setContact(contact);
 		 dbConnector.writeDataToDB();
+		
 	}
-
-
 
 }

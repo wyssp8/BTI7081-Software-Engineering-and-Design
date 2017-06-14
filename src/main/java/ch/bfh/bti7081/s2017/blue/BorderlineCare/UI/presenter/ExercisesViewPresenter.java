@@ -109,7 +109,7 @@ public class ExercisesViewPresenter implements ExerciseClickListener {
 		initExerciseDaily();
 		DiaryEntry diaryFromExercise = new DiaryEntry();
 		
-		diaryFromExercise.setStatus("good");
+		diaryFromExercise.setStatus("Good");
 		diaryFromExercise.setTitle(currentDailyExercise.getTitle());
 		diaryFromExercise.setDiaryEntry(currentDailyExercise.getDescription() + " !Exercise Done!");
 		DBConnector.getDBConnector().getLoginAccount().getDiaryEntries().add(diaryFromExercise);
