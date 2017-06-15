@@ -19,6 +19,8 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.SettingsViewImpl;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.SettingsView;
 
 /**
+ *The SettingsViewPresenter class delivers the information from the model to the view, add function to the UI's buttons,
+ *initialises the information on the Ui's fields and validate the information in the case the user changes any setting. 
  * @author André
  *
  */
