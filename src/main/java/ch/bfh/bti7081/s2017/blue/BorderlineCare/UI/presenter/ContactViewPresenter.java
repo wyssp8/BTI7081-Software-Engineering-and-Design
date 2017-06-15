@@ -9,6 +9,7 @@ import com.vaadin.ui.PopupView;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
+import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.DiaryEntry;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.ContactViewImpl;
 
 /*
@@ -26,10 +27,11 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	public ContactViewPresenter(ContactModel model, ContactViewImpl view) {
 		this.contactModel = model;
 		this.contactViewImpl = view;
-		dbconnector = DBConnector.getDBConnector();
+		//dbconnector = DBConnector.getDBConnector();
 
-		this.contacts = dbconnector.getLoginAccount().getContacts();
-		initializeContacts(this.contacts);
+		//this.contacts = dbconnector.getLoginAccount().getContacts();
+		//initializeContacts(this.contacts);
+		initializeContacts();
 
 		contactViewImpl.addContactButtonClickListeneer(this);
 		contactViewImpl.initializeDeletePopup();
@@ -60,14 +62,20 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	 */
 	@Override
 	public void deleteContact(Contact toRemove) {
-		this.contacts.remove(toRemove);
+		//this.contacts.remove(toRemove);
+		DBConnector.getDBConnector().getLoginAccount().getContacts().remove(toRemove);
 	}
 
 	@Override
 	public void deleteContacts(Set<Contact> contacts) {
-		this.contacts.removeAll(contacts);
+		/*this.contacts.removeAll(contacts);
 		for (Contact contact : contacts) {
 			dbconnector.deleteDataFromDB(contact);
+		}*/
+		
+		DBConnector.getDBConnector().getLoginAccount().getContacts().removeAll(contacts);
+		for (Contact contact : contacts) {
+			DBConnector.getDBConnector().deleteDataFromDB(contact);
 		}
 	}
 
@@ -77,10 +85,20 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	 */
 	@Override
 	public void saveButtonClick(String stringInput, int integerInput) {
+		initializeContacts();
+		Contact contact = new Contact();
+		contact.setName(stringInput);
+		contact.setPhoneNumber(integerInput);
+		contact.setLoginAccount(DBConnector.getDBConnector().getLoginAccount());
+		DBConnector.getDBConnector().getLoginAccount().getContacts().add(contact);
+		DBConnector.getDBConnector().writeDataToDB();
+		initializeContacts();
+		contactViewImpl.getContactPopup().setPopupVisible(false);
+		/*
 		this.contacts.add(new Contact(stringInput, integerInput, dbconnector.getLoginAccount()));
 		dbconnector.writeDataToDB();
 		initializeContacts(this.contacts);
-		contactViewImpl.getContactPopup().setPopupVisible(false);
+		contactViewImpl.getContactPopup().setPopupVisible(false);*/
 	}
 
 	@Override
@@ -94,7 +112,7 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	 */
 	@Override
 	public void deleteSelected(Set<Contact> toDelete) {
-		System.out.println("Contacts in DB: ");
+		/*System.out.println("Contacts in DB: ");
 		for (Contact contact : this.contacts) {
 			System.out.println("-> " + contact.getName());
 		}
@@ -120,11 +138,30 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 
 		dbconnector.writeDataToDB();
 
+		contactViewImpl.getContactPopup().setPopupVisible(false);*/
+		
+		Set<Contact> tmp = new HashSet<>();
+		for (Contact contact : toDelete) {
+			for (Contact c : DBConnector.getDBConnector().getLoginAccount().getContacts()) {
+				if (contact.getId() == c.getId()) {
+					tmp.add(c);
+				}
+			}
+		}
+		deleteContacts(tmp);
+		DBConnector.getDBConnector().writeDataToDB();	
+		initializeContacts();
 		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}
 
+	/*
 	public void initializeContacts(Set<Contact> contacts) {
 		contactViewImpl.getGrid().setItems(this.contacts);
+	}*/
+	
+	@SuppressWarnings("unchecked")
+	public void initializeContacts() {
+		contactViewImpl.getGrid().setItems(DBConnector.getDBConnector().getLoginAccount().getContacts());
 	}
 
 }
