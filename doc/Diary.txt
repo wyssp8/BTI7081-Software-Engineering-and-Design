@@ -10,7 +10,7 @@
 
 Diary:
 ------------------------------------------------------
-   
+
 Team:
 
 Kieliger Martin		(kielm1@bfh.ch)
@@ -24,46 +24,46 @@ Wyss Patrick Sandro	(wyssp8@gmail.com)
 ------------------------------------------------------
 28.02.2017
 ------------------------------------------------------
-Anwesend:	Kieliger, Frutiger, Argollo, Luder, Wyss
+Presence:	Kieliger, Frutiger, Argollo, Luder, Wyss
 
 <<<<<<< Updated upstream
-Task:		Task01 und Task02 im Team am erarbeiten
+Task:		Work in team on Task01 and Task02.
 
 ------------------------------------------------------
 06.03.2017
 ------------------------------------------------------
-Anwesend:	Niemand aufgrund Unterrichtsausfall.
+Presence:	no one (no class this day)
 
-Task:		Selbst�ndiges erarbeiten der gestellten Aufgaben des Lehrers. RE 3.3 und Sommerville_SE9ed_pp082_091.pdf.
+Task:		Selfwork on RE 3.3 und Sommerville_SE9ed_pp082_091.pdf.
 
 ------------------------------------------------------
 07.03.2017
 ------------------------------------------------------
-Anwesend:	Kieliger, Pitta, Frutiger, Luder, Wyss, Polo
+Presence:	Kieliger, Pitta, Frutiger, Luder, Wyss, Polo
 
 <<<<<<< Updated upstream
-Task:		Selbst�ndiges erarbeiten der Theorie RE 3.4 und Sommerville_SE9ed_pp100_109.pdf. Anschliessend erarbeiten des CS2 im Team.
+Task:		Self work on theory subjects RE 3.4 und Sommerville_SE9ed_pp100_109.pdf. Later worked on CS2 in Team.
 
 
 ------------------------------------------------------
 10.03.2017
 ------------------------------------------------------
-Anwesend:	Niemand, aufgrund Unterrichtsausfall.
+Presence:	no one (no class this day)
 
-Task:		Selbst�ndiges erarbeiten der Theorie RE 3.6, 3.7, 3.8
+Task:		Self work on theory subjects RE 3.6, 3.7, 3.8
 
 
 ------------------------------------------------------
 13.03.2017
 ------------------------------------------------------
-Anwesend:	Frutiger, Argollo, Luder, Wyss, Polo
+Presence:	Frutiger, Argollo, Luder, Wyss, Polo
 
-Task: 		Start des Task03 CS01. 
+Task: 		Start of Task03 CS01.
 
 ------------------------------------------------------
 14.03.2017
 ------------------------------------------------------
-Anwesend:	Frutiger, Argollo, Luder, Wyss, Polo
+Presence:	Frutiger, Argollo, Luder, Wyss, Polo
 
 Task:		CS01 Task03 Design Thinking.
 
@@ -71,9 +71,9 @@ Task:		CS01 Task03 Design Thinking.
 ------------------------------------------------------
 17.03.2017
 ------------------------------------------------------
-Anwesend:	Frutiger, Argollo, Luder, Wyss, Polo, Kieliger
+Presence:	Frutiger, Argollo, Luder, Wyss, Polo, Kieliger
 
-Task:		CS01 Task03 Design Thinking. Storyboards, Prototyps und Dokument am erstellen
+Task:		CS01 Task03 Design Thinking. Storyboards, Prototypes and Documentation 
 
 
 ------------------------------------------------------
@@ -81,43 +81,92 @@ Task:		CS01 Task03 Design Thinking. Storyboards, Prototyps und Dokument am erste
 ------------------------------------------------------
 Anwensend:	Frutiger, Argollo, Luder, Wyss
 
-Task:		Abschluss des Projektes CS01 Task03 und erstellen der Pr�sentation.
-
+Task:		
+Finished project cs01 Task03 and planing presentation
 
 
 ------------------------------------------------------
-Selbständiges erarbeiten der Theorie RE 3.4 und Sommerville_SE9ed_pp100_109.pdf. Anschliessend erarbeiten des CS2 im Team.
+Sefl work of the Theory RE 3.4 and Sommerville_SE9ed_pp100_109.pdf. 
+and later work of CS2 in Team.
 ------------------------------------------------------
-Task:		Task01 und Task02 im Team am erarbeiten
+Task:		Team work on Task01 und Task02 
 
 
 ------------------------------------------------------
 01.05.2017
 ------------------------------------------------------
-Anwensend:	alle
+Presence:	Everyone
 
-Task:		Arbeiten an Sprint 1
+Task:		Working on tasks of Sprint 1
 
 ------------------------------------------------------
 02.05.2017
 ------------------------------------------------------
-Anwensend:	alle
+Presence:	Everyone
 
-Task:		Arbeiten an Sprint 1
+Task:		Working on tasks of Sprint 1
 
 ------------------------------------------------------
 05.05.2017
 ------------------------------------------------------
-Anwensend:	alle
+Presence:	Everyone
 
-Task:		Arbeiten an Sprint 1
+Task:		Working on tasks of Sprint 1
 
 ------------------------------------------------------
 09.05.2017
 ------------------------------------------------------
-Anwensend:	alle
+Presence:	Everyone
 
-Task:		Arbeiten an Sprint 1
+Task:		Working on tasks of Sprint 1
+
+------------------------------------------------------
+19.05.2017
+------------------------------------------------------
+Presence:	Everyone
+
+Task: Working on tasks of Sprint 1
+
+------------------------------------------------------
+22.05.2017
+------------------------------------------------------
+Presence:	Everyone
+
+Task: Sprint 2 took place
+
+------------------------------------------------------
+30.05.2017
+------------------------------------------------------
+Presence:	Everyone
+
+Task: Working on tasks defined on Sprint 2
+
+------------------------------------------------------
+06.06.2017
+------------------------------------------------------
+Presence:	Everyone
+
+Task: Conde improving , DB improving.
+
+------------------------------------------------------
+12.06.2017
+------------------------------------------------------
+Presence:	Everyone
+
+Task: Working on last functionalities. Code improving
+debugging and tests. 
+
+------------------------------------------------------
+13.06.2017
+------------------------------------------------------
+Presence:	Everyone
+Code improving, refactoring, cleaning. 
 
 
+------------------------------------------------------
+15.06.2017
+------------------------------------------------------
+Presence:	Everyone
+
+Task: Finishing Code , Work on Presentation and Video		
 
