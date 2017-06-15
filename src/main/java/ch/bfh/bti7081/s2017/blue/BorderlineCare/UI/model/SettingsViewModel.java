@@ -77,7 +77,7 @@ public class SettingsViewModel implements Serializable{
 		if(getContact() == null){
 			throw new Exception("No emergency contact defined");
 		}
-		String phoneNumber = Integer.toString(getContact().getPhoneNumber());
+		String phoneNumber = getContact().getPhoneNumber();
 		String fullLink = "tel:" + phoneNumber;
 		logger.log(Level.INFO, "Link to open: " + fullLink);
 		return fullLink;
@@ -87,7 +87,7 @@ public class SettingsViewModel implements Serializable{
 		if(getContact() == null){
 			throw new Exception("No emergency contact defined");
 		}
-		String phoneNumber = Integer.toString(getContact().getPhoneNumber());
+		String phoneNumber = getContact().getPhoneNumber();
 		String body = "I need help.";
 		String fullLink = "sms://" + phoneNumber + "?body=" + body;
 		logger.log(Level.INFO, "Link to open: " + fullLink);

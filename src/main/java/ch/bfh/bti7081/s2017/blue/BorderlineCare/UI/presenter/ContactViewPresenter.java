@@ -67,7 +67,8 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	public void deleteContacts(Set<Contact> contacts) {
 		this.contacts.removeAll(contacts);
 		for (Contact contact : contacts) {
-			dbconnector.deleteDataFromDB(contact);
+			DBConnector.getDBConnector().getLoginAccount().getContacts();
+			DBConnector.getDBConnector().deleteDataFromDB(contact);
 		}
 	}
 
@@ -76,8 +77,8 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	 * 
 	 */
 	@Override
-	public void saveButtonClick(String stringInput, int integerInput) {
-		this.contacts.add(new Contact(stringInput, integerInput, dbconnector.getLoginAccount()));
+	public void saveButtonClick(String nameInput, String numberInput) {
+		this.contacts.add(new Contact(nameInput, numberInput, dbconnector.getLoginAccount()));
 		dbconnector.writeDataToDB();
 		initializeContacts(this.contacts);
 		contactViewImpl.getContactPopup().setPopupVisible(false);
@@ -118,7 +119,7 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 
 		initializeContacts(this.contacts);
 
-		dbconnector.writeDataToDB();
+		DBConnector.getDBConnector().writeDataToDB();
 
 		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}

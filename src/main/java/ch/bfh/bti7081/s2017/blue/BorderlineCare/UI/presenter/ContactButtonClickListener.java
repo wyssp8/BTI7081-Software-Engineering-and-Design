@@ -8,7 +8,7 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 
 public interface ContactButtonClickListener {
 	public void deleteButtonClick(PopupView popuu, Set<Contact> toDelete);
-	public void saveButtonClick(String stringInput, int integerInput);
+	public void saveButtonClick(String nameInput, String numberInput);
 	public void cancelButtonClick();
 	public void deleteContact(Contact toRemove);
 	public void deleteSelected(Set<Contact> contacts);

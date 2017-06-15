@@ -5,37 +5,21 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import com.vaadin.annotations.Theme;
-import com.vaadin.data.BeanValidationBinder;
-import com.vaadin.data.provider.DataProvider;
-import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.server.ThemeResource;
-import com.vaadin.server.UserError;
 import com.vaadin.shared.data.sort.SortDirection;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.Column;
 import com.vaadin.ui.Grid.SelectionMode;
-import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.PopupView;
-import com.vaadin.ui.PopupView.Content;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.grid.HeaderRow;
 import com.vaadin.ui.components.grid.MultiSelectionModel;
-import com.vaadin.ui.renderers.ButtonRenderer;
-import com.vaadin.ui.renderers.ImageRenderer;
-
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.ContactButtonClickListener;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.ContactView;
@@ -129,6 +113,7 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 		deleteContactPopupContent.addComponents(label, deleteP, cancel);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void initNewContactPopup() {
 		tfName = new TextField("Name:");
 		tfName.setIcon(FontAwesome.USER);
@@ -140,10 +125,12 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 		save = new Button("save");
 		save.addClickListener(clickEvent -> {
 			for (ContactButtonClickListener listener : contactButtonClickListeners) {
-				String stringInput = getNameField().getValue();
+				String nameInput = getNameField().getValue();
 				try {
-					int integerInput = Integer.parseInt(getPhoneNUmberField().getValue());
-					listener.saveButtonClick(stringInput, integerInput);
+					String numberInput = getPhoneNUmberField().getValue();
+					
+				//	int integerInput = Integer.parseInt(getPhoneNUmberField().getValue());
+					listener.saveButtonClick(nameInput, numberInput);
 				} catch (NumberFormatException e) {
 					Notification.show("Phonenumber must consist only of numbers", Notification.TYPE_WARNING_MESSAGE);
 				}
