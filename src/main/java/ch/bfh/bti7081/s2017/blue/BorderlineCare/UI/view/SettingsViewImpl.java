@@ -17,7 +17,6 @@ import com.vaadin.ui.Layout;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
-
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
@@ -25,7 +24,10 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter.interfaces.Settings
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.SettingsView;
 
 /**
- * @author André completar aqui a descrição dessa classes
+ * The SettingsViewImp set the user interface for the Settings. It shows the information about the logged user, and alows the user to 
+ * edit and save those informations.
+ * It also alows the user to set a one contact as an emergency contact taht will be called when the emergency button is pressed 
+ * @author André Pitta
  */
 
 public class SettingsViewImpl extends CustomComponent implements SettingsView {

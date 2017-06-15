@@ -17,6 +17,8 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 
 /**
+ * The SettingsViewModel holds the information that will be save to the database if changed in the settings UI.
+ * It holds the contact object that will be called/sms when the emergencys buttons are pressed.
  * @author André
  *
  */

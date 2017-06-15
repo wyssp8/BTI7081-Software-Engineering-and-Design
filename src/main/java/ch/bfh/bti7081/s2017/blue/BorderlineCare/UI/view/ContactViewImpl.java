@@ -29,23 +29,29 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.ContactView;
  * @author ludes2
  * 
  */
+@SuppressWarnings("deprecation")
 public class ContactViewImpl extends CustomComponent implements ContactView {
 
 	private static final long serialVersionUID = -1924986860210433106L;
 	private Grid<Contact> grid;
 	private List<ContactButtonClickListener> contactButtonClickListeners = new ArrayList<>();
-	private PopupView newContactPopup, deleteContactPopup;
+	private PopupView newContactPopup;
+	private PopupView deleteContactPopup;
 	private VerticalLayout newContactPopupContent = new VerticalLayout();
 	private VerticalLayout deleteContactPopupContent = new VerticalLayout();
 	private VerticalLayout layout = new VerticalLayout();
 	private HorizontalLayout buttonLayout = new HorizontalLayout();
-	private Button deleteP, save, cancel, deleteSelected, newContactButton;
+	private Button deleteP; 
+	private Button save;
+	private Button cancel;
+	private Button deleteSelected;
+	private Button newContactButton;
 	private Label label;
-	private TextField tfName, tfPhoneNumber, search;
+	private TextField tfName;
+	private TextField tfPhoneNumber; 
 
 	public ContactViewImpl() {
 		grid = new Grid<>();
-		// create two columns, set the ID's and add the captions
 		Column<Contact, ?> columnName = grid.addColumn(Contact::getName);
 		columnName.setId("Name");
 		columnName.setCaption("Name");
@@ -62,19 +68,9 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 		selectionModel.selectAll();
 
 		selectionModel.addMultiSelectionListener(event -> {
-			//Set<Contact> toDelete = event.getAllSelectedItems();
 			Set<Contact> toDelete = new HashSet<>();
 			for (Contact itemId : grid.getSelectedItems()) {
-				toDelete.add(itemId);
-				
-				
-			}
-		
-			
-			
-			
-			for (Contact contact : toDelete) {
-				System.out.println("----------" + contact.getName());
+				toDelete.add(itemId);		
 			}
 			deleteSelected.addClickListener(clieckEvent -> {
 				for (ContactButtonClickListener listener : contactButtonClickListeners) {
@@ -90,14 +86,10 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 		newContactButton = new Button("new Contact", click -> {
 			newContactPopup.setPopupVisible(true);
 		});
-
-		search = new TextField();
-		search.setValue("searchContact");
-
-		buttonLayout.addComponents(newContactButton, deleteSelected, search);
+		
+		buttonLayout.addComponents(newContactButton, deleteSelected);
 		layout.addComponents(grid, newContactPopup, buttonLayout);
 		setCompositionRoot(layout);
-
 	}
 
 
@@ -128,8 +120,6 @@ public class ContactViewImpl extends CustomComponent implements ContactView {
 				String nameInput = getNameField().getValue();
 				try {
 					String numberInput = getPhoneNUmberField().getValue();
-					
-				//	int integerInput = Integer.parseInt(getPhoneNUmberField().getValue());
 					listener.saveButtonClick(nameInput, numberInput);
 				} catch (NumberFormatException e) {
 					Notification.show("Phonenumber must consist only of numbers", Notification.TYPE_WARNING_MESSAGE);
