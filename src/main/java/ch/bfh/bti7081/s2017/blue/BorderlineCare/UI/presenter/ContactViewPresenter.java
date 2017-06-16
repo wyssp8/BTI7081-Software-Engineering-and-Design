@@ -1,13 +1,8 @@
 package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.presenter;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-
-import java.util.Iterator;
 import java.util.Set;
-
 import com.vaadin.ui.PopupView;
-
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.Contact;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.ContactModel;
@@ -23,16 +18,11 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	private ContactModel contactModel;
 	private ContactViewImpl contactViewImpl;
 	private Set<Contact> contacts;
-	private DBConnector dbconnector;
 
 	public ContactViewPresenter(ContactModel model, ContactViewImpl view) {
 		this.contactModel = model;
 		this.contactViewImpl = view;
-		dbconnector = DBConnector.getDBConnector();
-
-		this.contacts = dbconnector.getLoginAccount().getContacts();
-		initializeContacts(this.contacts);
-
+		initializeContacts();
 		contactViewImpl.addContactButtonClickListeneer(this);
 		contactViewImpl.initializeDeletePopup();
 		contactViewImpl.initNewContactPopup();
@@ -44,8 +34,8 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	}
 
 	/*
-	 *
-	 *
+	 *@param the Popup which will be showed by clicking on the Button 'delete'
+	 *@param the Set of Contact selected in the Grid
 	 */
 	@Override
 	public void deleteButtonClick(PopupView popup, Set<Contact> toDelete) {
@@ -56,32 +46,35 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 		});
 	}
 
-	/*
-	 * 
-	 * 
-	 */
+
 	@Override
 	public void deleteContact(Contact toRemove) {
-		this.contacts.remove(toRemove);
+		DBConnector.getDBConnector().getLoginAccount().getContacts().remove(toRemove);
 	}
 
 	@Override
 	public void deleteContacts(Set<Contact> contacts) {
-		this.contacts.removeAll(contacts);
+		DBConnector.getDBConnector().getLoginAccount().getContacts().removeAll(contacts);
 		for (Contact contact : contacts) {
-			dbconnector.deleteDataFromDB(contact);
+			DBConnector.getDBConnector().deleteDataFromDB(contact);
 		}
 	}
 
 	/*
 	 * 
-	 * 
+	 * @param the input from the user in the Name TextField
+	 * @param the input from the user in the Phonenumber TextFiled
 	 */
-	@Override
-	public void saveButtonClick(String stringInput, int integerInput) {
-		this.contacts.add(new Contact(stringInput, integerInput, dbconnector.getLoginAccount()));
-		dbconnector.writeDataToDB();
-		initializeContacts(this.contacts);
+
+	public void saveButtonClick(String stringInput, String numberInput) {
+		initializeContacts();
+		Contact contact = new Contact();
+		contact.setName(stringInput);
+		contact.setPhoneNumber(numberInput);
+		contact.setLoginAccount(DBConnector.getDBConnector().getLoginAccount());
+		DBConnector.getDBConnector().getLoginAccount().getContacts().add(contact);
+		DBConnector.getDBConnector().writeDataToDB();
+		initializeContacts();
 		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}
 
@@ -96,39 +89,23 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	 */
 	@Override
 	public void deleteSelected(Set<Contact> toDelete) {
-		System.out.println("Contacts in DB: ");
-		for (Contact contact : this.contacts) {
-			System.out.println("-> " + contact.getName());
-		}
-		System.out.println("Contacts selected in toDelete: ");
-		for (Contact contact : toDelete) {
-			System.out.println("-> " + contact.getName());
-		}
-
 		Set<Contact> tmp = new HashSet<>();
 		for (Contact contact : toDelete) {
-			for (Contact c : this.contacts) {
+			for (Contact c : DBConnector.getDBConnector().getLoginAccount().getContacts()) {
 				if (contact.getId() == c.getId()) {
 					tmp.add(c);
 				}
 			}
 		}
-
-		System.out.println("Contacts in tmp");
-		for (Contact contact : tmp) {
-			System.out.println("-> " + contact.getName());
-		}
 		deleteContacts(tmp);
-
-		initializeContacts(this.contacts);
-
-		dbconnector.writeDataToDB();
-
+		DBConnector.getDBConnector().writeDataToDB();
+		initializeContacts();
 		contactViewImpl.getContactPopup().setPopupVisible(false);
 	}
 
-	public void initializeContacts(Set<Contact> contacts) {
-		contactViewImpl.getGrid().setItems(this.contacts);
+	@SuppressWarnings("unchecked")
+	public void initializeContacts() {
+		contactViewImpl.getGrid().setItems(DBConnector.getDBConnector().getLoginAccount().getContacts());
 	}
 
 }

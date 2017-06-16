@@ -38,7 +38,6 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.view.interfaces.DiaryView;
  */
 
 public class DiaryViewImpl extends CustomComponent implements DiaryView {
-	
 
 	private static final long serialVersionUID = -6250389995528614659L;
 	private final static Logger logger = Logger.getLogger(DiaryViewModel.class.getName());
@@ -91,20 +90,16 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		smileyRadioGroup.setIcon(smileyRadio);
 		smileyRadioGroup.setStyleName(ValoTheme.OPTIONGROUP_HORIZONTAL);
 		
-		
 		//Title Textfield
 		textField = new TextField(title);
-		
 		
 		// Create a text area
 		txtArea = new TextArea(entry);
 		txtArea.setWidth(textAreaWidth);
 		txtArea.setValue(exampleText);
 		
-		
-		//Button Add
+		//Button Add with clicklistener
 		buttonAdd = new Button(add);
-		
 		buttonAdd.addClickListener(clickEvent -> {
 			logger.log(Level.INFO, logInfo);
 			for (DiaryButtonClickListener listener : diaryButtonListeners) {
@@ -113,26 +108,20 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 				String titleInput = getTextField();
 				String diaryInput = getTextArea();
 				logger.log(Level.INFO,"call addButtonClick");
-				listener.addButtonClick(dateInput, radioInput, titleInput, diaryInput);
+				listener.addButtonClick(dateInput, radioInput, titleInput, diaryInput);	
 			}	
 		});
 		
 		//Button Delete
 		buttonDelete = new Button(deleteSelect);
 	
-	
 		//Grid Table
 		grid = new Grid<>();
-		
-		TextField nameEditor = new TextField();
-		
 		grid.addColumn(DiaryEntry::getDate).setCaption(date).setWidth(120);
 		grid.addColumn(DiaryEntry::getStatus).setCaption(status).setWidth(100);
 		grid.addColumn(DiaryEntry::getTitle).setCaption(title).setWidth(200);
-		grid.addColumn(DiaryEntry::getDiaryEntry).setEditorComponent(nameEditor, DiaryEntry::setDiaryEntry).setCaption(entry);
-		
-		//grid.getEditor().setEnabled(true); Schreibt änderungen nicht in DB
-		
+		grid.addColumn(DiaryEntry::getDiaryEntry).setCaption(entry);
+	
 		grid.setWidth(gridWidth);
 		grid.setSizeFull();
 		grid.setSelectionMode(SelectionMode.NONE);
@@ -141,7 +130,7 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		selectionModel = (MultiSelectionModel<DiaryEntry>) grid.setSelectionMode(SelectionMode.MULTI);
 		selectionModel.selectAll();
 		
-		//Delete Multiselection
+		//Delete Multiselection from grid
 		selectionModel.addMultiSelectionListener(event -> {
 			Set<DiaryEntry> toDelete = event.getAllSelectedItems();
 			buttonDelete.addClickListener(clieckEvent -> {
@@ -151,7 +140,6 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 			});
 		});
 
-	
 		buttonLayout.addComponents(buttonAdd, buttonDelete);
 		vLayout.addComponents(dateField, smileyRadioGroup, textField, txtArea, buttonLayout, grid);
 		setCompositionRoot(vLayout);	
@@ -160,7 +148,6 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 	@Override
 	public void addDiaryButtonClickListener(DiaryButtonClickListener clickListener) {
 		diaryButtonListeners.add(clickListener);
-		
 	}
 	
 	public String getDateField() {
@@ -185,12 +172,12 @@ public class DiaryViewImpl extends CustomComponent implements DiaryView {
 		return selectionModel;
 	}
 	
-
-	public void initializeDiaryEntryGrid(Set<DiaryEntry> diaryEntry){
-		grid.setItems(diaryEntry);
-	}
-	
 	public Button getDeleteButton() {
 		return this.buttonDelete;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Grid getGrid(){
+		return this.grid;
 	}
 }

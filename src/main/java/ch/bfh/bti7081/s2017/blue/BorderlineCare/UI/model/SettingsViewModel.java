@@ -17,6 +17,8 @@ import ch.bfh.bti7081.s2017.blue.BorderlineCare.DB.DBConnector;
 import ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.login.LoginAccount;
 
 /**
+ * The SettingsViewModel holds the information that will be save to the database if changed in the settings UI.
+ * It holds the contact object that will be called/sms when the emergencys buttons are pressed.
  * @author André
  *
  */
@@ -77,7 +79,7 @@ public class SettingsViewModel implements Serializable{
 		if(getContact() == null){
 			throw new Exception("No emergency contact defined");
 		}
-		String phoneNumber = Integer.toString(getContact().getPhoneNumber());
+		String phoneNumber = getContact().getPhoneNumber();
 		String fullLink = "tel:" + phoneNumber;
 		logger.log(Level.INFO, "Link to open: " + fullLink);
 		return fullLink;
@@ -87,7 +89,7 @@ public class SettingsViewModel implements Serializable{
 		if(getContact() == null){
 			throw new Exception("No emergency contact defined");
 		}
-		String phoneNumber = Integer.toString(getContact().getPhoneNumber());
+		String phoneNumber = getContact().getPhoneNumber();
 		String body = "I need help.";
 		String fullLink = "sms://" + phoneNumber + "?body=" + body;
 		logger.log(Level.INFO, "Link to open: " + fullLink);

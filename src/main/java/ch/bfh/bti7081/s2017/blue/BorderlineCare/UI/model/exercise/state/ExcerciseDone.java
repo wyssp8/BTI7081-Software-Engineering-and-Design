@@ -2,6 +2,11 @@ package ch.bfh.bti7081.s2017.blue.BorderlineCare.UI.model.exercise.state;
 
 import com.vaadin.ui.themes.ValoTheme;
 
+/**
+ * ExerciseDone State
+ * @author frutiger
+ *
+ */
 public class ExcerciseDone implements State {
 
 	@Override
