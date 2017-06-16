@@ -34,9 +34,7 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	}
 
 	/*
-	 * @param popup: the Popup which will be showed by clicking on the Button
-	 * 'delete'
-	 * 
+	 * @param popup: the Popup which will be showed by clicking on the Button 'delete'
 	 * @param toDelete: the Set of Contact selected in the Grid
 	 */
 	@Override
@@ -64,7 +62,6 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	/*
 	 * 
 	 * @param stringInput: the input from the user in the Name TextField
-	 * 
 	 * @param numberInput: the input from the user in the Phonenumber TextFiled
 	 */
 
@@ -87,7 +84,6 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 
 	/*
 	 * @param toDelete: the Set of contact selected on the Grid.
-	 *
 	 */
 	@Override
 	public void deleteSelected(Set<Contact> toDelete) {
