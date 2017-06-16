@@ -64,7 +64,6 @@ public class ContactViewPresenter implements ContactButtonClickListener {
 	 * @param stringInput: the input from the user in the Name TextField
 	 * @param numberInput: the input from the user in the Phonenumber TextFiled
 	 */
-
 	public void saveButtonClick(String stringInput, String numberInput) {
 		initializeContacts();
 		Contact contact = new Contact();
